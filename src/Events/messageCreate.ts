@@ -7,8 +7,10 @@ export const event: Event = {
     name: 'messageCreate',
     run: (client, message: Message) => {
 
+        if(!client.config.valid_channels.includes(message.channel.id)) return;
+
         if (message.author.bot) return;
-        if (!message.content.startsWith(client.config.prefix)) return
+        if (!message.content.startsWith(client.config.prefix)) return;
 
         const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
         const cmd = args.shift().toLowerCase();
@@ -17,7 +19,7 @@ export const event: Event = {
 
         const command = client.commands.get(cmd) || client.aliases.get(cmd);
 
-        if (command) (command as Command).run(client, message, args)
+        if (command) (command as Command).run(client, message, args);
 
     }
 }
