@@ -6,7 +6,7 @@ import { Command } from '../../Interfaces';
 
 export const command: Command = {
     name: 'ping',
-    aliases: ['p'],
+    aliases: [],
     run: async (client, message, args) => {
 
         const outputMessage = new MessageEmbed().setDescription(`\`${client.ws.ping}ms\``)
