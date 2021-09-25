@@ -22,6 +22,7 @@ export const command: Command = {
                 case 'music': message.channel.send({ embeds: [HelpMenus.music.main] }); break
 
                 case 'league': message.channel.send({ embeds: [HelpMenus.league.main] }); break
+                case 'check': message.channel.send({ embeds: [HelpMenus.league.check] }); break
 
                 case 'other': message.channel.send({ embeds: [HelpMenus.other.main] }); break
                 case 'ping': message.channel.send({ embeds: [HelpMenus.other.ping] }); break

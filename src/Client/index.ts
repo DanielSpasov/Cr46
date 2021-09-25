@@ -20,9 +20,9 @@ class ExtendedClient extends Client {
 
     public async init() {
 
-        // this.login(this.config.token);
         this.login(process.env.BOT_TOKEN)
 
+        this.config.requestOptions = { headers: { 'X-Riot-Token': process.env.RIOT_API_KEY } }
 
         // Commands
         const commandPath = path.join(__dirname, '..', 'Commands');

@@ -1,0 +1,6 @@
+export { IChampion } from './IChampion'
+export { IDDragonChampion } from './IDDragonChampion'
+export { IDDragonChampions } from './IDDragonChampions'
+export { IElo } from './IElo'
+export { ILeagueVersions } from './ILeagueVersions'
+export { ISummoner } from './ISummoner'

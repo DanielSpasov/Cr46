@@ -6,6 +6,12 @@ export const league = {
     main: new MessageEmbed()
         .setTitle('League Commands')
         .setColor('BLUE')
-        .setDescription('`League Commands Coming Soon`')
+        .setDescription('`check`')
+        .setFooter('Type /help <CommandName> for details on a command'),
+
+    check: new MessageEmbed()
+        .setTitle('League Commands')
+        .setColor('BLUE')
+        .setDescription('/check <AccountName> - Displays information about that League of Legends account.')
         .setFooter('Type /help <CommandName> for details on a command'),
 }
