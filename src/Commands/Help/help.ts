@@ -20,6 +20,9 @@ export const command: Command = {
             switch (type) {
 
                 case 'music': message.channel.send({ embeds: [HelpMenus.music.main] }); break
+                case 'play': message.channel.send({ embeds: [HelpMenus.music.play] }); break
+                case 'pause': message.channel.send({ embeds: [HelpMenus.music.pause] }); break
+                case 'resume': message.channel.send({ embeds: [HelpMenus.music.resume] }); break
 
                 case 'league': message.channel.send({ embeds: [HelpMenus.league.main] }); break
                 case 'check': message.channel.send({ embeds: [HelpMenus.league.check] }); break
