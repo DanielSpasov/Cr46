@@ -17,13 +17,18 @@ export const event: Event = {
         const cmd = interaction.customId;
 
         switch (cmd) {
-            case 'resume': await resume.run(client, interaction, []); break;
-            case 'pause': await pause.run(client, interaction, []); break;
+            case 'resume-pause':
+                if (client.music.isPaused) await resume.run(client, interaction, []);
+                else if (!client.music.isPaused) await pause.run(client, interaction, []);
+                break;
             case 'loop': await loop.run(client, interaction, []); break;
             case 'skip':
 
                 break;
             case 'clear':
+
+                break;
+            case 'shuffle':
 
                 break;
             default: break;

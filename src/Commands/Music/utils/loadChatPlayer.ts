@@ -32,15 +32,9 @@ export const loadChatPlayer = (client, message, isUpdate) => {
     const buttons = new MessageActionRow()
         .addComponents(
             new MessageButton()
-                .setCustomId('resume')
-                .setLabel('Resume')
-                .setStyle('SUCCESS')
-                .setDisabled(!client.music.isPaused),
-            new MessageButton()
-                .setCustomId('pause')
-                .setLabel('Pause')
-                .setStyle('PRIMARY')
-                .setDisabled(client.music.isPaused),
+                .setCustomId('resume-pause')
+                .setLabel(client.music.isPaused ? 'Resume' : 'Pause')
+                .setStyle(client.music.isPaused ? 'SUCCESS' : 'PRIMARY'),
             new MessageButton()
                 .setCustomId('skip')
                 .setLabel('Skip')
@@ -49,6 +43,10 @@ export const loadChatPlayer = (client, message, isUpdate) => {
                 .setCustomId('loop')
                 .setLabel('Loop')
                 .setStyle(loopingColor),
+            new MessageButton()
+                .setCustomId('shuffle')
+                .setLabel('Shuffle')
+                .setStyle('SECONDARY'),
             new MessageButton()
                 .setCustomId('clear')
                 .setLabel('Clear & Disconnect')
