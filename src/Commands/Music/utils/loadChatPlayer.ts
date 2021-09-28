@@ -11,7 +11,7 @@ export const loadChatPlayer = (client, message, isUpdate) => {
     const playerEmbed = new MessageEmbed()
         .setTitle(`Music Player`)
         .setColor('PURPLE')
-        .setFooter(`Looping: ${loopingWord}`)
+        .setFooter(`Looping: ${loopingWord} | Shuffling: ${client.music.shuffle ? 'Enabled' : 'Disabled'}`)
 
     if (!queue.length) {
         playerEmbed.addField(
@@ -34,11 +34,11 @@ export const loadChatPlayer = (client, message, isUpdate) => {
             new MessageButton()
                 .setCustomId('resume-pause')
                 .setLabel(client.music.isPaused ? 'Resume' : 'Pause')
-                .setStyle(client.music.isPaused ? 'SUCCESS' : 'PRIMARY'),
+                .setStyle('SUCCESS'),
             new MessageButton()
                 .setCustomId('skip')
                 .setLabel('Skip')
-                .setStyle('SECONDARY'),
+                .setStyle('PRIMARY'),
             new MessageButton()
                 .setCustomId('loop')
                 .setLabel('Loop')
@@ -46,7 +46,7 @@ export const loadChatPlayer = (client, message, isUpdate) => {
             new MessageButton()
                 .setCustomId('shuffle')
                 .setLabel('Shuffle')
-                .setStyle('SECONDARY'),
+                .setStyle(client.music.shuffle ? 'SUCCESS' : 'SECONDARY'),
             new MessageButton()
                 .setCustomId('clear')
                 .setLabel('Clear & Disconnect')

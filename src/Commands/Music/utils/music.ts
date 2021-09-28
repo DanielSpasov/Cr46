@@ -4,7 +4,8 @@ const music = {
     connection: null,
     player: null,
     chatPlayer: null,
-    isPaused: false
+    isPaused: false,
+    shuffle: false
 }
 
 export default music

@@ -5,4 +5,5 @@ export interface Music {
     player: any;
     chatPlayer: any;
     isPaused: boolean;
+    shuffle: boolean;
 }
