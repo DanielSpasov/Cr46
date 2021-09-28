@@ -21,6 +21,7 @@ export const command: Command = {
 
                 case 'music': message.channel.send({ embeds: [HelpMenus.music.main] }); break
                 case 'play': message.channel.send({ embeds: [HelpMenus.music.play] }); break
+                case 'p': message.channel.send({ embeds: [HelpMenus.music.p] }); break
                 case 'skip': message.channel.send({ embeds: [HelpMenus.music.skip] }); break
                 case 'pause': message.channel.send({ embeds: [HelpMenus.music.pause] }); break
                 case 'stop': message.channel.send({ embeds: [HelpMenus.music.stop] }); break

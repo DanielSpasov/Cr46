@@ -6,12 +6,17 @@ export const music = {
     main: new MessageEmbed()
         .setTitle('Music Commands')
         .setColor('PURPLE')
-        .setDescription('`play`, `skip`, `pause`, `resume`, `loop`, `shuffle`')
+        .setDescription('`play`, `p`, `skip`, `stop`, `pause`, `unpause`, `resume`, `loop`, `shuffle`')
         .setFooter('Type /help <CommandName> for details on a command'),
     play: new MessageEmbed()
         .setTitle('Play Command')
         .setColor('PURPLE')
         .setDescription('/play <SongName>/<YouTubeLink> - The bot will join the channel and play the song for you.')
+        .setFooter('Type /help <CommandName> for details on a command'),
+    p: new MessageEmbed()
+        .setTitle('Play Command')
+        .setColor('PURPLE')
+        .setDescription('/p <SongName>/<YouTubeLink> - The bot will join the channel and play the song for you.')
         .setFooter('Type /help <CommandName> for details on a command'),
     skip: new MessageEmbed()
         .setTitle('Skip Command')
