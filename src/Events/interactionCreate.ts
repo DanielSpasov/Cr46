@@ -4,6 +4,7 @@ import { Event } from '../Interfaces';
 
 import { command as pause } from '../Commands/Music/pause'
 import { command as resume } from '../Commands/Music/resume'
+import { command as skip } from '../Commands/Music/skip'
 import { command as loop } from '../Commands/Music/loop'
 import { command as shuffle } from '../Commands/Music/shuffle'
 
@@ -24,9 +25,7 @@ export const event: Event = {
                 break;
             case 'loop': await loop.run(client, interaction, []); break;
             case 'shuffle': await shuffle.run(client, interaction, []); break;
-            case 'skip':
-
-                break;
+            case 'skip': await skip.run(client, interaction, []); break;
             case 'clear':
 
                 break;

@@ -1,9 +1,8 @@
-import { createAudioPlayer, createAudioResource, joinVoiceChannel } from '@discordjs/voice';
-import ytdl from 'ytdl-core';
+import { createAudioPlayer, joinVoiceChannel } from '@discordjs/voice';
 
 import { Command } from '../../Interfaces';
 
-import { videoFinder, loadChatPlayer } from './utils';
+import { videoFinder, videoPlayer, loadChatPlayer } from './utils';
 
 
 
@@ -20,15 +19,6 @@ export const command: Command = {
 
             const guild = client.music.guilds.get(message.guildId);
 
-            const video = await videoFinder(args.join(' '));
-            guild.queue.push(video);
-
-            if (guild.queue.length <= 1) {
-                client.music.chatPlayer = await loadChatPlayer(client, message, false);
-            } else {
-                await loadChatPlayer(client, message, true);
-            }
-
             const voiceChannelID = message.guild.members.cache.get(message.author.id).voice.channelId;
 
             if (!client.music.connection) {
@@ -40,8 +30,17 @@ export const command: Command = {
                 client.music.connection.subscribe(client.music.player);
             }
 
-            const resource = createAudioResource(ytdl(video.url, { filter: 'audioonly' }));
-            client.music.player.play(resource);
+            const video = await videoFinder(args.join(' '));
+            guild.queue.push(video);
+
+            if (guild.queue.length <= 1) {
+                client.music.chatPlayer = await loadChatPlayer(client, message, false);
+                videoPlayer(client, guild.queue[0]);
+            } else {
+                await loadChatPlayer(client, message, true);
+            }
+
+
 
         } catch (error) { console.log(error) }
     }
