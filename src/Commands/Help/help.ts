@@ -21,8 +21,11 @@ export const command: Command = {
 
                 case 'music': message.channel.send({ embeds: [HelpMenus.music.main] }); break
                 case 'play': message.channel.send({ embeds: [HelpMenus.music.play] }); break
+                case 'skip': message.channel.send({ embeds: [HelpMenus.music.skip] }); break
                 case 'pause': message.channel.send({ embeds: [HelpMenus.music.pause] }); break
                 case 'resume': message.channel.send({ embeds: [HelpMenus.music.resume] }); break
+                case 'loop': message.channel.send({ embeds: [HelpMenus.music.loop] }); break
+                case 'shuffle': message.channel.send({ embeds: [HelpMenus.music.shuffle] }); break
 
                 case 'league': message.channel.send({ embeds: [HelpMenus.league.main] }); break
                 case 'check': message.channel.send({ embeds: [HelpMenus.league.check] }); break
