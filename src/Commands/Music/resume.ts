@@ -6,7 +6,7 @@ import { loadChatPlayer } from './utils';
 
 export const command: Command = {
     name: 'resume',
-    aliases: [],
+    aliases: ['unpause'],
     run: async (client, message, args) => {
         try {
             await client.music.player.unpause();

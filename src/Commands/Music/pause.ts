@@ -6,7 +6,7 @@ import { loadChatPlayer } from './utils';
 
 export const command: Command = {
     name: 'pause',
-    aliases: [],
+    aliases: ['stop'],
     run: async (client, message, args) => {
         try {
             await client.music.player.pause();

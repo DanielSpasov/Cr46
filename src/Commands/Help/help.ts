@@ -23,7 +23,9 @@ export const command: Command = {
                 case 'play': message.channel.send({ embeds: [HelpMenus.music.play] }); break
                 case 'skip': message.channel.send({ embeds: [HelpMenus.music.skip] }); break
                 case 'pause': message.channel.send({ embeds: [HelpMenus.music.pause] }); break
+                case 'stop': message.channel.send({ embeds: [HelpMenus.music.stop] }); break
                 case 'resume': message.channel.send({ embeds: [HelpMenus.music.resume] }); break
+                case 'unpause': message.channel.send({ embeds: [HelpMenus.music.unpause] }); break
                 case 'loop': message.channel.send({ embeds: [HelpMenus.music.loop] }); break
                 case 'shuffle': message.channel.send({ embeds: [HelpMenus.music.shuffle] }); break
 

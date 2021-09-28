@@ -23,10 +23,20 @@ export const music = {
         .setColor('PURPLE')
         .setDescription('/pause - Pauses the currently playing song.')
         .setFooter('Type /help <CommandName> for details on a command'),
+    stop: new MessageEmbed()
+        .setTitle('Stop Command')
+        .setColor('PURPLE')
+        .setDescription('/stop - Pauses the currently playing song.')
+        .setFooter('Type /help <CommandName> for details on a command'),
     resume: new MessageEmbed()
         .setTitle('Resume Command')
         .setColor('PURPLE')
         .setDescription('/resume - Resumes the song if it is paused.')
+        .setFooter('Type /help <CommandName> for details on a command'),
+    unpause: new MessageEmbed()
+        .setTitle('Unpause Command')
+        .setColor('PURPLE')
+        .setDescription('/unpause - Resumes the song if it is paused.')
         .setFooter('Type /help <CommandName> for details on a command'),
     loop: new MessageEmbed()
         .setTitle('Loop Command')
