@@ -5,10 +5,13 @@ import { MessageActionRow, MessageButton, MessageEmbed } from 'discord.js';
 export const loadChatPlayer = (client, message, isUpdate) => {
 
     const queue = client.music.guilds.get(message.guildId).queue
+    const loopingWord = client.music.looping ? client.music.looping === 1 ? 'Song' : 'Queue' : 'Disabled';
+    const loopingColor = client.music.looping ? client.music.looping === 1 ? 'SUCCESS' : 'PRIMARY' : 'SECONDARY';
 
     const playerEmbed = new MessageEmbed()
         .setTitle(`Music Player`)
         .setColor('PURPLE')
+        .setFooter(`Looping: ${loopingWord}`)
 
     if (!queue.length) {
         playerEmbed.addField(
@@ -45,7 +48,7 @@ export const loadChatPlayer = (client, message, isUpdate) => {
             new MessageButton()
                 .setCustomId('loop')
                 .setLabel('Loop')
-                .setStyle('SECONDARY'),
+                .setStyle(loopingColor),
             new MessageButton()
                 .setCustomId('clear')
                 .setLabel('Clear & Disconnect')
