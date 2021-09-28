@@ -29,14 +29,15 @@ export const loadChatPlayer = (client, message, isUpdate) => {
     const buttons = new MessageActionRow()
         .addComponents(
             new MessageButton()
-                .setCustomId('play')
-                .setLabel('Play')
+                .setCustomId('resume')
+                .setLabel('Resume')
                 .setStyle('SUCCESS')
-                .setDisabled(true),
+                .setDisabled(!client.music.isPaused),
             new MessageButton()
                 .setCustomId('pause')
                 .setLabel('Pause')
-                .setStyle('PRIMARY'),
+                .setStyle('PRIMARY')
+                .setDisabled(client.music.isPaused),
             new MessageButton()
                 .setCustomId('skip')
                 .setLabel('Skip')

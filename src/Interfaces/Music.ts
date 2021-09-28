@@ -4,4 +4,5 @@ export interface Music {
     connection: any;
     player: any;
     chatPlayer: any;
+    isPaused: boolean;
 }
