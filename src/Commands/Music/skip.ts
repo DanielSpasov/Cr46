@@ -10,6 +10,7 @@ export const command: Command = {
     aliases: [],
     run: async (client, message, args) => {
         try {
+            if (message.interaction === null) message.delete();
             const guild = client.music.guilds.get(message.guildId);
             guild.queue.shift();
             videoPlayer(client, guild.queue[0]);

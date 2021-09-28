@@ -9,6 +9,7 @@ export const command: Command = {
     aliases: ['unpause'],
     run: async (client, message, args) => {
         try {
+            if (message.interaction === null) message.delete();
             client.music.player.unpause();
             client.music.isPaused = false;
             await loadChatPlayer(client, message, true);

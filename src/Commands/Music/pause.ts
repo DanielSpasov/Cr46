@@ -9,6 +9,7 @@ export const command: Command = {
     aliases: ['stop'],
     run: async (client, message, args) => {
         try {
+            if (message.interaction === null) message.delete();
             client.music.player.pause();
             client.music.isPaused = true;
             await loadChatPlayer(client, message, true);

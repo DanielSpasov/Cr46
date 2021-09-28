@@ -9,6 +9,7 @@ export const command: Command = {
     aliases: [],
     run: async (client, message, args) => {
         try {
+            if (message.interaction === null) message.delete();
             client.music.shuffle = !client.music.shuffle;
             await loadChatPlayer(client, message, true);
         } catch (error) { console.log(error) }
