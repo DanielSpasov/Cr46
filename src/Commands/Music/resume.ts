@@ -9,7 +9,7 @@ export const command: Command = {
     aliases: ['unpause'],
     run: async (client, message, args) => {
         try {
-            await client.music.player.unpause();
+            client.music.player.unpause();
             client.music.isPaused = false;
             await loadChatPlayer(client, message, true);
         } catch (error) { console.log(error) }
