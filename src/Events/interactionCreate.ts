@@ -23,7 +23,7 @@ export const event: Event = {
                 else if (!client.music.isPaused) await pause.run(client, interaction, []);
                 break;
             case 'loop': await loop.run(client, interaction, []); break;
-            case 'shuffle': shuffle.run(client, interaction, []); break;
+            case 'shuffle': await shuffle.run(client, interaction, []); break;
             case 'skip':
 
                 break;
