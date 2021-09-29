@@ -21,7 +21,18 @@ export const idleListener = async (client, message) => {
             }
 
             await loadChatPlayer(client, message, true);
-            if (!guild.queue[0]) return;
+
+            if (!guild.queue[0]) {
+                setTimeout(() => {
+                    const hasQueuedSong = guild.queue[0] ? true : false;
+                    if (!hasQueuedSong) {
+                        client.music.connection.destroy();
+                        client.music.connection = null;
+                        client.music.player = null;
+                    }
+                }, 180000);
+                return;
+            };
 
             const nextSong = createAudioResource(ytdl(guild.queue[0].url, { filter: 'audioonly' }));
             client.music.player.play(nextSong);
