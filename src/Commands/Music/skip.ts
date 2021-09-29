@@ -4,6 +4,7 @@ import ytdl from 'ytdl-core';
 import { Command } from '../../Interfaces';
 
 import { loadChatPlayer } from './utils';
+import music from './utils/music';
 
 
 
@@ -16,7 +17,13 @@ export const command: Command = {
             if (message.interaction === null) message.delete();
 
             const guild = client.music.guilds.get(message.guildId);
-            guild.queue.shift();
+
+            if (music.looping === 0) guild.queue.shift();
+            if (music.looping === 1) { }
+            if (music.looping === 2) {
+                const firstSong = guild.queue.shift();
+                guild.queue.push(firstSong);
+            }
 
             if (!guild.queue[0]) {
                 client.music.player.stop();

@@ -1,6 +1,8 @@
 import { AudioPlayerStatus, createAudioResource } from '@discordjs/voice';
 import ytdl from 'ytdl-core';
+
 import { loadChatPlayer } from '.';
+import music from './music';
 
 
 
@@ -10,7 +12,13 @@ export const idleListener = async (client, message) => {
         client.music.player.on(AudioPlayerStatus.Idle, async () => {
 
             const guild = client.music.guilds.get(message.guildId);
-            guild.queue.shift();
+
+            if (music.looping === 0) guild.queue.shift();
+            if (music.looping === 1) { }
+            if (music.looping === 2) {
+                const firstSong = guild.queue.shift();
+                guild.queue.push(firstSong);
+            }
 
             await loadChatPlayer(client, message, true);
             if (!guild.queue[0]) return;
