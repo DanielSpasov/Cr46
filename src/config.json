@@ -1,6 +1,7 @@
 {
     "prefix": "/",
     "valid_channels": ["688849699364667438", "511624993105379329"],
+    "roles_channel": "909718121047277589",
     "requestOptions": { "headers": { "X-Riot-Token": "process.env.RIOT_API_KEY" } },
     "lol_api_url": "https://euw1.api.riotgames.com",
     "lol_ddragon_url": "https://ddragon.leagueoflegends.com",
