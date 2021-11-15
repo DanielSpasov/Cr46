@@ -1,5 +1,6 @@
 import { Message, MessageEmbed, TextChannel } from 'discord.js';
 import { Event } from '../Interfaces';
+import connectDB from '../DB/config';
 
 
 
@@ -7,20 +8,15 @@ export const event: Event = {
     name: 'ready',
     run: async (client) => {
         try {
-            console.log('Cr46 is Online!');
 
             client.user.setActivity(
                 process.env.NODE_ENV === 'production' ? '@Cr46' : 'Under Maintenance',
                 { type: process.env.NODE_ENV === 'production' ? 'LISTENING' : 'WATCHING' }
             );
 
-            const botCommandsChannel = await <Promise<TextChannel>>client.channels.fetch(client.config.valid_channels[0]);
-            botCommandsChannel.send({
-                embeds: [new MessageEmbed()
-                    .setDescription(`Cr46 is Running in ${process.env.NODE_ENV} mode`)
-                    .setColor('GREEN')]
-            });
+            connectDB();
 
+            // SHUOLF NOT BE IN THE READY EVENT ---
             const getEmoji = emojiName => client.emojis.cache.find(emoji => emoji.name === emojiName);
             const emojis = {
                 league: 'League of Legends',
@@ -47,6 +43,14 @@ export const event: Event = {
                 .setColor('BLURPLE')
 
             firstMessage(client, content, reactions);
+            
+            console.log('Cr46 is Online!');
+            const botCommandsChannel = await <Promise<TextChannel>>client.channels.fetch(client.config.valid_channels[0]);
+            botCommandsChannel.send({
+                embeds: [new MessageEmbed()
+                    .setDescription(`Cr46 is Running in ${process.env.NODE_ENV} mode`)
+                    .setColor('GREEN')]
+            });
 
         } catch (error) { console.log(error.message) }
     }

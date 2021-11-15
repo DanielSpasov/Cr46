@@ -24,6 +24,7 @@
     "axios": "^0.21.4",
     "discord.js": "13.1.0",
     "dotenv": "10.0.0",
+    "mongoose": "^6.0.12",
     "tweetnacl": "^1.0.3",
     "yt-search": "2.10.1",
     "ytdl-core": "4.9.1"
