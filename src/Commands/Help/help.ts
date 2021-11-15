@@ -1,5 +1,3 @@
-import { MessageEmbed, MessageActionRow, MessageButton } from 'discord.js';
-
 import { Command } from '../../Interfaces';
 
 import { menus as HelpMenus } from './Menus';

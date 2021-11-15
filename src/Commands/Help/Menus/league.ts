@@ -1,5 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 
+import config from '../../../config.json'
+
 
 
 export const league = {
@@ -7,11 +9,11 @@ export const league = {
         .setTitle('League Commands')
         .setColor('BLUE')
         .setDescription('`check`')
-        .setFooter('Type /help <CommandName> for details on a command'),
+        .setFooter(`Type ${config.prefix}help <CommandName> for details on a command`),
 
     check: new MessageEmbed()
         .setTitle('League Commands')
         .setColor('BLUE')
-        .setDescription('/check <AccountName> - Displays information about that League of Legends account.')
-        .setFooter('Type /help <CommandName> for details on a command'),
+        .setDescription(`${config.prefix}check <AccountName> - Displays information about that League of Legends account.`)
+        .setFooter(`Type ${config.prefix}help <CommandName> for details on a command`),
 }

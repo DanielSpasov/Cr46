@@ -32,6 +32,9 @@ export const command: Command = {
                 client.music.chatPlayer = await loadChatPlayer(client, message, false);
                 idleListener(client, message);
             }
+            // if (client.music.connection._state.status == 'disconnected') {
+
+            // }
 
             const video = await videoFinder(args.join(' '));
 
