@@ -16,12 +16,16 @@ export const command: Command = {
 
             if (!args.length) return;
 
+            const optionalRegion = args[args.length - 1]
+            let region
+            if (optionalRegion.includes('region:')) region = args.pop().split('region:')[1]
+
             const username = args.join(' ');
 
             const versions = await axios.get<ILeagueVersions>(getURL(client, 'versions'), client.config.requestOptions);
             const latest = versions.data[0];
 
-            const summoner = await axios.get<ISummoner>(getURL(client, 'summoner', [username]), client.config.requestOptions);
+            const summoner = await axios.get<ISummoner>(getURL(client, 'summoner', [username], region), client.config.requestOptions);
 
             const outputEmbed = new MessageEmbed();
             outputEmbed.setColor('BLUE');
@@ -32,15 +36,15 @@ export const command: Command = {
 
             const outputMessage = await message.channel.send({ embeds: [outputEmbed] });
 
-            const description = await getRanked(client, summoner)
+            const description = await getRanked(client, summoner, region)
             outputEmbed.setDescription(description)
             outputMessage.edit({ embeds: [outputEmbed] })
 
-            const fields = await getChampions(client, summoner, latest, 9)
+            const fields = await getChampions(client, summoner, latest, 9, region)
             outputEmbed.addFields(fields)
             outputMessage.edit({ embeds: [outputEmbed] })
 
 
-        } catch (error) { console.log(error) }
+        } catch (error) { console.log(error.message) }
     }
 }

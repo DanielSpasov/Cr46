@@ -1,7 +1,5 @@
 {
     "prefix": ".",
     "requestOptions": { "headers": { "X-Riot-Token": "process.env.RIOT_API_KEY" } },
-    "lol_api_url": "https://euw1.api.riotgames.com",
-    "lol_ddragon_url": "https://ddragon.leagueoflegends.com",
     "interaction_url": "https://discord.com/api/v8/interactions"
 }

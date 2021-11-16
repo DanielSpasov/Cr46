@@ -10,7 +10,8 @@ export const getChampions = async (
     client,
     summoner,
     version,
-    count
+    count,
+    region
 ): Promise<Array<{
     name: string,
     value: string,
@@ -19,7 +20,7 @@ export const getChampions = async (
     try {
 
         let fields = [];
-        const sumChampions = await axios.get<IChampion[]>(getURL(client, 'sumChampions', [summoner.data.id]), client.config.requestOptions);
+        const sumChampions = await axios.get<IChampion[]>(getURL(client, 'sumChampions', [summoner.data.id], region), client.config.requestOptions);
         const allChampions = await axios.get<IDDragonChampions>(getURL(client, 'allChampions', [version]), client.config.requestOptions)
         const topChampions = sumChampions.data.slice(0, count);
         const topChampionsIDs = sumChampions.data.slice(0, count).map(<IChampion>(x) => x = x.championId);
