@@ -3,9 +3,10 @@ import mongoose from 'mongoose';
 
 
 const guildSchema = new mongoose.Schema({
-    name: {
+    id: {
         type: String,
         required: true,
+        unique: true
     },
 });
 
