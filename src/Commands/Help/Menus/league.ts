@@ -14,7 +14,6 @@ export const league = {
     check: new MessageEmbed()
         .setTitle('League Commands')
         .setColor('BLUE')
-        .setDescription(`${config.prefix}check <AccountName> region:<Region(optional)> (Default region is EUW) - Displays information about that League of Legends account.\n
-        \`.check Babus\` - Checks 'Babus' in EUW\n\`.check Yassuo region:na1\` - Checks 'Yassuo' in NA`)
-        .setFooter(`Type ${config.prefix}help <CommandName> for details on a command`),
+        .setDescription(`\`${config.prefix}check <AccountName> region:<Region(optional)>\` (Default region is EUW) - Displays information about that League of Legends account.\n
+        \`.check Babus\` - Checks 'Babus' in EUW\n\`.check Yassuo region:na1\` - Checks 'Yassuo' in NA`),
 }

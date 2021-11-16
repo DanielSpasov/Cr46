@@ -14,10 +14,10 @@ export const other = {
     ping: new MessageEmbed()
         .setTitle('Ping Command')
         .setColor('AQUA')
-        .setDescription(`${config.prefix}ping - Shows the milisecons the bot takes to respond.`),
+        .setDescription(`\`${config.prefix}ping\` - Shows the milisecons the bot takes to respond.`),
 
     coinflip: new MessageEmbed()
         .setTitle('Coinflip Command')
         .setColor('AQUA')
-        .setDescription(`${config.prefix}coinflip <Heads>/<Tails> - The bot will flip a coin and decide your faith.`)
+        .setDescription(`\`${config.prefix}coinflip <Heads>/<Tails>\` - The bot will flip a coin and decide your faith.`)
 }
