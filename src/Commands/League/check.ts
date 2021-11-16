@@ -16,9 +16,20 @@ export const command: Command = {
 
             if (!args.length) return;
 
+            const validRegions = ['br1', 'eun1', 'euw1', 'jp1', 'la1', 'la2', 'kr', 'na1', 'oc2', 'ru', 'tr1']
             const optionalRegion = args[args.length - 1]
             let region
-            if (optionalRegion.includes('region:')) region = args.pop().split('region:')[1]
+            if (optionalRegion.includes('region:')) {
+                region = args.pop().split('region:')[1];
+                if (!validRegions.includes(region)) return await message.channel.send({
+                    embeds: [
+                        new MessageEmbed()
+                            .setDescription(`Region **${region}** is not a valid region.`)
+                            .setColor('RED')
+                            .setFooter(`Valid Regions: ${validRegions.join(', ')}`)
+                    ]
+                });
+            }
 
             const username = args.join(' ');
 
@@ -45,6 +56,14 @@ export const command: Command = {
             outputMessage.edit({ embeds: [outputEmbed] })
 
 
-        } catch (error) { console.log(error.message) }
+        } catch (error) {
+            await message.channel.send({
+                embeds: [
+                    new MessageEmbed()
+                        .setDescription(`Summoner **${args.join(' ')}** not found.`)
+                        .setColor('RED')
+                ]
+            });
+        }
     }
 }
