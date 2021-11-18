@@ -1,6 +1,6 @@
 import { Event } from '../Interfaces';
 
-import Guild from '../Models/Guild';
+import Guild from '../DB/Models/Guild';
 
 
 
