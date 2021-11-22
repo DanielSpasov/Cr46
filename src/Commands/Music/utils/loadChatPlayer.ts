@@ -17,7 +17,7 @@ export const loadChatPlayer = (client, message, isUpdate) => {
         if (!guild.queue.length) {
             playerEmbed.addField(
                 'No songs left in the Queue:',
-                `Bot will disconnect in 3 minutes`,
+                guild.connection ? `Bot will disconnect in 3 minutes` : `Listening party is over`,
                 true);
         } else {
             playerEmbed.addField(
