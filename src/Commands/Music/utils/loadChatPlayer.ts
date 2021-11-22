@@ -33,7 +33,7 @@ export const loadChatPlayer = (client, message, isUpdate) => {
         const buttons = new MessageActionRow()
             .addComponents(
                 new MessageButton()
-                    .setCustomId('resume-pause')
+                    .setCustomId(guild.isPaused ? 'resume' : 'pause')
                     .setLabel(guild.isPaused ? 'Resume' : 'Pause')
                     .setStyle('SUCCESS'),
                 new MessageButton()
@@ -49,8 +49,8 @@ export const loadChatPlayer = (client, message, isUpdate) => {
                     .setLabel('Shuffle')
                     .setStyle(guild.shuffle ? 'SUCCESS' : 'SECONDARY'),
                 new MessageButton()
-                    .setCustomId('clear')
-                    .setLabel('Clear & Disconnect')
+                    .setCustomId(guild.queue.length == 0 ? 'disconnect' : 'clear')
+                    .setLabel(guild.queue.length == 0 ? 'Disconnect' : 'Clear')
                     .setStyle('DANGER')
             )
 

@@ -7,6 +7,8 @@ import { command as resume } from '../Commands/Music/resume'
 import { command as skip } from '../Commands/Music/skip'
 import { command as loop } from '../Commands/Music/loop'
 import { command as shuffle } from '../Commands/Music/shuffle'
+import { command as clear } from '../Commands/Music/clear'
+import { command as disconnect } from '../Commands/Music/disconnect'
 
 
 
@@ -17,19 +19,15 @@ export const event: Event = {
             if (!interaction.isButton()) return;
     
             const command = interaction.customId;
-            const guild = client.music.guilds.get(interaction.guildId);
     
             switch (command) {
-                case 'resume-pause':
-                    if (guild.isPaused) await resume.run(client, interaction, []);
-                    else if (!guild.isPaused) await pause.run(client, interaction, []);
-                    break;
+                case 'resume': await resume.run(client, interaction, []); break;
+                case 'pause': await pause.run(client, interaction, []); break;
                 case 'loop': await loop.run(client, interaction, []); break;
                 case 'shuffle': await shuffle.run(client, interaction, []); break;
                 case 'skip': await skip.run(client, interaction, []); break;
-                case 'clear':
-    
-                    break;
+                case 'clear': await clear.run(client, interaction, []); break;
+                case 'disconnect': await disconnect.run(client, interaction, []); break;
                 default: break;
             }
     

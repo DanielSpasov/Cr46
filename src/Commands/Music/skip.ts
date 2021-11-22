@@ -18,16 +18,13 @@ export const command: Command = {
             const guild = client.music.guilds.get(message.guildId);
 
             if (guild.looping === 0) guild.queue.shift();
-            if (guild.looping === 1) { }
-            if (guild.looping === 2) {
-                const firstSong = guild.queue.shift();
-                guild.queue.push(firstSong);
-            }
+            if (guild.looping === 2) guild.queue.push(guild.queue.shift());
 
             if (!guild.queue[0]) {
                 guild.player.stop();
             } else {
                 const resource = createAudioResource(ytdl(guild.queue[0].url, { filter: 'audioonly' }));
+                guild.isPaused = false;
                 guild.player.play(resource);
             }
 

@@ -14,11 +14,7 @@ export const idleListener = async (client, message) => {
         guild.player.on(AudioPlayerStatus.Idle, async () => {
 
             if (guild.looping === 0) guild.queue.shift();
-            if (guild.looping === 1) { }
-            if (guild.looping === 2) {
-                const firstSong = guild.queue.shift();
-                guild.queue.push(firstSong);
-            }
+            if (guild.looping === 2) guild.queue.push(guild.queue.shift());
 
             await loadChatPlayer(client, message, true);
 
