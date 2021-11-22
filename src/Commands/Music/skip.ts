@@ -4,7 +4,6 @@ import ytdl from 'ytdl-core';
 import { Command } from '../../Interfaces';
 
 import { loadChatPlayer } from './utils';
-import music from './utils/music';
 
 
 
@@ -18,18 +17,18 @@ export const command: Command = {
 
             const guild = client.music.guilds.get(message.guildId);
 
-            if (music.looping === 0) guild.queue.shift();
-            if (music.looping === 1) { }
-            if (music.looping === 2) {
+            if (guild.looping === 0) guild.queue.shift();
+            if (guild.looping === 1) { }
+            if (guild.looping === 2) {
                 const firstSong = guild.queue.shift();
                 guild.queue.push(firstSong);
             }
 
             if (!guild.queue[0]) {
-                client.music.player.stop();
+                guild.player.stop();
             } else {
                 const resource = createAudioResource(ytdl(guild.queue[0].url, { filter: 'audioonly' }));
-                client.music.player.play(resource);
+                guild.player.play(resource);
             }
 
             await loadChatPlayer(client, message, true);

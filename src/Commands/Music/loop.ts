@@ -9,9 +9,13 @@ export const command: Command = {
     aliases: [],
     run: async (client, message, args) => {
         try {
+            const guild = client.music.guilds.get(message.guildId);
+
             if (message.interaction === null) message.delete();
-            if (client.music.looping === 2) client.music.looping = 0;
-            else client.music.looping += 1;
+            if (guild.looping === 2) guild.looping = 0;
+
+            else guild.looping += 1;
+
             await loadChatPlayer(client, message, true);
         } catch (error) { console.log(error) }
     }

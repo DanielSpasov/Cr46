@@ -16,12 +16,13 @@ export const event: Event = {
         try {
             if (!interaction.isButton()) return;
     
-            const cmd = interaction.customId;
+            const command = interaction.customId;
+            const guild = client.music.guilds.get(interaction.guildId);
     
-            switch (cmd) {
+            switch (command) {
                 case 'resume-pause':
-                    if (client.music.isPaused) await resume.run(client, interaction, []);
-                    else if (!client.music.isPaused) await pause.run(client, interaction, []);
+                    if (guild.isPaused) await resume.run(client, interaction, []);
+                    else if (!guild.isPaused) await pause.run(client, interaction, []);
                     break;
                 case 'loop': await loop.run(client, interaction, []); break;
                 case 'shuffle': await shuffle.run(client, interaction, []); break;

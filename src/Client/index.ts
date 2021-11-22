@@ -5,7 +5,7 @@ import path from 'path';
 import { Command, Event, Config, Music } from '../Interfaces';
 
 import ConfigJson from '../config.json';
-import MusicConfig from '../Commands/Music/utils/music';
+import MusicConfig from '../Commands/Music/utils/config';
 
 import dotenv from 'dotenv'
 dotenv.config()

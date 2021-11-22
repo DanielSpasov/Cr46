@@ -10,7 +10,7 @@ export const command: Command = {
     run: async (client, message, args) => {
         try {
             if (message.interaction === null) message.delete();
-            client.music.shuffle = !client.music.shuffle;
+            client.music.guilds.get(message.guildId).shuffle = !client.music.guilds.get(message.guildId).shuffle;
             await loadChatPlayer(client, message, true);
         } catch (error) { console.log(error) }
     }
