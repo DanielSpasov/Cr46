@@ -70,6 +70,7 @@ export const command: Command = {
                 ]
             });
 
+            guild.isPaused = false;
             if (guild.queue.length === 0) {
                 guild.queue.push(video);
                 const resource = createAudioResource(ytdl(video.url, { filter: 'audioonly' }));
