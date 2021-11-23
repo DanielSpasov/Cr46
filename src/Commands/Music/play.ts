@@ -1,6 +1,5 @@
 import { createAudioPlayer, createAudioResource, joinVoiceChannel, VoiceConnectionStatus } from '@discordjs/voice';
 import { MessageEmbed } from 'discord.js';
-import { connection } from 'mongoose';
 import ytdl from 'ytdl-core';
 
 import { Command } from '../../Interfaces';
@@ -48,12 +47,16 @@ export const command: Command = {
                     adapterCreator: message.guild.voiceAdapterCreator,
                 });
 
-                guild.connection.on(VoiceConnectionStatus.Disconnected, async () => {
-                    guild.connection.destroy();
-                    guild.connection = null;
-                    guild.player = null;
-                    guild.queue = [];
-                    await loadChatPlayer(client, message, false);
+                guild.connection.on(VoiceConnectionStatus.Disconnected, () => {
+                    setTimeout(async () => {
+                        if (guild.connection._state.status === 'disconnected') {
+                            guild.connection.destroy();
+                            guild.connection = null;
+                            guild.player = null;
+                            guild.queue = [];
+                            await loadChatPlayer(client, message, true);
+                        }
+                    }, 2500);
                 });
 
                 guild.connection.subscribe(guild.player);
@@ -62,7 +65,7 @@ export const command: Command = {
             };
 
             const video = await videoFinder(args.join(' '));
-            if(!video) return message.channel.send({
+            if (!video) return message.channel.send({
                 embeds: [
                     new MessageEmbed()
                         .setDescription(`Please provide arguments to the ${client.config.prefix}play command`)
