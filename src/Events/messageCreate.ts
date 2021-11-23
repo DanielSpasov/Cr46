@@ -14,10 +14,10 @@ export const event: Event = {
 
             if (channel.id !== '688849699364667438') {
                 if (channel.name !== 'botspam') return;
-                if (message.author.bot) return;
-                if (message.mentions.users.get('890877562404884531')) return MainMenu.run(client, message, []);
-                if (!message.content.startsWith(client.config.prefix)) return;
             }
+            if (message.author.bot) return;
+            if (message.mentions.users.get('890877562404884531')) return MainMenu.run(client, message, []);
+            if (!message.content.startsWith(client.config.prefix)) return;
 
             const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
             const cmd = args.shift().toLowerCase();
