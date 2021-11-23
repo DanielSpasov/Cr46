@@ -27,6 +27,10 @@ export const command: Command = {
                 case 'unpause': message.channel.send({ embeds: [HelpMenus.music.unpause] }); break
                 case 'loop': message.channel.send({ embeds: [HelpMenus.music.loop] }); break
                 case 'shuffle': message.channel.send({ embeds: [HelpMenus.music.shuffle] }); break
+                case 'disconnect': message.channel.send({ embeds: [HelpMenus.music.disconnect] }); break
+                case 'dc': message.channel.send({ embeds: [HelpMenus.music.dc] }); break
+                case 'clear': message.channel.send({ embeds: [HelpMenus.music.clear] }); break
+                case 'c': message.channel.send({ embeds: [HelpMenus.music.c] }); break
 
                 case 'league': message.channel.send({ embeds: [HelpMenus.league.main] }); break
                 case 'check': message.channel.send({ embeds: [HelpMenus.league.check] }); break
