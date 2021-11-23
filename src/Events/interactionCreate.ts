@@ -17,9 +17,12 @@ export const event: Event = {
     run: async (client, interaction) => {
         try {
             if (!interaction.isButton()) return;
-    
+
+            const guild = client.music.guilds.get(interaction.guildId);
             const command = interaction.customId;
-    
+
+            if (guild.chatPlayer.id !== interaction.message.id) return;
+
             switch (command) {
                 case 'resume': await resume.run(client, interaction, []); break;
                 case 'pause': await pause.run(client, interaction, []); break;
@@ -30,8 +33,8 @@ export const event: Event = {
                 case 'disconnect': await disconnect.run(client, interaction, []); break;
                 default: break;
             }
-    
+            
             axios.post(`${client.config.interaction_url}/${interaction.id}/${interaction.token}/callback`, { type: 7 })
-        } catch(error) { console.log(error.message) }
+        } catch (error) { console.log(error.message) }
     }
 }
