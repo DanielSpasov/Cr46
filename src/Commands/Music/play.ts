@@ -49,13 +49,15 @@ export const command: Command = {
 
                 guild.connection.on(VoiceConnectionStatus.Disconnected, () => {
                     setTimeout(async () => {
-                        if (guild.connection._state.status === 'disconnected') {
-                            guild.connection.destroy();
-                            guild.connection = null;
-                            guild.player = null;
-                            guild.queue = [];
-                            await loadChatPlayer(client, message, true);
-                        }
+                        try {
+                            if (guild.connection._state.status === 'disconnected') {
+                                guild.connection.destroy();
+                                guild.connection = null;
+                                guild.player = null;
+                                guild.queue = [];
+                                await loadChatPlayer(client, message, true);
+                            }
+                        } catch (err) { console.log(err.message) }
                     }, 2500);
                 });
 
@@ -74,6 +76,8 @@ export const command: Command = {
             });
 
             guild.isPaused = false;
+            if (!guild.player) return;
+
             if (guild.queue.length === 0) {
                 guild.queue.push(video);
                 const resource = createAudioResource(ytdl(video.url, { filter: 'audioonly' }));
@@ -84,6 +88,6 @@ export const command: Command = {
             await loadChatPlayer(client, message, true);
 
 
-        } catch (error) { console.log(error) }
+        } catch (error) { console.log(error.message) }
     }
 }
