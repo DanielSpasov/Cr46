@@ -20,12 +20,15 @@ export const idleListener = async (client, message) => {
 
             if (!guild.queue[0]) {
                 setTimeout(() => {
-                    const hasQueuedSong = guild.queue[0] ? true : false;
-                    if (!hasQueuedSong) {
-                        guild.connection.destroy();
-                        guild.connection = null;
-                        guild.player = null;
-                    }
+                    try {
+                        if (!guild.connection) return;
+                        const hasQueuedSong = guild.queue[0] ? true : false;
+                        if (!hasQueuedSong) {
+                            guild.connection.destroy();
+                            guild.connection = null;
+                            guild.player = null;
+                        }
+                    } catch (err) { console.log(err.message) }
                 }, 180000);
                 return;
             };
