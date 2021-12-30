@@ -38,6 +38,8 @@ export const command: Command = {
                 case 'other': message.channel.send({ embeds: [HelpMenus.other.main] }); break
                 case 'ping': message.channel.send({ embeds: [HelpMenus.other.ping] }); break
                 case 'coinflip': message.channel.send({ embeds: [HelpMenus.other.coinflip] }); break
+                case 'rockpaperscissors': message.channel.send({ embeds: [HelpMenus.other.rockpaperscissors] }); break
+                case 'rps': message.channel.send({ embeds: [HelpMenus.other.rps] }); break
 
                 default: message.channel.send({ embeds: [HelpMenus.main] }); break
             }

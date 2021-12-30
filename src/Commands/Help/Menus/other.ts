@@ -19,5 +19,15 @@ export const other = {
     coinflip: new MessageEmbed()
         .setTitle('Coinflip Command')
         .setColor('AQUA')
-        .setDescription(`\`${config.prefix}coinflip <Heads>/<Tails>\` - The bot will flip a coin and decide your faith.`)
+        .setDescription(`\`${config.prefix}coinflip <Heads>/<Tails>\` - The bot will flip a coin and decide your faith.`),
+
+    rps: new MessageEmbed()
+        .setTitle('Rock Paper Scissors Command')
+        .setColor('AQUA')
+        .setDescription(`\`${config.prefix}rps Rock/Paper/Scissors\` - Play rock paper scissors with Cr46.`),
+
+    rockpaperscissors: new MessageEmbed()
+        .setTitle('Rock Paper Scissors Command')
+        .setColor('AQUA')
+        .setDescription(`\`${config.prefix}rockpaperscissors Rock/Paper/Scissors\` - Play rock paper scissors with Cr46.`)
 }
