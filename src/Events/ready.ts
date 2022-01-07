@@ -1,6 +1,5 @@
 import { MessageEmbed, TextChannel } from 'discord.js';
 import { Event } from '../Interfaces';
-import connectDB from '../DB/config';
 
 
 
@@ -13,8 +12,6 @@ export const event: Event = {
                 process.env.NODE_ENV === 'production' ? '@Cr46' : 'Under Maintenance',
                 { type: process.env.NODE_ENV === 'production' ? 'LISTENING' : 'WATCHING' }
             );
-
-            connectDB();
 
             console.log('Cr46 is Online!');
             const botCommandsChannel = await <Promise<TextChannel>>client.channels.fetch('688849699364667438');
