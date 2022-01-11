@@ -8,8 +8,7 @@ export const event: Event = {
     run: async (client, guild) => {
         try {
 
-            const oldGuild = await Guild.findOneAndDelete({ id: guild.id });
-            await oldGuild.save();
+            await Guild.findOneAndDelete({ id: guild.id });
 
             console.log(`Cr46 was removed from Guild with ID: ${guild.id}`);
             
