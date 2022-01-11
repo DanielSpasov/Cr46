@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { Event } from '../Interfaces';
+import Guild from '../Models/Guild';
 
 
 
@@ -8,11 +8,10 @@ export const event: Event = {
     run: async (client, guild) => {
         try {
 
-            const req = await axios.delete(`${process.env.API_URL}/guild?guild=${guild.id}`)
+            const oldGuild = await Guild.findOneAndDelete({ id: guild.id });
+            await oldGuild.save();
 
-            if (req.data.status === 'DELETED') {
-                console.log(`Cr46 was removed from Guild with ID: ${guild.id}`);
-            }
+            console.log(`Cr46 was removed from Guild with ID: ${guild.id}`);
             
         } catch (error) { console.log(error.message) }
     }

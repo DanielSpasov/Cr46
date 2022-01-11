@@ -1,6 +1,8 @@
 import { MessageEmbed, TextChannel } from 'discord.js';
 import { Event } from '../Interfaces';
 
+import mongoose from 'mongoose';
+
 
 
 export const event: Event = {
@@ -20,6 +22,11 @@ export const event: Event = {
                     .setDescription(`Cr46 is Running in ${process.env.NODE_ENV} mode`)
                     .setColor('GREEN')]
             });
+
+            mongoose.connect(process.env.DB_URI!, {});
+            const db = mongoose.connection;
+            db.once('error', () => console.log('Connection Error'));
+            db.once('open', () => console.log('Database Connected'));
 
         } catch (error) { console.log(error.message) }
     }

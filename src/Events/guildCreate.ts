@@ -1,5 +1,5 @@
 import { Event } from '../Interfaces';
-import axios from 'axios';
+import Guild from '../Models/Guild';
 
 
 
@@ -7,8 +7,8 @@ export const event: Event = {
     name: 'guildCreate',
     run: async (client, guild) => {
         try {
-            
-            const req = await axios.post(`${process.env.API_URL}/guild`, {
+
+            const newGuild = await new Guild({
                 id: guild.id,
                 icon: guild.icon,
                 prefix: '/',
@@ -25,10 +25,10 @@ export const event: Event = {
                 gamblingModule: false,
                 voiceCommands: false,
             });
+            if (!newGuild) return console.log(`Adding Cr46 to guild with ID: ${guild.id} failed`)
+            await newGuild.save();
 
-            if (req.data.status === 'CREATED') {
-                console.log(`Cr46 was added to Guild with ID: ${guild.id}`);
-            }
+            console.log(`Cr46 was added to Guild with ID: ${guild.id}`);
 
         } catch (error) { console.log(error.message) }
     }
