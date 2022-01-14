@@ -8,6 +8,13 @@ const guildSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    name: {
+        type: String,
+        required: true,
+        unique: false,
+        minlength: 2,
+        maxlength: 100,
+    },
     icon: {
         type: String,
         required: true,
@@ -17,6 +24,29 @@ const guildSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: false,
+    },
+    channels: {
+        text: [{
+            id: { type: String },
+            type: { type: String },
+            name: { type: String },
+            parent: { type: String || null },
+            position: { type: Number },
+        }],
+        voice: [{
+            id: { type: String },
+            type: { type: String },
+            name: { type: String },
+            parent: { type: String || null },
+            position: { type: Number },
+        }],
+        categories: [{
+            id: { type: String },
+            type: { type: String },
+            name: { type: String },
+            parent: { type: String || null },
+            position: { type: Number },
+        }],
     },
     validChannels: [{
         type: String

@@ -8,11 +8,33 @@ export const event: Event = {
     run: async (client, guild) => {
         try {
 
+            const guildChannels = Array.from(await guild.channels.fetch())
+
+            let channels = {
+                text: [],
+                voice: [],
+                categories: []
+            }
+            for (const kvp of guildChannels) {
+                const channel = {
+                    id: kvp[1].id,
+                    type: kvp[1].type,
+                    name: kvp[1].name,
+                    parent: kvp[1].parentId,
+                    position: kvp[1].rawPosition
+                }
+                if (kvp[1].type === 'GUILD_VOICE') channels.voice.push(channel)
+                if (kvp[1].type === 'GUILD_TEXT') channels.text.push(channel)
+                if (kvp[1].type === 'GUILD_CATEGORY') channels.categories.push(channel)
+            }
+
             const newGuild = await new Guild({
                 id: guild.id,
+                name: guild.name,
                 icon: guild.icon,
                 prefix: '/',
-                validChannels: ['botspam'],
+                channels: channels,
+                validChannels: [],
                 leagueModule: true,
                 tftModule: true,
                 moveByActivityModule: false,
