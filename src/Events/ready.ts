@@ -16,7 +16,7 @@ export const event: Event = {
             );
 
             console.log('Cr46 is Online!');
-            const botCommandsChannel = await <Promise<TextChannel>>client.channels.fetch('688849699364667438');
+            const botCommandsChannel = await <Promise<TextChannel>>client.channels.fetch('931474316141416478');
             botCommandsChannel.send({
                 embeds: [new MessageEmbed()
                     .setDescription(`Cr46 is Running in ${process.env.NODE_ENV} mode`)
