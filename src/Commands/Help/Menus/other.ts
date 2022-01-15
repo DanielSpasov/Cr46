@@ -8,7 +8,7 @@ export const other = {
     main: new MessageEmbed()
         .setTitle('Other Commands')
         .setColor('AQUA')
-        .setDescription('`ping`, `coinflip`')
+        .setDescription('`ping`, `coinflip`, `rps`, `rockpaperscissors`')
         .setFooter(`Type ${config.prefix}help <CommandName> for details on a command`),
 
     ping: new MessageEmbed()
