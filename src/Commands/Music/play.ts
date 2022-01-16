@@ -3,6 +3,7 @@ import { MessageEmbed } from 'discord.js';
 import ytdl from 'ytdl-core';
 
 import { Command } from '../../Interfaces';
+import Guild from '../../Models/Guild';
 
 import { videoFinder, idleListener, loadChatPlayer } from './utils';
 
@@ -13,6 +14,8 @@ export const command: Command = {
     aliases: ['p'],
     run: async (client, message, args) => {
         try {
+
+            const guildPrefix = await (await Guild.findOne({ id: message.guildId })).prefix;
 
             message.delete();
 
@@ -35,7 +38,7 @@ export const command: Command = {
             if (!voiceChannelID) return message.channel.send({
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(`You need to be in a voice channel to use ${client.config.prefix}play`)
+                        .setDescription(`You need to be in a voice channel to use ${guildPrefix}play`)
                         .setColor('PURPLE')
                 ]
             });
@@ -70,7 +73,7 @@ export const command: Command = {
             if (!video) return message.channel.send({
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(`Please provide arguments to the ${client.config.prefix}play command`)
+                        .setDescription(`Please provide arguments to the ${guildPrefix}play command`)
                         .setColor('PURPLE')
                 ]
             });

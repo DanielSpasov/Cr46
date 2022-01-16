@@ -1,19 +1,24 @@
 import { MessageEmbed } from 'discord.js';
 
-import config from '../../../config.json'
-
 
 
 export const league = {
-    main: new MessageEmbed()
-        .setTitle('League Commands')
-        .setColor('BLUE')
-        .setDescription('`check`')
-        .setFooter(`Type ${config.prefix}help <CommandName> for details on a command`),
-
-    check: new MessageEmbed()
-        .setTitle('League Commands')
-        .setColor('BLUE')
-        .setDescription(`\`${config.prefix}check <AccountName> region:<Region(optional)>\` (Default region is EUW) - Displays information about that League of Legends account.\n
-        \`.check Babus\` - Checks 'Babus' in EUW\n\`.check Yassuo region:na1\` - Checks 'Yassuo' in NA`),
+    main: (message, prefix) => {
+        message.channel.send({
+            embeds: [new MessageEmbed()
+                .setTitle('League Commands')
+                .setColor('BLUE')
+                .setDescription('`check`')
+                .setFooter(`Type ${prefix}help <CommandName> for details on a command`)]
+        })
+    },
+    check: (message, prefix) => {
+        message.channel.send({
+            embeds: [new MessageEmbed()
+                .setTitle('League Commands')
+                .setColor('BLUE')
+                .setDescription(`\`${prefix}check <AccountName> region:<Region(optional)>\` (Default region is EUW) - Displays information about that League of Legends account.\n
+            \`${prefix}check Babus\` - Checks 'Babus' in EUW\n\`${prefix}check Yassuo region:na1\` - Checks 'Yassuo' in NA`)]
+        })
+    },
 }

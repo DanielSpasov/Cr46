@@ -1,33 +1,50 @@
 import { MessageEmbed } from 'discord.js';
 
-import config from '../../../config.json'
-
 
 
 export const other = {
-    main: new MessageEmbed()
-        .setTitle('Other Commands')
-        .setColor('AQUA')
-        .setDescription('`ping`, `coinflip`, `rps`, `rockpaperscissors`')
-        .setFooter(`Type ${config.prefix}help <CommandName> for details on a command`),
-
-    ping: new MessageEmbed()
-        .setTitle('Ping Command')
-        .setColor('AQUA')
-        .setDescription(`\`${config.prefix}ping\` - Shows the milisecons the bot takes to respond.`),
-
-    coinflip: new MessageEmbed()
-        .setTitle('Coinflip Command')
-        .setColor('AQUA')
-        .setDescription(`\`${config.prefix}coinflip <Heads>/<Tails>\` - The bot will flip a coin and decide your faith.`),
-
-    rps: new MessageEmbed()
-        .setTitle('Rock Paper Scissors Command')
-        .setColor('AQUA')
-        .setDescription(`\`${config.prefix}rps Rock/Paper/Scissors\` - Play rock paper scissors with Cr46.`),
-
-    rockpaperscissors: new MessageEmbed()
-        .setTitle('Rock Paper Scissors Command')
-        .setColor('AQUA')
-        .setDescription(`\`${config.prefix}rockpaperscissors Rock/Paper/Scissors\` - Play rock paper scissors with Cr46.`)
+    main: (message, prefix) => {
+        message.channel.send({
+            embeds: [new MessageEmbed()
+                .setTitle('Other Commands')
+                .setColor('AQUA')
+                .setDescription('`ping`, `coinflip`, `rps`, `rockpaperscissors`')
+                .setFooter(`Type ${prefix}help <CommandName> for details on a command`)]
+        })
+    },
+    ping: (message, prefix) => {
+        message.channel.send({
+            embeds: [new MessageEmbed()
+                .setTitle('Ping Command')
+                .setColor('AQUA')
+                .setDescription(`\`${prefix}ping\` - Shows the milisecons the bot takes to respond.`)]
+        })
+    },
+    coinflip: (message, prefix) => {
+        message.channel.send({
+            embeds: [new MessageEmbed()
+                .setTitle('Coinflip Command')
+                .setColor('AQUA')
+                .setDescription(`\`${prefix}coinflip <Heads>/<Tails>\` - The bot will flip a coin and decide your faith.`)]
+        })
+    },
+    rps: (message, prefix) => {
+        message.channel.send({
+            embeds: [
+                new MessageEmbed()
+                    .setTitle('Rock Paper Scissors Command')
+                    .setColor('AQUA')
+                    .setDescription(`\`${prefix}rps Rock/Paper/Scissors\` - Play rock paper scissors with Cr46.`),
+            ]
+        })
+    },
+    rockpaperscissors: (message, prefix) => {
+        message.channel.send({
+            embeds: [new MessageEmbed()
+                .setTitle('Rock Paper Scissors Command')
+                .setColor('AQUA')
+                .setDescription(`\`${prefix}rockpaperscissors Rock/Paper/Scissors\` - Play rock paper scissors with Cr46.`)
+            ]
+        })
+    }
 }

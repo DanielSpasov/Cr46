@@ -1,6 +1,7 @@
 import { Command } from '../../Interfaces';
-
 import { menus as HelpMenus } from './Menus';
+
+import Guild from '../../Models/Guild';
 
 
 
@@ -10,38 +11,40 @@ export const command: Command = {
     run: async (client, message, args) => {
         try {
 
-            if (!message.content.startsWith(client.config.prefix)) return message.channel.send({ embeds: [HelpMenus.main] });
-            if (!args[0]) return message.channel.send({ embeds: [HelpMenus.main] });
+            const guildPrefix = await (await Guild.findOne({ id: message.guildId })).prefix;
+
+            if (!message.content.startsWith(guildPrefix)) return HelpMenus.main(message, guildPrefix);
+            if (!args[0]) return HelpMenus.main(message, guildPrefix);
 
             const type = args.shift().toLowerCase()
 
             switch (type) {
 
-                case 'music': message.channel.send({ embeds: [HelpMenus.music.main] }); break
-                case 'play': message.channel.send({ embeds: [HelpMenus.music.play] }); break
-                case 'p': message.channel.send({ embeds: [HelpMenus.music.p] }); break
-                case 'skip': message.channel.send({ embeds: [HelpMenus.music.skip] }); break
-                case 'pause': message.channel.send({ embeds: [HelpMenus.music.pause] }); break
-                case 'stop': message.channel.send({ embeds: [HelpMenus.music.stop] }); break
-                case 'resume': message.channel.send({ embeds: [HelpMenus.music.resume] }); break
-                case 'unpause': message.channel.send({ embeds: [HelpMenus.music.unpause] }); break
-                case 'loop': message.channel.send({ embeds: [HelpMenus.music.loop] }); break
-                case 'shuffle': message.channel.send({ embeds: [HelpMenus.music.shuffle] }); break
-                case 'disconnect': message.channel.send({ embeds: [HelpMenus.music.disconnect] }); break
-                case 'dc': message.channel.send({ embeds: [HelpMenus.music.dc] }); break
-                case 'clear': message.channel.send({ embeds: [HelpMenus.music.clear] }); break
-                case 'c': message.channel.send({ embeds: [HelpMenus.music.c] }); break
+                case 'music': HelpMenus.music.main(message, guildPrefix); break
+                case 'play': HelpMenus.music.play(message, guildPrefix); break
+                case 'p': HelpMenus.music.p(message, guildPrefix); break
+                case 'skip': HelpMenus.music.skip(message, guildPrefix); break
+                case 'pause': HelpMenus.music.pause(message, guildPrefix); break
+                case 'stop': HelpMenus.music.stop(message, guildPrefix); break
+                case 'resume': HelpMenus.music.resume(message, guildPrefix); break
+                case 'unpause': HelpMenus.music.unpause(message, guildPrefix); break
+                case 'loop': HelpMenus.music.loop(message, guildPrefix); break
+                case 'shuffle': HelpMenus.music.shuffle(message, guildPrefix); break
+                case 'disconnect': HelpMenus.music.disconnect(message, guildPrefix); break
+                case 'dc': HelpMenus.music.dc(message, guildPrefix); break
+                case 'clear': HelpMenus.music.clear(message, guildPrefix); break
+                case 'c': HelpMenus.music.c(message, guildPrefix); break
 
-                case 'league': message.channel.send({ embeds: [HelpMenus.league.main] }); break
-                case 'check': message.channel.send({ embeds: [HelpMenus.league.check] }); break
+                case 'league': HelpMenus.league.main(message, guildPrefix); break
+                case 'check': HelpMenus.league.check(message, guildPrefix); break
 
-                case 'other': message.channel.send({ embeds: [HelpMenus.other.main] }); break
-                case 'ping': message.channel.send({ embeds: [HelpMenus.other.ping] }); break
-                case 'coinflip': message.channel.send({ embeds: [HelpMenus.other.coinflip] }); break
-                case 'rockpaperscissors': message.channel.send({ embeds: [HelpMenus.other.rockpaperscissors] }); break
-                case 'rps': message.channel.send({ embeds: [HelpMenus.other.rps] }); break
+                case 'other': HelpMenus.other.main(message, guildPrefix); break
+                case 'ping': HelpMenus.other.ping(message, guildPrefix); break
+                case 'coinflip': HelpMenus.other.coinflip(message, guildPrefix); break
+                case 'rockpaperscissors': HelpMenus.other.rockpaperscissors(message, guildPrefix); break
+                case 'rps': HelpMenus.other.rps(message, guildPrefix); break
 
-                default: message.channel.send({ embeds: [HelpMenus.main] }); break
+                default: HelpMenus.main(message, guildPrefix); break
             }
 
         } catch (error) { console.log(error) }
