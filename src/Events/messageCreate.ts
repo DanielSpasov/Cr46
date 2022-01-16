@@ -15,8 +15,8 @@ export const event: Event = {
             const channel = <TextChannel>message.channel;
             const guild = await Guild.findOne({ id: channel.guildId });
 
-            if (guild.validChannels.length && !guild.validChannels.includes(channel.id)) return;
             if (message.author.bot) return;
+            if (guild.validChannels.length && !guild.validChannels.includes(channel.id)) return;
             if (message.mentions.users.get('890877562404884531')) return MainMenu.run(client, message, []);
             if (!message.content.startsWith(guild.prefix)) return;
 

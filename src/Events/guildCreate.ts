@@ -35,17 +35,33 @@ export const event: Event = {
                 prefix: '/',
                 channels: channels,
                 validChannels: [],
-                leagueModule: true,
-                tftModule: true,
-                moveByActivityModule: false,
-                rolesModule: false,
-                music: {
-                    youtubeModule: true,
-                    spotifyModule: false,
-                    soundcloudModule: false,
+                league: {
+                    allowed: true
                 },
-                gamblingModule: false,
-                voiceCommands: false,
+                moveByActivity: {
+                    allowed: false
+                },
+                roles: {
+                    allowed: false,
+                    channel: false
+                },
+                music: {
+                    youtube: {
+                        allowed: true,
+                        playlists: false,
+                    },
+                    spotify: {
+                        allowed: false,
+                        playlists: false,
+                        albums: false
+                    },
+                },
+                gambling: {
+                    allowed: false
+                },
+                voiceCommands: {
+                    allowed: false
+                },
             });
             if (!newGuild) return console.log(`Adding Cr46 to guild with ID: ${guild.id} failed`)
             await newGuild.save();

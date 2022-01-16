@@ -11,9 +11,8 @@ const guildSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: false,
         minlength: 2,
-        maxlength: 100,
+        maxlength: 100
     },
     icon: {
         type: String,
@@ -22,8 +21,7 @@ const guildSchema = new mongoose.Schema({
     },
     prefix: {
         type: String,
-        required: true,
-        unique: false,
+        required: true
     },
     channels: {
         text: [{
@@ -51,52 +49,65 @@ const guildSchema = new mongoose.Schema({
     validChannels: [{
         type: String
     }],
-    leagueModule: {
-        type: Boolean,
-        required: true,
-        unique: false,
-    },
-    tftModule: {
-        type: Boolean,
-        required: true,
-        unique: false,
-    },
-    moveByActivityModule: {
-        type: Boolean,
-        required: true,
-        unique: false,
-    },
-    rolesModule: {
-        type: Boolean,
-        required: true,
-        unique: false,
-    },
-    music: {
-        youtubeModule: {
+    league: {
+        allowed: {
             type: Boolean,
-            required: true,
-            unique: false,
-        },
-        spotifyModule: {
-            type: Boolean,
-            required: true,
-            unique: false,
-        },
-        soundcloudModule: {
-            type: Boolean,
-            required: true,
-            unique: false,
+            required: true
         }
     },
-    gamblingModule: {
-        type: Boolean,
-        required: true,
-        unique: false,
+    moveByActivity: {
+        allowed: {
+            type: Boolean,
+            required: true
+        }
+    },
+    roles: {
+        allowed: {
+            type: Boolean,
+            required: true
+        },
+        channel: {
+            type: String,
+            required: true
+        }
+    },
+    music: {
+        youtube: {
+            allowed: {
+                type: Boolean,
+                required: true
+            },
+            playlists: {
+                type: Boolean,
+                required: true
+            }
+        },
+        spotify: {
+            allowed: {
+                type: Boolean,
+                required: true
+            },
+            playlists: {
+                type: Boolean,
+                required: true
+            },
+            albums: {
+                type: Boolean,
+                required: true
+            }
+        },
+    },
+    gambling: {
+        allowed: {
+            type: Boolean,
+            required: true
+        }
     },
     voiceCommands: {
-        type: Boolean,
-        required: true,
-        unique: false,
+        allowed: {
+            type: Boolean,
+            required: true
+        }
     }
 });
 
