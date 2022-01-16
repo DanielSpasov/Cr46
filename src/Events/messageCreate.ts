@@ -13,16 +13,14 @@ export const event: Event = {
         try {
 
             const channel = <TextChannel>message.channel;
-            const guildPrefix = await (await Guild.findOne({ id: channel.guildId })).prefix;
+            const guild = await Guild.findOne({ id: channel.guildId });
 
-            if (channel.id !== '688849699364667438') {
-                if (channel.name !== 'botspam') return;
-            }
+            if (guild.validChannels.length && !guild.validChannels.includes(channel.id)) return;
             if (message.author.bot) return;
             if (message.mentions.users.get('890877562404884531')) return MainMenu.run(client, message, []);
-            if (!message.content.startsWith(guildPrefix)) return;
+            if (!message.content.startsWith(guild.prefix)) return;
 
-            const args = message.content.slice(guildPrefix.length).trim().split(/ +/g);
+            const args = message.content.slice(guild.prefix.length).trim().split(/ +/g);
             const cmd = args.shift().toLowerCase();
             if (!cmd) return;
 
