@@ -80,6 +80,10 @@ const guildSchema = new mongoose.Schema({
             playlists: {
                 type: Boolean,
                 required: true
+            },
+            autoGenPlaylists: {
+                type: Boolean,
+                required: true
             }
         },
         spotify: {
