@@ -49,7 +49,7 @@ export const event: Event = {
                     youtube: {
                         allowed: true,
                         playlists: false,
-                        autoGenPlaylists: false,
+                        mixes: false,
                     },
                     spotify: {
                         allowed: false,
