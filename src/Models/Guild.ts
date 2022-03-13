@@ -81,7 +81,7 @@ const guildSchema = new mongoose.Schema({
                 type: Boolean,
                 required: true
             },
-            autoGenPlaylists: {
+            mixes: {
                 type: Boolean,
                 required: true
             }
