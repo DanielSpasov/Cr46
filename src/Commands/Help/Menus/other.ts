@@ -34,7 +34,7 @@ export const other = {
                 new MessageEmbed()
                     .setTitle('Rock Paper Scissors Command')
                     .setColor('AQUA')
-                    .setDescription(`\`${prefix}rps Rock/Paper/Scissors\` - Play rock paper scissors with Cr46.`),
+                    .setDescription(`\`${prefix}rps <Rock>/<Paper>/<Scissors>\` - Play rock paper scissors with Cr46.`),
             ]
         })
     },
@@ -43,7 +43,16 @@ export const other = {
             embeds: [new MessageEmbed()
                 .setTitle('Rock Paper Scissors Command')
                 .setColor('AQUA')
-                .setDescription(`\`${prefix}rockpaperscissors Rock/Paper/Scissors\` - Play rock paper scissors with Cr46.`)
+                .setDescription(`\`${prefix}rockpaperscissors <Rock>/<Paper>/<Scissors>\` - Play rock paper scissors with Cr46.`)
+            ]
+        })
+    },
+    binary: (message, prefix) => {
+        message.channel.send({
+            embeds: [new MessageEmbed()
+                .setTitle('Binary Translator')
+                .setColor('AQUA')
+                .setDescription(`\`${prefix}binary <Bianry Code>\` - Translates the binary code to Text, Decimal number and Hex number.`)
             ]
         })
     }
