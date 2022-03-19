@@ -1,6 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 
 import { Command } from '../../Interfaces';
+import Guild from '../../Models/Guild';
 
 import { menus } from '../Help/Menus/index'
 
@@ -12,7 +13,9 @@ export const command: Command = {
     run: async (client, message, args) => {
         try {
 
-            if (!args[0]) return message.channel.send({ embeds: [menus.other.coinflip] });
+            const guild = await Guild.findOne({ id: message.guildId });
+
+            if (!args[0]) return menus.other.coinflip(message, guild.prefix);
 
             const userChoice = args[0].toLowerCase()
             const botChoice = ['Heads', 'Tails'][Math.floor(Math.random() * 2)].toLowerCase()

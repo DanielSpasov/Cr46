@@ -5,6 +5,8 @@ import { Command } from '../../Interfaces';
 import { ILeagueVersions, ISummoner } from '../../Interfaces/League';
 
 import { getURL, getChampions, getRanked } from './getters';
+import { menus } from '../Help/Menus';
+import Guild from '../../Models/Guild';
 
 
 
@@ -14,7 +16,9 @@ export const command: Command = {
     run: async (client, message, args) => {
         try {
 
-            if (!args.length) return;
+            const guild = await Guild.findOne({ id: message.guildId });
+
+            if (!args.length) return menus.league.check(message, guild.prefix);
 
             const validRegions = ['br1', 'eun1', 'euw1', 'jp1', 'la1', 'la2', 'kr', 'na1', 'oc2', 'ru', 'tr1']
             const optionalRegion = args[args.length - 1]
