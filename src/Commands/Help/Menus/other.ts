@@ -46,14 +46,5 @@ export const other = {
                 .setDescription(`\`${prefix}rockpaperscissors <Rock>/<Paper>/<Scissors>\` - Play rock paper scissors with Cr46.`)
             ]
         })
-    },
-    binary: (message, prefix) => {
-        message.channel.send({
-            embeds: [new MessageEmbed()
-                .setTitle('Binary Translator')
-                .setColor('AQUA')
-                .setDescription(`\`${prefix}binary <Bianry Code>\` - Translates the binary code to Text, Decimal number and Hex number.`)
-            ]
-        })
     }
 }
