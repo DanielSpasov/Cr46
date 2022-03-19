@@ -19,6 +19,7 @@ export const command: Command = {
             const guild = await Guild.findOne({ id: message.guildId });
 
             if (!args.length) return menus.league.check(message, guild.prefix);
+            if (!guild.league.allowed) return menus.league.checkNotAllowed(message, guild.prefix);
 
             const validRegions = ['br1', 'eun1', 'euw1', 'jp1', 'la1', 'la2', 'kr', 'na1', 'oc2', 'ru', 'tr1']
             const optionalRegion = args[args.length - 1]

@@ -21,4 +21,13 @@ export const league = {
             \`${prefix}check Babus\` - Checks 'Babus' in EUW\n\`${prefix}check Yassuo region:na1\` - Checks 'Yassuo' in NA`)]
         })
     },
+    checkNotAllowed: (message, prefix) => {
+        message.channel.send({
+            embeds: [new MessageEmbed()
+                .setTitle('League Commands')
+                .setColor('BLUE')
+                .setDescription(`\`${prefix}check\` Command is not allowed in this server.\n
+            if you have Administrator permissions, you can turn it on here: **Dashboard coming soon**`)]
+        })
+    },
 }
