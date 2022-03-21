@@ -1,6 +1,8 @@
 import { AudioPlayerStatus, createAudioResource } from '@discordjs/voice';
 import ytdl from 'ytdl-core';
 
+import { command as play } from '../play';
+
 import { loadChatPlayer } from '.';
 
 
@@ -9,7 +11,9 @@ export const idleListener = async (client, message) => {
     try {
 
         const guild = client.music.guilds.get(message.guildId);
-        guild.player.on('error', (err) => console.log(`Audio Error, ${err.message}`))
+        guild.player.on('error', () => 
+            play.run(client, message, message.content.slice(guild.prefix.length).trim().split(/ +/g))
+        )
 
         guild.player.on(AudioPlayerStatus.Idle, async () => {
 

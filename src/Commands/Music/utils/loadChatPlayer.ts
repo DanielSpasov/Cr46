@@ -22,11 +22,21 @@ export const loadChatPlayer = (client, message, isUpdate) => {
         } else {
             playerEmbed.addField(
                 'Currently Playing:',
-                `\`Title:\` [${guild.queue[0].title}](${guild.queue[0].url})\n\`Duration:\` ${guild.queue[0].duration}`,
+                `\`Title:\` [${guild.queue[0].title}](${guild.queue[0].url})\n
+                \`Duration:\` ${guild.queue[0].duration}\n
+                \`Songs in Queue:\` ${guild.queue.length}`,
                 true);
+
+            let songList: string = '';
+            const playlistLength: number = guild.queue.length > 5 ? 5 : guild.queue.length;
+            for (let i = 0; i < playlistLength; i++) {
+                if (i == 4) songList += `**${i + 1}**:  [${guild.queue[i].title}](${guild.queue[i].url})\n...`
+                else songList += `**${i + 1}**:  [${guild.queue[i].title}](${guild.queue[i].url})\n`
+            }
+
             playerEmbed.addField(
                 'Queue',
-                guild.queue.map(s => s = `**${guild.queue.indexOf(s) + 1}**:  [${s.title}](${s.url})`).join('\n'),
+                songList,
                 true);
         }
 
