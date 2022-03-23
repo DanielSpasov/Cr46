@@ -30,7 +30,7 @@ export const command: Command = {
             });
 
             // IF NO GUILD PLAYER IS SET, SET A GUILD PLAYER
-            const guild = client.music.guilds.get(message.guildId);
+            const guild = await client.music.guilds.get(message.guildId);
             if (!guild.player) guild.player = createAudioPlayer();
             guild.player.setMaxListeners(1);
 

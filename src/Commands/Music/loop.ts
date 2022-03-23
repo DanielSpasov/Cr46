@@ -9,7 +9,7 @@ export const command: Command = {
     aliases: [],
     run: async (client, message, args) => {
         try {
-            const guild = client.music.guilds.get(message.guildId);
+            const guild = await client.music.guilds.get(message.guildId);
 
             if (message.interaction === null) message.delete();
             if (guild.looping === 2) guild.looping = 0;

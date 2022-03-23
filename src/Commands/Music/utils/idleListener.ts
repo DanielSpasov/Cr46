@@ -9,11 +9,13 @@ import { loadChatPlayer } from '.';
 
 export const idleListener = async (client, message) => {
     try {
-
-        const guild = client.music.guilds.get(message.guildId);
-        guild.player.on('error', () => 
-            play.run(client, message, message.content.slice(guild.prefix.length).trim().split(/ +/g))
-        )
+        const guild = await client.music.guilds.get(message.guildId);
+        guild.player.on('error', () => {
+            try {
+                const prefix = message.content.slice(guild.prefix.length).trim().split(/ +/g);
+                play.run(client, message, prefix);
+            } catch(err) { console.log(err.message) }
+        });
 
         guild.player.on(AudioPlayerStatus.Idle, async () => {
 

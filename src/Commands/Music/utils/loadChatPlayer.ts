@@ -2,10 +2,10 @@ import { MessageActionRow, MessageButton, MessageEmbed } from 'discord.js';
 
 
 
-export const loadChatPlayer = (client, message, isUpdate) => {
+export const loadChatPlayer = async (client, message, isUpdate) => {
     try {
 
-        const guild = client.music.guilds.get(message.guildId);
+        const guild = await client.music.guilds.get(message.guildId);
         const loopingWord = guild.looping ? guild.looping === 1 ? 'Song' : 'Queue' : 'Disabled';
         const loopingColor = guild.looping ? guild.looping === 1 ? 'SUCCESS' : 'PRIMARY' : 'SECONDARY';
 

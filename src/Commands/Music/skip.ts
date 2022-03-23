@@ -15,7 +15,7 @@ export const command: Command = {
 
             if (message.interaction === null) message.delete();
 
-            const guild = client.music.guilds.get(message.guildId);
+            const guild = await client.music.guilds.get(message.guildId);
 
             if (guild.looping === 0) guild.queue.shift();
             if (guild.looping === 2) guild.queue.push(guild.queue.shift());
