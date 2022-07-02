@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const guildSchema = new mongoose.Schema({
+const guildSchema = new Schema({
   id: {
     type: String,
     required: true,
@@ -27,7 +27,7 @@ const guildSchema = new mongoose.Schema({
         id: { type: String },
         type: { type: String },
         name: { type: String },
-        parent: { type: String || null },
+        parent: { type: String || undefined },
         position: { type: Number },
       },
     ],
@@ -36,7 +36,7 @@ const guildSchema = new mongoose.Schema({
         id: { type: String },
         type: { type: String },
         name: { type: String },
-        parent: { type: String || null },
+        parent: { type: String || undefined },
         position: { type: Number },
       },
     ],
@@ -45,7 +45,34 @@ const guildSchema = new mongoose.Schema({
         id: { type: String },
         type: { type: String },
         name: { type: String },
-        parent: { type: String || null },
+        parent: { type: String || undefined },
+        position: { type: Number },
+      },
+    ],
+    news: [
+      {
+        id: { type: String },
+        type: { type: String },
+        name: { type: String },
+        parent: { type: String || undefined },
+        position: { type: Number },
+      },
+    ],
+    store: [
+      {
+        id: { type: String },
+        type: { type: String },
+        name: { type: String },
+        parent: { type: String || undefined },
+        position: { type: Number },
+      },
+    ],
+    stage: [
+      {
+        id: { type: String },
+        type: { type: String },
+        name: { type: String },
+        parent: { type: String || undefined },
         position: { type: Number },
       },
     ],
@@ -121,4 +148,4 @@ const guildSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("Guild", guildSchema);
+export default model("Guild", guildSchema);

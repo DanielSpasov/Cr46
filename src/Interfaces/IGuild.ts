@@ -1,10 +1,4 @@
-interface IChannel {
-  id: string;
-  type: string;
-  name: string;
-  parent: string | null;
-  position: number;
-}
+import { IChannel } from "./IChannel";
 
 export interface IGuild {
   id: string;
@@ -15,6 +9,9 @@ export interface IGuild {
     text: IChannel[];
     voice: IChannel[];
     categories: IChannel[];
+    news: IChannel[];
+    store: IChannel[];
+    stage: IChannel[];
   };
   validChannels: string[];
   league: {
