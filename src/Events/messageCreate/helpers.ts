@@ -26,7 +26,11 @@ export const validateMessage = async (
   message: Message
 ) => {
   try {
-    if (!guild.validChannels.includes(channelID)) return false;
+    if (
+      !guild.validChannels.includes(channelID) &&
+      !!guild.validChannels.length
+    )
+      return false;
     if (message.mentions.users.get(client.user.id)) {
       HelpMenu.run(client, message, []);
       return false;
