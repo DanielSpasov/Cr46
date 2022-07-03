@@ -1,6 +1,6 @@
 import { Client } from "discord.js";
 
-import { sendMessage } from "../../Client/sendMessage";
+import { sendMessage } from "../../Services/Core/sendMessage";
 
 const mapActivity = {
   production: "@Cr46",
@@ -18,7 +18,7 @@ export const setActivity = (client: Client) => {
   });
 };
 
-export const sendStartupMessage = async (client: Client) => {
+export const sendStatusMessage = async (client: Client) => {
   sendMessage({
     client,
     embed: {

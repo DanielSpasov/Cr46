@@ -9,7 +9,8 @@ import {
   VoiceChannel,
 } from "discord.js";
 
-import errorHandler from "../../Errors/handler";
+import errorHandler from "../../../Errors/handler";
+import { defaultValues } from "./defaultValues";
 
 const mapType = {
   GUILD_TEXT: "text",
@@ -33,17 +34,9 @@ export const formatGuildChannels = (
   >
 ) => {
   try {
-    const formattedChannels = {
-      text: [],
-      category: [],
-      voice: [],
-      news: [],
-      store: [],
-      stage: [],
-    };
-
+    const result = defaultValues;
     channels.forEach((channel, id) =>
-      formattedChannels[mapType[channel.type]].push({
+      result[mapType[channel.type]].push({
         id,
         type: channel.type,
         name: channel.name,
@@ -51,8 +44,7 @@ export const formatGuildChannels = (
         position: channel.position,
       })
     );
-
-    return formattedChannels;
+    return result;
   } catch (error) {
     errorHandler(client, error);
   }

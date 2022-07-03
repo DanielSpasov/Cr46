@@ -1,15 +1,18 @@
-import { Event } from "../../Interfaces";
-import { createGuild } from "./createGuild";
-import { formatGuildChannels } from "./helpers";
+import { guildService } from "../../Services/Guild";
 import errorHandler from "../../Errors/handler";
+import { Event } from "../../Interfaces";
 
 export const event: Event = {
   name: "guildCreate",
   run: async (client, guild) => {
     try {
       const guildChannels = await guild.channels.fetch();
-      const channels = formatGuildChannels(client, guildChannels);
-      const craetedGuild = await createGuild(client, guild, channels);
+      const channels = guildService.formatGuildChannels(client, guildChannels);
+      const craetedGuild = await guildService.createGuild(
+        client,
+        guild,
+        channels
+      );
       if (!craetedGuild) {
         throw {
           type: "Database Error",

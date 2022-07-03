@@ -1,7 +1,8 @@
 import { Client, TextChannel } from "discord.js";
-import errorHandler from "../Errors/handler";
 
-const getTextChannel = async (
+import errorHandler from "../../../Errors/handler";
+
+export const text = async (
   client: Client,
   channelID?: string
 ): Promise<TextChannel> => {
@@ -15,8 +16,3 @@ const getTextChannel = async (
     errorHandler(client, error);
   }
 };
-
-const getChannel = {
-  text: getTextChannel,
-};
-export default getChannel;

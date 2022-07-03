@@ -1,6 +1,6 @@
 import { Client, MessageEmbedOptions, TextChannel } from "discord.js";
 
-import getChannel from "./getChannel";
+import { getChannel } from "../getChannel";
 
 interface SendMessageProps {
   client: Client;

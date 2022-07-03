@@ -1,7 +1,7 @@
 import { Client } from "discord.js";
 
 import { unknownError, invalidErrorFormat, weirdError } from "./common";
-import { sendMessage } from "../Client/sendMessage";
+import { sendMessage } from "../Services/Core/sendMessage";
 import { IHandledError } from "./IHandledError";
 import { isValidError } from "./validator";
 

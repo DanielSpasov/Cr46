@@ -1,4 +1,4 @@
-import { setActivity, sendStartupMessage } from "./helpers";
+import { setActivity, sendStatusMessage } from "./helpers";
 import errorHandler from "../../Errors/handler";
 import { Event } from "../../Interfaces";
 import { database } from "./database";
@@ -10,7 +10,7 @@ export const event: Event = {
       const hasConnection = await database.connect(client);
       if (!hasConnection) return;
       setActivity(client);
-      sendStartupMessage(client);
+      sendStatusMessage(client);
     } catch (error) {
       errorHandler(client, error);
     }
