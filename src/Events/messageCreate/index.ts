@@ -3,7 +3,7 @@ import { Message, TextChannel } from "discord.js";
 import { Event, Command } from "../../Interfaces";
 import errorHandler from "../../Errors/handler";
 import { destructureMessage, validateMessage } from "./helpers";
-import Guild from "../../Models/Guild";
+import Guild from "../../Database/Models/Guild";
 
 export const event: Event = {
   name: "messageCreate",

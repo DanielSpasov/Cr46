@@ -1,7 +1,7 @@
 import { createGuild } from "./createGuild";
-import { formatGuildChannels } from "./formatGuildChannels";
+import { channels } from "./channels";
 
 export const guildService = {
   createGuild,
-  formatGuildChannels,
+  channels,
 };

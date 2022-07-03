@@ -1,6 +1,6 @@
 import errorHandler from "../../Errors/handler";
 import { Event } from "../../Interfaces";
-import Guild from "../../Models/Guild";
+import Guild from "../../Database/Models/Guild";
 
 export const event: Event = {
   name: "guildDelete",

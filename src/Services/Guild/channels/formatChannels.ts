@@ -10,18 +10,9 @@ import {
 } from "discord.js";
 
 import errorHandler from "../../../Errors/handler";
-import { defaultValues } from "./defaultValues";
+import { mapType, defaultValues } from "./helpers";
 
-const mapType = {
-  GUILD_TEXT: "text",
-  GUILD_CATEGORY: "category",
-  GUILD_VOICE: "voice",
-  GUILD_NEWS: "news",
-  GUILD_STORE: "store",
-  GUILD_STAGE: "stage",
-};
-
-export const formatGuildChannels = (
+export const formatChannels = (
   client: Client,
   channels: Collection<
     string,
@@ -40,7 +31,7 @@ export const formatGuildChannels = (
         id,
         type: channel.type,
         name: channel.name,
-        parent: channel.parent?.id,
+        parent: channel.parentId,
         position: channel.position,
       })
     );

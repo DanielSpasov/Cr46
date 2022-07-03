@@ -1,7 +1,7 @@
 import { Client } from "discord.js";
 import mongoose from "mongoose";
 
-import errorHandler from "../../Errors/handler";
+import errorHandler from "../Errors/handler";
 
 const connect = async (client: Client) => {
   try {
@@ -14,8 +14,7 @@ const connect = async (client: Client) => {
       message: err.message,
       error_code: 501,
     });
-    console.error("Database Connection Error!");
-    console.error("Shutting down...");
+    console.error("Database Connection Error!\nShutting down...");
     client.destroy();
   }
 };

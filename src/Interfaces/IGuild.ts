@@ -8,10 +8,7 @@ export interface IGuild {
   channels: {
     text: IChannel[];
     voice: IChannel[];
-    categories: IChannel[];
-    news: IChannel[];
-    store: IChannel[];
-    stage: IChannel[];
+    category: IChannel[];
   };
   validChannels: string[];
   league: {

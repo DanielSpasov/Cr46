@@ -1,32 +1,32 @@
-import { MessageEmbed } from 'discord.js';
+import { MessageEmbed } from "discord.js";
 
-import { Command } from '../../Interfaces';
-import Guild from '../../Models/Guild';
+import { Command } from "../../Interfaces";
+import Guild from "../../Database/Models/Guild";
 
-import { menus } from '../Help/Menus/index'
-
-
+import { menus } from "../Help/Menus/index";
 
 export const command: Command = {
-    name: 'coinflip',
-    aliases: [],
-    run: async (client, message, args) => {
-        try {
+  name: "coinflip",
+  aliases: [],
+  run: async (client, message, args) => {
+    try {
+      const guild = await Guild.findOne({ id: message.guildId });
 
-            const guild = await Guild.findOne({ id: message.guildId });
+      if (!args[0]) return menus.other.coinflip(message, guild.prefix);
 
-            if (!args[0]) return menus.other.coinflip(message, guild.prefix);
+      const userChoice = args[0].toLowerCase();
+      const botChoice = ["Heads", "Tails"][
+        Math.floor(Math.random() * 2)
+      ].toLowerCase();
 
-            const userChoice = args[0].toLowerCase()
-            const botChoice = ['Heads', 'Tails'][Math.floor(Math.random() * 2)].toLowerCase()
+      const outputMessage = new MessageEmbed()
+        .setTitle(botChoice)
+        .setColor(userChoice === botChoice ? "GREEN" : "RED")
+        .setFooter(userChoice === botChoice ? "You win!" : "You lose!");
 
-            const outputMessage = new MessageEmbed()
-                .setTitle(botChoice)
-                .setColor(userChoice === botChoice ? 'GREEN' : 'RED')
-                .setFooter(userChoice === botChoice ? 'You win!' : 'You lose!')
-
-            message.channel.send({ embeds: [outputMessage] });
-
-        } catch (error) { console.log(error) }
+      message.channel.send({ embeds: [outputMessage] });
+    } catch (error) {
+      console.log(error);
     }
-}
+  },
+};

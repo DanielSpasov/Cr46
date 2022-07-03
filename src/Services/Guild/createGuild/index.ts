@@ -1,6 +1,6 @@
 import { Client, Guild as DiscordGuild } from "discord.js";
 
-import Guild from "../../../Models/Guild";
+import Guild from "../../../Database/Models/Guild";
 import { defaultValues } from "./defaultValues";
 import errorHandler from "../../../Errors/handler";
 import { IChannel } from "../../../Interfaces/IChannel";

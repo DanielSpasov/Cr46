@@ -27,7 +27,7 @@ const guildSchema = new Schema({
         id: { type: String },
         type: { type: String },
         name: { type: String },
-        parent: { type: String || undefined },
+        parent: { type: String || null },
         position: { type: Number },
       },
     ],
@@ -36,43 +36,16 @@ const guildSchema = new Schema({
         id: { type: String },
         type: { type: String },
         name: { type: String },
-        parent: { type: String || undefined },
+        parent: { type: String || null },
         position: { type: Number },
       },
     ],
-    categories: [
+    category: [
       {
         id: { type: String },
         type: { type: String },
         name: { type: String },
-        parent: { type: String || undefined },
-        position: { type: Number },
-      },
-    ],
-    news: [
-      {
-        id: { type: String },
-        type: { type: String },
-        name: { type: String },
-        parent: { type: String || undefined },
-        position: { type: Number },
-      },
-    ],
-    store: [
-      {
-        id: { type: String },
-        type: { type: String },
-        name: { type: String },
-        parent: { type: String || undefined },
-        position: { type: Number },
-      },
-    ],
-    stage: [
-      {
-        id: { type: String },
-        type: { type: String },
-        name: { type: String },
-        parent: { type: String || undefined },
+        parent: { type: String || null },
         position: { type: Number },
       },
     ],

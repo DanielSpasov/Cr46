@@ -2,6 +2,6 @@ export interface IChannel {
   id: string;
   type: string;
   name: string;
-  parent: string | undefined;
+  parent: string | null;
   position: number;
 }
