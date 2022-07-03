@@ -1,4 +1,4 @@
-import { Client, Message, TextChannel } from "discord.js";
+import { Client, Message } from "discord.js";
 import ExtendedClient from "../../Client";
 
 import { command as HelpMenu } from "../../Commands/Help/help";
