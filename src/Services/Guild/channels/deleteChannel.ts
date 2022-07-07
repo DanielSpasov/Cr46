@@ -6,15 +6,15 @@ import { mapType } from "./helpers";
 
 export const deleteChannel = async (
   client: Client,
-  channel: TextChannel | VoiceChannel | CategoryChannel,
-  guildID: string
+  channel: TextChannel | VoiceChannel | CategoryChannel
 ) => {
   try {
-    const dbGuild = await Guild.findOne({ id: guildID });
-    const typeChannels = dbGuild.channels[mapType[channel.type]];
+    const guild = await Guild.findOne({ id: channel.guildId });
+    const typeChannels = guild.channels[mapType[channel.type]];
     const filteredChannels = typeChannels.filter((ch) => ch.id !== channel.id);
-    dbGuild.channels[mapType[channel.type]] = filteredChannels;
-    const saved = await dbGuild.save();
+    guild.channels[mapType[channel.type]] = filteredChannels;
+
+    const saved = await guild.save();
     if (!saved) {
       throw {
         type: "Database Error",

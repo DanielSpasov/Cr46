@@ -1,7 +1,7 @@
 import { Client, Guild as DiscordGuild } from "discord.js";
 
 import Guild from "../../../Database/Models/Guild";
-import { defaultValues } from "./defaultValues";
+import { defaultValues } from "./helpers";
 import errorHandler from "../../../Errors/handler";
 import { IChannel } from "../../../Interfaces/IChannel";
 
@@ -12,11 +12,8 @@ export const createGuild = async (
     text: IChannel[];
     voice: IChannel[];
     category: IChannel[];
-    news: IChannel[];
-    store: IChannel[];
-    stage: IChannel[];
   }
-): Promise<boolean> => {
+) => {
   try {
     const newGuild = await new Guild({
       id: guild.id,
@@ -25,12 +22,15 @@ export const createGuild = async (
       channels: channels,
       ...defaultValues,
     });
+    await newGuild.save();
     if (!newGuild) {
       console.error(`Adding Cr46 to guild with ID: ${guild.id} failed.`);
-      return false;
+      throw {
+        type: "Database Error",
+        message: `Failed to add Cr46 in guild with ID: ${guild.id}.`,
+        error_code: 400,
+      };
     }
-    await newGuild.save();
-    return true;
   } catch (error) {
     errorHandler(client, error);
   }

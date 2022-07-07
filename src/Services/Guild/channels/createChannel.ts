@@ -6,8 +6,7 @@ import { mapType } from "./helpers";
 
 export const createChannel = async (
   client: Client,
-  newChannel: TextChannel | VoiceChannel | CategoryChannel,
-  id: string
+  newChannel: TextChannel | VoiceChannel | CategoryChannel
 ) => {
   try {
     const channel = {
@@ -17,8 +16,9 @@ export const createChannel = async (
       parent: newChannel.parentId,
       position: newChannel.position,
     };
-    const dbGuild = await Guild.findOne({ id });
+    const dbGuild = await Guild.findOne({ id: newChannel.guildId });
     dbGuild.channels[mapType[channel.type]].push(channel);
+
     const saved = await dbGuild.save();
     if (!saved) {
       throw {

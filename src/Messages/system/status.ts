@@ -8,7 +8,7 @@ export const status = async (client: Client) => {
     embed: {
       description: `<@${client.user.id}> is running in **${
         process.env.NODE_ENV
-      }** mode.\n\`${getDate()}\``,
+      }** mode.\n\n\`${getDate()}\``,
       color: "GREEN",
     },
   });

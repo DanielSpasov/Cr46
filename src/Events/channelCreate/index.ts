@@ -6,11 +6,9 @@ export const event: Event = {
   name: "channelCreate",
   run: async (client, newChannel) => {
     try {
-      const clientGuilds = await client.guilds.fetch();
-      const guild = await clientGuilds.get(newChannel.guildId).fetch();
-      await guildService.channels.create(client, newChannel, guild.id);
+      await guildService.channels.create(client, newChannel);
       console.log(
-        `${newChannel.type} with ID: ${newChannel.id} was CREATED in Guild with ID: ${guild.id}`
+        `${newChannel.type} with ID: ${newChannel.id} was CREATED in Guild with ID: ${newChannel.guildId}.`
       );
     } catch (error) {
       errorHandler(client, error);
