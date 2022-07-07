@@ -10,6 +10,20 @@ import Guild from "../../Database/Models/Guild";
 
 export const command: Command = {
   name: "check",
+  description:
+    "Sends a message with information about a specific League of Legends account.",
+  arguments: [
+    {
+      name: "name",
+      description: "The League of Legends account name.",
+      required: true,
+    },
+    {
+      name: "server",
+      description: "The Specific Server the account is in (default is EUW).",
+      required: false,
+    },
+  ],
   aliases: [],
   run: async (client, message, args) => {
     try {

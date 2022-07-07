@@ -1,13 +1,13 @@
-import { Event } from "../Interfaces";
+import { Event } from "../../Interfaces";
 
-import { command as pause } from "../Commands/Music/pause";
-import { command as resume } from "../Commands/Music/resume";
-import { command as skip } from "../Commands/Music/skip";
-import { command as loop } from "../Commands/Music/loop";
-import { command as shuffle } from "../Commands/Music/shuffle";
-import { command as clear } from "../Commands/Music/clear";
-import { command as disconnect } from "../Commands/Music/disconnect";
-import errorHandler from "../Errors/handler";
+import { command as pause } from "../../Commands/Music/pause";
+import { command as resume } from "../../Commands/Music/resume";
+import { command as skip } from "../../Commands/Music/skip";
+import { command as loop } from "../../Commands/Music/loop";
+import { command as shuffle } from "../../Commands/Music/shuffle";
+import { command as clear } from "../../Commands/Music/clear";
+import { command as disconnect } from "../../Commands/Music/disconnect";
+import errorHandler from "../../Errors/handler";
 
 export const event: Event = {
   name: "interactionCreate",

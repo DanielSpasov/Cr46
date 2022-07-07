@@ -5,6 +5,7 @@ import Guild from "../../Database/Models/Guild";
 
 export const command: Command = {
   name: "help",
+  arguments: [],
   aliases: [],
   run: async (client, message, args) => {
     try {

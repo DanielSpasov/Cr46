@@ -8,6 +8,7 @@ import { menus } from "../Help/Menus/index";
 
 export const command: Command = {
   name: "rockpaperscissors",
+  arguments: [],
   aliases: ["rps"],
   run: async (client, message, args) => {
     try {

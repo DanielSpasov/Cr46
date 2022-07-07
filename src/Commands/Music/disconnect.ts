@@ -1,25 +1,26 @@
-import { Command } from '../../Interfaces';
+import { Command } from "../../Interfaces";
 
-import { loadChatPlayer } from './utils';
-
-
+import { loadChatPlayer } from "./utils";
 
 export const command: Command = {
-    name: 'disconnect',
-    aliases: ['dc'],
-    run: async (client, message, args) => {
-        try {
-            const guild = await client.music.guilds.get(message.guildId);
+  name: "disconnect",
+  arguments: [],
+  aliases: ["dc"],
+  run: async (client, message, args) => {
+    try {
+      const guild = await client.music.guilds.get(message.guildId);
 
-            if (message.interaction === null) message.delete();
-            
-            guild.queue = [];
-            guild.player.stop();
-            guild.player = null;
-            guild.connection.destroy();
-            guild.connection = null;
+      if (message.interaction === null) message.delete();
 
-            await loadChatPlayer(client, message, true);
-        } catch (error) { console.log(error) }
+      guild.queue = [];
+      guild.player.stop();
+      guild.player = null;
+      guild.connection.destroy();
+      guild.connection = null;
+
+      await loadChatPlayer(client, message, true);
+    } catch (error) {
+      console.log(error);
     }
-}
+  },
+};

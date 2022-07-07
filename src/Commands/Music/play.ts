@@ -14,6 +14,7 @@ import { videoFinder, idleListener, loadChatPlayer } from "./utils";
 
 export const command: Command = {
   name: "play",
+  arguments: [],
   aliases: ["p"],
   run: async (client, message, args) => {
     try {

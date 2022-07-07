@@ -7,6 +7,7 @@ import { menus } from "../Help/Menus/index";
 
 export const command: Command = {
   name: "coinflip",
+  arguments: [],
   aliases: [],
   run: async (client, message, args) => {
     try {
