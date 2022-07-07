@@ -1,4 +1,4 @@
-import { MessageEmbed } from "discord.js";
+import { Interaction, MessageEmbed } from "discord.js";
 import axios from "axios";
 
 import { Command } from "../../Interfaces";
@@ -7,6 +7,22 @@ import { ILeagueVersions, ISummoner } from "../../Interfaces/League";
 import { getURL, getChampions, getRanked } from "./getters";
 import { menus } from "../Help/Menus";
 import Guild from "../../Database/Models/Guild";
+import errorHandler from "../../Errors/handler";
+import { message as messageService } from "../../Messages";
+
+const validServers = [
+  "br1",
+  "eun1",
+  "euw1",
+  "jp1",
+  "la1",
+  "la2",
+  "kr",
+  "na1",
+  "oc2",
+  "ru",
+  "tr1",
+];
 
 export const command: Command = {
   name: "check",
@@ -14,13 +30,13 @@ export const command: Command = {
     "Sends a message with information about a specific League of Legends account.",
   arguments: [
     {
-      name: "name",
+      key: "summoner",
       description: "The League of Legends account name.",
       required: true,
     },
     {
-      name: "server",
-      description: "The Specific Server the account is in (default is EUW).",
+      key: "server",
+      description: `Valid Servers: ${validServers.join(", ")}`,
       required: false,
     },
   ],
@@ -28,78 +44,79 @@ export const command: Command = {
   run: async (client, message, args) => {
     try {
       const guild = await Guild.findOne({ id: message.guildId });
-
-      if (!args.length) return menus.league.check(message, guild.prefix);
-      if (!guild.league.allowed)
+      if (!guild.league.allowed) {
         return menus.league.checkNotAllowed(message, guild.prefix);
-
-      const validRegions = [
-        "br1",
-        "eun1",
-        "euw1",
-        "jp1",
-        "la1",
-        "la2",
-        "kr",
-        "na1",
-        "oc2",
-        "ru",
-        "tr1",
-      ];
-      const optionalRegion = args[args.length - 1];
-      let region;
-      if (optionalRegion.includes("region:")) {
-        region = args.pop().split("region:")[1];
-        if (!validRegions.includes(region))
-          return await message.channel.send({
-            embeds: [
-              new MessageEmbed()
-                .setDescription(`Region **${region}** is not a valid region.`)
-                .setColor("RED")
-                .setFooter(`Valid Regions: ${validRegions.join(", ")}`),
-            ],
-          });
       }
 
-      const username = args.join(" ");
+      const interaction = message as any;
+      const summonerName = interaction.options._hoistedOptions.find(
+        (x) => x.name === "summoner"
+      ).value;
+      const serverProps = interaction.options._hoistedOptions.find(
+        (x) => x.name === "server"
+      );
+      const server = serverProps
+        ? { value: serverProps.value.toLowerCase() }
+        : { value: "euw1" };
+
+      if (server && !validServers.includes(server.value)) {
+        throw {
+          type: "League of Legends Error (Common)",
+          message: "Invalid Server",
+          error_code: 404,
+        };
+      }
 
       const versions = await axios.get<ILeagueVersions>(
-        getURL(client, "versions"),
+        getURL({ key: "versions" }),
         client.config.requestOptions
       );
       const latest = versions.data[0];
 
       const summoner = await axios.get<ISummoner>(
-        getURL(client, "summoner", [username], region),
+        getURL({ key: "summoner", summonerName, server: server.value }),
         client.config.requestOptions
       );
 
-      const outputEmbed = new MessageEmbed();
-      outputEmbed.setColor("BLUE");
-      outputEmbed.setAuthor(
-        `${summoner.data.name} - Level ${summoner.data.summonerLevel}`,
-        getURL(client, "profileIcon", [latest, summoner.data.profileIconId])
+      const accMessage = await messageService.send({
+        client,
+        channelID: message.channel.id,
+        embed: {
+          color: "BLUE",
+          author: {
+            name: `${summoner.data.name} - Level ${summoner.data.summonerLevel}`,
+            iconURL: getURL({
+              key: "profileIcon",
+              version: latest,
+              iconID: summoner.data.profileIconId,
+            }),
+          },
+        },
+      });
+
+      const description = await getRanked(client, summoner, server.value);
+      messageService.edit({
+        message: accMessage,
+        embed: {
+          description: description,
+        },
+      });
+
+      const fields = await getChampions(
+        client,
+        summoner,
+        latest,
+        9,
+        server.value
       );
-
-      const outputMessage = await message.channel.send({
-        embeds: [outputEmbed],
+      messageService.edit({
+        message: accMessage,
+        embed: {
+          fields: fields,
+        },
       });
-
-      const description = await getRanked(client, summoner, region);
-      outputEmbed.setDescription(description);
-      outputMessage.edit({ embeds: [outputEmbed] });
-
-      const fields = await getChampions(client, summoner, latest, 9, region);
-      outputEmbed.addFields(fields);
-      outputMessage.edit({ embeds: [outputEmbed] });
     } catch (error) {
-      await message.channel.send({
-        embeds: [
-          new MessageEmbed()
-            .setDescription(`Summoner **${args.join(" ")}** not found.`)
-            .setColor("RED"),
-        ],
-      });
+      errorHandler(client, error, "511624993105379329");
     }
   },
 };

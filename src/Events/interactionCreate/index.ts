@@ -13,7 +13,9 @@ export const event: Event = {
   name: "interactionCreate",
   run: async (client, interaction) => {
     try {
-      interaction.reply("\\\\\n");
+      interaction.reply(
+        `<@${interaction.user.id}> used the \`${interaction.commandName}\` command.`
+      );
       if (interaction.isCommand()) {
         client.commands
           .get(interaction.commandName)

@@ -1,23 +1,42 @@
 import { Client } from "discord.js";
 
 import { unknownError, invalidErrorFormat, weirdError } from "./common";
-import { sendMessage } from "../Services/Core/sendMessage";
 import { IHandledError } from "./IHandledError";
 import { isValidError } from "./validator";
+import { message } from "../Messages";
 
 export default async function errorHandler(
   client: Client,
-  error?: IHandledError
+  error?: IHandledError,
+  channelID?: string
 ) {
   try {
+    console.error(error);
+    if (error.isAxiosError) {
+      message.send({
+        client,
+        embed: {
+          title: "Axios Error",
+          footer: {
+            text: `Error Code: ${error.response.data.status.status_code}`,
+          },
+          color: "RED",
+          description: error.response.data.status.message.toString(),
+        },
+        channelID,
+      });
+      return;
+    }
     if (!error) {
-      sendMessage({ client, embed: weirdError });
+      message.send({ client, embed: weirdError, channelID });
+      return;
     }
     if (!isValidError(error)) {
-      sendMessage({ client, embed: invalidErrorFormat });
+      message.send({ client, embed: invalidErrorFormat, channelID });
+      return;
     }
 
-    await sendMessage({
+    await message.send({
       client,
       embed: {
         title: error.type,
@@ -27,8 +46,11 @@ export default async function errorHandler(
           text: `Error Code: ${error.error_code}`,
         },
       },
+      channelID,
     });
+    return;
   } catch (err) {
-    sendMessage({ client, embed: unknownError });
+    console.error(error);
+    message.send({ client, embed: unknownError, channelID });
   }
 }

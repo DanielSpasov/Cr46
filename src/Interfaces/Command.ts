@@ -9,7 +9,7 @@ export interface Command {
   name: string;
   description?: string;
   arguments: {
-    name: string;
+    key: string;
     description?: string;
     required: boolean;
   }[];

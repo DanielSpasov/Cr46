@@ -1,9 +1,9 @@
 import { Client } from "discord.js";
 
-import { sendMessage } from "../../Services/Core/sendMessage";
+import { message } from "..";
 
 export const status = async (client: Client) => {
-  sendMessage({
+  message.send({
     client,
     embed: {
       description: `<@${client.user.id}> is running in **${

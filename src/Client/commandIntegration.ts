@@ -19,7 +19,7 @@ const setupCommandIntegrations = async (client: ExtendedClient) => {
         cmd.arguments.forEach((arg) =>
           command.addStringOption((option) =>
             option
-              .setName(arg.name)
+              .setName(arg.key)
               .setDescription(
                 arg.description || "This argument has no description"
               )

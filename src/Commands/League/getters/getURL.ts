@@ -1,14 +1,30 @@
-
-
-
-
-export const getURL = (client, key: string, args?: string[], region = 'euw1'): string => {
-    switch (key) {
-        case 'versions': return `https://ddragon.leagueoflegends.com/api/versions.json`;
-        case 'summoner': return `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${args[0]}`;
-        case 'profileIcon': return `https://ddragon.leagueoflegends.com/cdn/${args[0]}/img/profileicon/${args[1]}.png`;
-        case 'ranked': return `https://${region}.api.riotgames.com/lol/league/v4/entries/by-summoner/${args[0]}`;
-        case 'sumChampions': return `https://${region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${args[0]}`;
-        case 'allChampions': return `https://ddragon.leagueoflegends.com/cdn/${args[0]}/data/en_US/champion.json`;
-    }
-}
+export const getURL = ({
+  key,
+  version,
+  summonerName,
+  summonerId,
+  iconID,
+  server = "euw1",
+}: {
+  key: string;
+  version?: string;
+  summonerName?: string;
+  summonerId?: string;
+  iconID?: number;
+  server?: string | undefined;
+}): string => {
+  switch (key) {
+    case "versions":
+      return `https://ddragon.leagueoflegends.com/api/versions.json`;
+    case "summoner":
+      return `https://${server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}`;
+    case "profileIcon":
+      return `https://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${iconID}.png`;
+    case "ranked":
+      return `https://${server}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}`;
+    case "sumChampions":
+      return `https://${server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerId}`;
+    case "allChampions":
+      return `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`;
+  }
+};
