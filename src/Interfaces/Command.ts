@@ -8,11 +8,11 @@ interface Run {
 export interface Command {
   name: string;
   description?: string;
+  aliases?: string[];
   arguments: {
     key: string;
     description?: string;
     required: boolean;
   }[];
-  aliases?: string[];
   run: Run;
 }

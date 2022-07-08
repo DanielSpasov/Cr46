@@ -1,6 +1,6 @@
-export { IChampion } from './IChampion'
-export { IDDragonChampion } from './IDDragonChampion'
-export { IDDragonChampions } from './IDDragonChampions'
-export { IElo } from './IElo'
-export { ILeagueVersions } from './ILeagueVersions'
-export { ISummoner } from './ISummoner'
+export { IDDragonChampions } from "./IDDragonChampions";
+export { IDDragonChampion } from "./IDDragonChampion";
+export { ILeagueVersions } from "./ILeagueVersions";
+export { Champion } from "./Champion";
+export { Summoner } from "./Summoner";
+export { Rank } from "./Rank";

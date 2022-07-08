@@ -1,4 +1,8 @@
 {
-    "requestOptions": { "headers": { "X-Riot-Token": "process.env.RIOT_API_KEY" } },
-    "interaction_url": "https://discord.com/api/v8/interactions"
+  "requestOptions": {
+    "headers": {
+      "X-Riot-Token": "process.env.RIOT_API_KEY"
+    }
+  },
+  "default_league_server": "euw1"
 }

@@ -1,8 +1,7 @@
 import { Client, Collection } from "discord.js";
 import dotenv from "dotenv";
 
-import { Command, Event, Config, Music } from "../Interfaces";
-import MusicConfig from "../Commands/Music/utils/config";
+import { Command, Event, Config } from "../Interfaces";
 import ConfigJson from "../config.json";
 
 import setupCommandIntegrations from "./commandIntegration";
@@ -14,7 +13,6 @@ class ExtendedClient extends Client {
   public commands: Collection<string, Command> = new Collection();
   public events: Collection<string, Event> = new Collection();
   public aliases: Collection<string, Command> = new Collection();
-  public music: Music = MusicConfig;
   public config: Config = ConfigJson;
 
   public async init() {

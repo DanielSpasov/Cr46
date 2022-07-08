@@ -1,59 +1,20 @@
 import { Event } from "../../Interfaces";
-
-import { command as pause } from "../../Commands/Music/pause";
-import { command as resume } from "../../Commands/Music/resume";
-import { command as skip } from "../../Commands/Music/skip";
-import { command as loop } from "../../Commands/Music/loop";
-import { command as shuffle } from "../../Commands/Music/shuffle";
-import { command as clear } from "../../Commands/Music/clear";
-import { command as disconnect } from "../../Commands/Music/disconnect";
 import errorHandler from "../../Errors/handler";
 
 export const event: Event = {
   name: "interactionCreate",
   run: async (client, interaction) => {
     try {
-      interaction.reply(
-        `<@${interaction.user.id}> used the \`${interaction.commandName}\` command.`
-      );
       if (interaction.isCommand()) {
-        client.commands
+        await interaction.deferReply();
+        const message = await client.commands
           .get(interaction.commandName)
           .run(client, interaction, []);
-      } else if (interaction.isButton()) {
-        const guild = client.music.guilds.get(interaction.guildId);
-        const command = interaction.customId;
-
-        if (guild.chatPlayer.id !== interaction.message.id) return;
-
-        switch (command) {
-          case "resume":
-            await resume.run(client, interaction, []);
-            break;
-          case "pause":
-            await pause.run(client, interaction, []);
-            break;
-          case "loop":
-            await loop.run(client, interaction, []);
-            break;
-          case "shuffle":
-            await shuffle.run(client, interaction, []);
-            break;
-          case "skip":
-            await skip.run(client, interaction, []);
-            break;
-          case "clear":
-            await clear.run(client, interaction, []);
-            break;
-          case "disconnect":
-            await disconnect.run(client, interaction, []);
-            break;
-          default:
-            break;
-        }
+        if (!message) return interaction.deleteReply();
+        interaction.editReply({ embeds: [message] });
       }
     } catch (error) {
-      errorHandler(client, error);
+      errorHandler({ client, error });
     }
   },
 };

@@ -3,15 +3,21 @@ import { Client } from "discord.js";
 import { unknownError, invalidErrorFormat, weirdError } from "./common";
 import { IHandledError } from "./IHandledError";
 import { isValidError } from "./validator";
+import ExtendedClient from "../Client";
 import { message } from "../Messages";
 
-export default async function errorHandler(
-  client: Client,
-  error?: IHandledError,
-  channelID?: string
-) {
+export default async function errorHandler({
+  client,
+  error,
+  module,
+  channelID,
+}: {
+  client: Client | ExtendedClient;
+  error?: IHandledError;
+  module?: string | undefined;
+  channelID?: string;
+}) {
   try {
-    console.error(error);
     if (error.isAxiosError) {
       message.send({
         client,
@@ -39,7 +45,7 @@ export default async function errorHandler(
     await message.send({
       client,
       embed: {
-        title: error.type,
+        title: `${module || error.type} Error`,
         description: error.message,
         color: "RED",
         footer: {

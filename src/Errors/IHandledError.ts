@@ -1,5 +1,5 @@
 export interface IHandledError {
-  type: string;
+  type?: string;
   message: string;
   error_code: number | string;
   isAxiosError?: boolean;
