@@ -30,6 +30,12 @@ export const command: Command = {
       const interaction = message as Interaction;
       const summonerName = get.summonerName(interaction);
       const championCount = get.championsCount(interaction);
+      if (championCount > 15) {
+        throw {
+          message: `The maximum number of champion Cr46 can display at once is **15**`,
+          error_code: 400,
+        };
+      }
       const serverName = get.serverName(client, interaction);
 
       const version = await get.latestVersion(client);
@@ -101,7 +107,7 @@ export const command: Command = {
         client,
         error,
         module: "League of Legends",
-        channelID: "511624993105379329",
+        channelID: "688849699364667438",
       });
     }
   },

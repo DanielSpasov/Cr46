@@ -10,7 +10,7 @@ export const event: Event = {
         const message = await client.commands
           .get(interaction.commandName)
           .run(client, interaction, []);
-        if (!message) return interaction.deleteReply();
+        if (!message) return await interaction.deleteReply();
         interaction.editReply({ embeds: [message] });
       }
     } catch (error) {
