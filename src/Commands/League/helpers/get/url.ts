@@ -1,4 +1,4 @@
-export const getURL = ({
+export const url = ({
   key,
   version,
   summonerName,

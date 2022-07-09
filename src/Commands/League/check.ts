@@ -1,7 +1,8 @@
-import { validServers, get, formatRanks, formatChamps } from "./helpers";
+import { get, format } from "./helpers";
 import { Interaction } from "../../Interfaces/Interaction";
 import errorHandler from "../../Errors/handler";
 import { Command } from "../../Interfaces";
+import ExtendedClient from "../../Client";
 
 export const command: Command = {
   name: "check",
@@ -25,30 +26,27 @@ export const command: Command = {
       required: false,
     },
   ],
-  run: async (client, message) => {
+  run: async (client: ExtendedClient, interaction: Interaction) => {
     try {
-      const interaction = message as Interaction;
+      // Command arguments
       const summonerName = get.summonerName(interaction);
-      const championCount = get.championsCount(interaction);
-      if (championCount > 15) {
-        throw {
-          message: `The maximum number of champion Cr46 can display at once is **15**`,
-          error_code: 400,
-        };
-      }
+      const championCount = get.championsCount(client, interaction);
       const serverName = get.serverName(client, interaction);
 
-      const version = await get.latestVersion(client);
-
-      const summoner = await get.summoner(client, summonerName, serverName);
-      if (!summoner) {
-        throw {
-          message: `Summoner \`${summonerName}\` Not Found`,
-          error_code: 404,
-        };
-      }
-
-      const rankData = await get.rank(client, summoner.id, serverName);
+      // API Requests
+      const version = await get.latestVersion(client, interaction);
+      const summoner = await get.summoner(
+        client,
+        interaction,
+        summonerName,
+        serverName
+      );
+      const rankData = await get.rank(
+        client,
+        interaction,
+        summoner.id,
+        serverName
+      );
       const champData = await get.champions(
         client,
         summoner.id,
@@ -57,25 +55,11 @@ export const command: Command = {
         serverName
       );
 
-      if (!validServers.includes(serverName)) {
-        throw {
-          message: `Server not Found: \`${serverName}\`\nValid Servers: \`${validServers.join(
-            "`, `"
-          )}\``,
-          error_code: 404,
-        };
-      }
-
-      const accountIcon = get.url({
-        key: "icon",
-        version,
-        iconID: summoner.profileIconId,
-      });
+      // Message Formatting
       const basicAccountInfo = `${summoner.name} - Level ${summoner.summonerLevel}`;
-      const rankedMessageInfo = formatRanks(rankData).join("\n");
-      const champMessageInfo = formatChamps(champData);
-      const color = get.messageColorByRank(rankData);
-
+      const rankedMessageInfo = format.ranks(rankData).join("\n");
+      const champMessageInfo = format.champions(champData);
+      const color = format.rankColor(rankData);
       const hasChampHistory = Boolean(champData[0]);
       const thumbnailURL = hasChampHistory
         ? get.url({
@@ -85,6 +69,11 @@ export const command: Command = {
           })
         : null;
 
+      const accountIcon = get.url({
+        key: "icon",
+        version,
+        iconID: summoner.profileIconId,
+      });
       return {
         author: {
           name: basicAccountInfo,
@@ -98,17 +87,12 @@ export const command: Command = {
         },
         timestamp: Date.now(),
         footer: {
-          text: "Cr46",
-          iconURL: "https://i.imgur.com/xn5SseQ.png",
+          text: client.user.username,
+          iconURL: client.config.bot_icon_url,
         },
       };
     } catch (error) {
-      errorHandler({
-        client,
-        error,
-        module: "League of Legends",
-        channelID: "688849699364667438",
-      });
+      errorHandler({ client, error, module: "League of Legends" });
     }
   },
 };

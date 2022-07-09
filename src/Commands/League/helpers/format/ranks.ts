@@ -1,15 +1,15 @@
-import { Rank } from "../../../Interfaces/League";
+import { Rank } from "../../../../Interfaces/League";
 
 const mapQueueType = {
   RANKED_SOLO_5x5: "SOLO",
   RANKED_FLEX_SR: "FLEX",
 };
 
-const calcWinrate = (wins: number, losses: number) => {
+const calcWinrate = (wins: number, losses: number): number => {
   return Math.round((wins / (wins + losses)) * 100);
 };
 
-export const formatRanks = (rankData: Rank[]) => {
+export const ranks = (rankData: Rank[]): string[] => {
   return rankData.map((x) => {
     if (!mapQueueType[x.queueType]) return;
 

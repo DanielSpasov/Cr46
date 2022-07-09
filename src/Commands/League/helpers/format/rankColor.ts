@@ -14,19 +14,19 @@ const ranks = [
 ];
 
 const mapColor = [
-  "#5b1973",
+  "BLUE",
   "#4d4d4d",
-  "#7a5c2f",
-  "#999897",
-  "#f5db49",
-  "#39cc91",
-  "#05adf5",
+  "DARK_ORANGE",
+  "GREY",
+  "GOLD",
+  "AQUA",
+  "BLUE",
   "#a025b0",
-  "#ad2a5a",
-  "#05f5ed",
+  "LUMINOUS_VIVID_PINK",
+  "YELLOW",
 ];
 
-export const getMessageColorByRank = (rankData: Rank[]): string => {
+export const rankColor = (rankData: Rank[]): string => {
   let highestRank = 0;
   rankData.forEach((rank) => {
     if (ranks.indexOf(rank.tier) > highestRank) {

@@ -1,8 +1,3 @@
-import { Client } from "discord.js";
-
-import { unknownError, invalidErrorFormat, weirdError } from "./common";
-import { IHandledError } from "./IHandledError";
-import { isValidError } from "./validator";
 import ExtendedClient from "../Client";
 import { message } from "../Messages";
 
@@ -10,53 +5,38 @@ export default async function errorHandler({
   client,
   error,
   module,
-  channelID,
 }: {
-  client: Client | ExtendedClient;
-  error?: IHandledError;
+  client: ExtendedClient;
+  error?: any;
   module?: string | undefined;
-  channelID?: string;
 }) {
-  try {
-    if (error.isAxiosError) {
-      message.send({
-        client,
-        embed: {
-          title: "Axios Error",
-          footer: {
-            text: `Error Code: ${error.response.data.status.status_code}`,
-          },
-          color: "RED",
-          description: error.response.data.status.message.toString(),
-        },
-        channelID,
-      });
-      return;
-    }
-    if (!error) {
-      message.send({ client, embed: weirdError, channelID });
-      return;
-    }
-    if (!isValidError(error)) {
-      message.send({ client, embed: invalidErrorFormat, channelID });
-      return;
-    }
-
-    await message.send({
-      client,
-      embed: {
-        title: `${module || error.type} Error`,
-        description: error.message,
-        color: "RED",
-        footer: {
-          text: `Error Code: ${error.error_code}`,
-        },
+  const type = module || error.type || "Unknown";
+  const code =
+    error.error_code ||
+    error.status_code ||
+    error.response.data.status.status_code ||
+    500;
+  const messageContent =
+    error.message ||
+    error.response.data.status.message ||
+    error.error.message ||
+    error.err.message ||
+    "No Message was provided";
+  const channelID = error.channelID || process.env.CONSOLE_CHANNEL_ID;
+  message.send({
+    client,
+    embed: {
+      author: {
+        name: `${type} Error`,
+        iconURL: client.config.bot_icon_url,
       },
-      channelID,
-    });
-    return;
-  } catch (err) {
-    console.error(error);
-    message.send({ client, embed: unknownError, channelID });
-  }
+      footer: {
+        text: `Error Code: ${code}`,
+      },
+      color: "RED",
+      description: messageContent,
+    },
+    channelID,
+  });
+  return;
 }

@@ -1,4 +1,2 @@
-export { validServers } from "./validServers";
-export { formatRanks } from "./formatRanks";
-export { formatChamps } from "./formatChamps";
+export { format } from "./format";
 export { get } from "./get";
