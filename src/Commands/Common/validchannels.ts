@@ -33,16 +33,23 @@ export const command: Command = {
           color: "GREEN",
         };
       } else {
-        const isValidChannel = /<#[0-9]{18}>/.test(channel.value);
+        const channelID = channel.value.slice(2, channel.value.length - 1);
+        const guilds = await client.guilds.fetch();
+        const currentGuild = await guilds.get(interaction.guildId).fetch();
+        const channels = await currentGuild.channels.fetch();
+        const targetChannel = channels.get(channelID);
+
+        const isValidChannel =
+          /<#[0-9]{18}>/.test(channel.value) &&
+          targetChannel.type === "GUILD_TEXT";
         if (!isValidChannel) {
           throw {
             channelID: interaction.channelId,
-            message: `${channel.value} is not a valid channel. Please mention the channel e.g. <#${interaction.channelId}>`,
+            message: `${channel.value} is not a valid text channel. Please mention the channel e.g. <#${interaction.channelId}>`,
             error_code: 400,
           };
         }
 
-        const channelID = channel.value.slice(2, channel.value.length - 1);
         if (guild.validChannels.includes(channelID)) {
           const channelIndex = guild.validChannels.indexOf(channelID);
           guild.validChannels.splice(channelIndex, 1);
