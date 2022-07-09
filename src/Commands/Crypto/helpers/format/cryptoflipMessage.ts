@@ -12,11 +12,11 @@ export const cryptoflipMessage = (
 
   const name = isWinner
     ? "You guessed the cryptocurrency! Congratulations!"
-    : "Congratulations! You just lost your life savings!";
+    : "You just lost your life savings! Congratulations!";
   const color = isWinner ? "GREEN" : "RED";
   const description = isWinner
-    ? `It was \`${randomCrypto.name} (${randomCrypto.symbol})\`,\nNow touch grass.`
-    : `You chose \`${userCrypto.name} (${userCrypto.symbol})\`,\nBut the cryptocurrency is \`${randomCrypto.name} (${randomCrypto.symbol})\`.`;
+    ? `It was \`${randomCrypto.name} (${randomCrypto.symbol})\`.\nNow touch grass.`
+    : `You chose \`${userCrypto.name} (${userCrypto.symbol})\`,\nbut the crypto was \`${randomCrypto.name} (${randomCrypto.symbol})\`.`;
 
   return {
     author: {
