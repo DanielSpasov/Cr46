@@ -1,8 +1,8 @@
 import { destructureMessage, validateMessage } from "./helpers";
 import { Event, Command } from "../../Interfaces/Core";
+import { guildService } from "../../Services/Guild";
 import { Message, TextChannel } from "discord.js";
 import errorHandler from "../../Errors/handler";
-import Guild from "../../Database/Models/Guild";
 import ExtendedClient from "../../Client";
 
 export const event: Event = {
@@ -12,8 +12,7 @@ export const event: Event = {
       if (message.author.bot) return;
 
       const channel = <TextChannel>message.channel;
-      const guild = await Guild.findOne({ id: channel.guildId });
-
+      const guild = await guildService.get(client, channel.guildId);
       const isValid = await validateMessage(client, guild, channel.id, message);
       if (!isValid) return;
 

@@ -1,9 +1,9 @@
 import { Guild as DiscordGuild } from "discord.js";
-import Guild from "../../../Database/Models/Guild";
-import errorHandler from "../../../Errors/handler";
-import { Channel } from "../../../Interfaces/Core";
-import ExtendedClient from "../../../Client";
-import { defaultValues } from "./helpers";
+import { defaultValues } from "./guilds/helpers";
+import Guild from "../../Database/Models/Guild";
+import errorHandler from "../../Errors/handler";
+import { Channel } from "../../Interfaces/Core";
+import ExtendedClient from "../../Client";
 
 export const createGuild = async (
   client: ExtendedClient,

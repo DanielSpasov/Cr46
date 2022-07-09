@@ -1,4 +1,3 @@
-import { command as HelpMenu } from "../../Commands/Help/help";
 import errorHandler from "../../Errors/handler";
 import { Guild } from "../../Interfaces/Core";
 import ExtendedClient from "../../Client";
@@ -30,10 +29,6 @@ export const validateMessage = async (
       !!guild.validChannels.length
     )
       return false;
-    if (message.mentions.users.get(client.user.id)) {
-      HelpMenu.run(client, message, []);
-      return false;
-    }
     if (!message.content.startsWith(guild.prefix)) return false;
     return true;
   } catch (error) {

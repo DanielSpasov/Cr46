@@ -1,6 +1,6 @@
-import Guild from "../../../Database/Models/Guild";
-import errorHandler from "../../../Errors/handler";
-import ExtendedClient from "../../../Client";
+import Guild from "../../Database/Models/Guild";
+import errorHandler from "../../Errors/handler";
+import ExtendedClient from "../../Client";
 
 export const deleteGuild = async (client: ExtendedClient, guildId: string) => {
   try {

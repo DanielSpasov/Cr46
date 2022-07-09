@@ -1,7 +1,11 @@
 import { channels } from "./channels";
-import { guilds } from "./guilds";
+import { createGuild } from "./create";
+import { deleteGuild } from "./delete";
+import { getGuild } from "./get";
 
 export const guildService = {
   channels,
-  ...guilds,
+  create: createGuild,
+  delete: deleteGuild,
+  get: getGuild,
 };
