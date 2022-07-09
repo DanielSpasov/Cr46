@@ -91,7 +91,11 @@ export const command: Command = {
         },
       };
     } catch (error) {
-      errorHandler({ client, error, module: "League of Legends" });
+      errorHandler({
+        client,
+        error: { channelID: interaction.channelId, ...error },
+        module: "League of Legends",
+      });
     }
   },
 };

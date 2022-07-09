@@ -11,7 +11,12 @@ export const event: Event = {
       const hasConnection = await database.connect(client);
       if (!hasConnection) return;
       setActivity(client);
-      message.status(client);
+      message.send({
+        client,
+        channelID: process.env.CONSOLE_CHANNEL_ID,
+        embed: message.common.status(client),
+      });
+      console.log("Cr46 is Online!");
     } catch (error) {
       errorHandler({ client, error });
     }

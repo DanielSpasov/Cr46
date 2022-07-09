@@ -28,7 +28,7 @@ export default async function errorHandler({
     embed: {
       author: {
         name: `${type} Error`,
-        iconURL: client.config.bot_icon_url,
+        iconURL: client?.config?.bot_icon_url,
       },
       footer: {
         text: `Error Code: ${code}`,
