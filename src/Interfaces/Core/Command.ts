@@ -1,8 +1,12 @@
-import { Interaction, Message } from "discord.js";
+import { Interaction, Message, MessageEmbedOptions } from "discord.js";
 import Client from "../../Client";
 
 interface Run {
-  (client: Client, message: Message | Interaction, args: string[]);
+  (
+    client: Client,
+    message: Message | Interaction,
+    args: string[]
+  ): Promise<MessageEmbedOptions>;
 }
 
 export interface Command {

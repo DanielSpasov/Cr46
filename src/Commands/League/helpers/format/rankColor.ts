@@ -1,3 +1,4 @@
+import { ColorResolvable } from "discord.js";
 import { Rank } from "../../../../Interfaces/League";
 
 const ranks = [
@@ -13,7 +14,7 @@ const ranks = [
   "CHALLENGER",
 ];
 
-const mapColor = [
+const mapColor: ColorResolvable[] = [
   "BLUE",
   "#4d4d4d",
   "DARK_ORANGE",
@@ -26,7 +27,7 @@ const mapColor = [
   "YELLOW",
 ];
 
-export const rankColor = (rankData: Rank[]): string => {
+export const rankColor = (rankData: Rank[]): ColorResolvable => {
   let highestRank = 0;
   rankData.forEach((rank) => {
     if (ranks.indexOf(rank.tier) > highestRank) {

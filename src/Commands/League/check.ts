@@ -1,4 +1,5 @@
 import { Interaction, Command } from "../../Interfaces/Core";
+import { MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../Errors/handler";
 import ExtendedClient from "../../Client";
 import { get, format } from "./helpers";
@@ -25,7 +26,10 @@ export const command: Command = {
       required: false,
     },
   ],
-  run: async (client: ExtendedClient, interaction: Interaction) => {
+  run: async (
+    client: ExtendedClient,
+    interaction: Interaction
+  ): Promise<MessageEmbedOptions> => {
     try {
       // Command arguments
       const summonerName = get.summonerName(interaction);
