@@ -1,25 +1,37 @@
-import { MessageEmbed } from "discord.js";
+import { ColorResolvable, MessageEmbed } from "discord.js";
+import ExtendedClient from "../../Client";
+import errorHandler from "../../Errors/handler";
 
-import { Command } from "../../Interfaces/Core";
+import { Command, Interaction } from "../../Interfaces/Core";
 
 export const command: Command = {
   name: "ping",
+  description: "Shows Cr46's Latency in miliseconds.",
   arguments: [],
   aliases: [],
-  run: async (client, message, args) => {
+  run: async (client: ExtendedClient, interaction: Interaction) => {
     try {
-      const outputMessage = new MessageEmbed().setDescription(
-        `\`${client.ws.ping}ms\``
-      );
+      let color: ColorResolvable;
+      if (client.ws.ping <= 75) {
+        color = "#78ff66";
+      } else if (client.ws.ping <= 150) {
+        color = "#e6fa64";
+      } else if (client.ws.ping <= 999) {
+        color = "#fa7664";
+      } else {
+        color = "DARK_BUT_NOT_BLACK";
+      }
 
-      if (client.ws.ping <= 75) outputMessage.setColor("#78ff66");
-      if (client.ws.ping > 75 && client.ws.ping <= 150)
-        outputMessage.setColor("#e6fa64");
-      if (client.ws.ping >= 150) outputMessage.setColor("#fa7664");
-
-      message.channel.send({ embeds: [outputMessage] });
+      return {
+        description: `\`${client.ws.ping}ms\``,
+        color,
+      };
     } catch (error) {
-      console.log(error);
+      errorHandler({
+        client,
+        error: { channelID: interaction.channelId, ...error },
+        module: "Common",
+      });
     }
   },
 };

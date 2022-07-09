@@ -15,7 +15,7 @@ export const command: Command = {
       errorHandler({
         client,
         error: { channelID: interaction.channelId, ...error },
-        module: "League of Legends",
+        module: "Common",
       });
     }
   },
