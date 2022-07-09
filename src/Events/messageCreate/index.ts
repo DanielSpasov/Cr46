@@ -3,10 +3,11 @@ import { Event, Command } from "../../Interfaces/Core";
 import { Message, TextChannel } from "discord.js";
 import errorHandler from "../../Errors/handler";
 import Guild from "../../Database/Models/Guild";
+import ExtendedClient from "../../Client";
 
 export const event: Event = {
   name: "messageCreate",
-  run: async (client, message: Message) => {
+  run: async (client: ExtendedClient, message: Message) => {
     try {
       if (message.author.bot) return;
 

@@ -12,17 +12,17 @@ export default async function errorHandler({
 }) {
   const type = module || error.type || "Unknown";
   const code =
-    error.error_code ||
-    error.status_code ||
-    error.response.data.status.status_code ||
+    error?.error_code ||
+    error?.status_code ||
+    error?.response?.data?.status?.status_code ||
     500;
   const messageContent =
-    error.message ||
-    error.response.data.status.message ||
-    error.error.message ||
-    error.err.message ||
+    error?.message ||
+    error?.response?.data?.status?.message ||
+    error?.error.message ||
+    error?.err.message ||
     "No Message was provided";
-  const channelID = error.channelID || process.env.CONSOLE_CHANNEL_ID;
+  const channelID = error?.channelID || process.env.CONSOLE_CHANNEL_ID;
   message.send({
     client,
     embed: {

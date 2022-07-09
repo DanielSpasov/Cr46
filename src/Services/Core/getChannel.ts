@@ -1,9 +1,9 @@
-import { Client, TextChannel } from "discord.js";
+import errorHandler from "../../Errors/handler";
+import ExtendedClient from "../../Client";
+import { TextChannel } from "discord.js";
 
-import errorHandler from "../../../Errors/handler";
-
-export const text = async (
-  client: Client,
+export const getChannel = async (
+  client: ExtendedClient,
   channelID?: string
 ): Promise<TextChannel> => {
   try {
@@ -13,6 +13,6 @@ export const text = async (
     ));
     return channel;
   } catch (error) {
-    errorHandler(client, error);
+    errorHandler({ client, error });
   }
 };
