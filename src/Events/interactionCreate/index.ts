@@ -12,8 +12,6 @@ export const event: Event = {
       if (interaction.isCommand()) {
         const guild = await Guild.findOne({ id: interaction.guildId });
 
-        if (!guild.validChannels.length) {
-        }
         if (
           !guild.validChannels.includes(interaction.channelId) &&
           !!guild.validChannels.length

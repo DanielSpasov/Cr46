@@ -10,6 +10,7 @@ export default async function errorHandler({
   error?: any;
   module?: string | undefined;
 }) {
+  console.log(error);
   const type = module || error.type || "Unknown";
   const code =
     error?.error_code ||
