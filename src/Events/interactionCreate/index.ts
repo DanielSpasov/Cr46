@@ -1,5 +1,5 @@
-import { Event } from "../../Interfaces";
 import errorHandler from "../../Errors/handler";
+import { Event } from "../../Interfaces/Core";
 
 export const event: Event = {
   name: "interactionCreate",

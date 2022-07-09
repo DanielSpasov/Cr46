@@ -1,17 +1,17 @@
-import { Client, Guild as DiscordGuild } from "discord.js";
-
+import { Guild as DiscordGuild } from "discord.js";
 import Guild from "../../../Database/Models/Guild";
-import { defaultValues } from "./helpers";
 import errorHandler from "../../../Errors/handler";
-import { IChannel } from "../../../Interfaces/IChannel";
+import { Channel } from "../../../Interfaces/Core";
+import ExtendedClient from "../../../Client";
+import { defaultValues } from "./helpers";
 
 export const createGuild = async (
-  client: Client,
+  client: ExtendedClient,
   guild: DiscordGuild,
   channels: {
-    text: IChannel[];
-    voice: IChannel[];
-    category: IChannel[];
+    text: Channel[];
+    voice: Channel[];
+    category: Channel[];
   }
 ) => {
   try {
@@ -32,6 +32,6 @@ export const createGuild = async (
       };
     }
   } catch (error) {
-    errorHandler(client, error);
+    errorHandler({ client, error });
   }
 };

@@ -1,6 +1,6 @@
 import { guildService } from "../../Services/Guild";
 import errorHandler from "../../Errors/handler";
-import { Event } from "../../Interfaces";
+import { Event } from "../../Interfaces/Core";
 
 export const event: Event = {
   name: "guildDelete",
@@ -9,7 +9,7 @@ export const event: Event = {
       await guildService.delete(client, guild.id);
       console.log(`Cr46 was removed from Guild with ID: ${guild.id}.`);
     } catch (error) {
-      errorHandler(client, error);
+      errorHandler({ client, error });
     }
   },
 };

@@ -1,8 +1,8 @@
+import { SlashCommandBuilder } from "@discordjs/builders";
 import { Routes } from "discord-api-types/v9";
 import errorHandler from "../Errors/handler";
 import { REST } from "@discordjs/rest";
 import ExtendedClient from ".";
-import { SlashCommandBuilder } from "@discordjs/builders";
 
 const setupCommandIntegrations = async (client: ExtendedClient) => {
   try {
@@ -38,8 +38,7 @@ const setupCommandIntegrations = async (client: ExtendedClient) => {
       });
     });
   } catch (error) {
-    console.log(error);
-    errorHandler(client, error);
+    errorHandler({ client, error });
   }
 };
 export default setupCommandIntegrations;

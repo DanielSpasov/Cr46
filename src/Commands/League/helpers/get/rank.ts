@@ -1,4 +1,4 @@
-import { Interaction } from "../../../../Interfaces/Interaction";
+import { Interaction } from "../../../../Interfaces/Core";
 import { Rank } from "../../../../Interfaces/League";
 import ExtendedClient from "../../../../Client";
 import axios from "axios";

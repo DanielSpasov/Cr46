@@ -1,8 +1,7 @@
-import { get, format } from "./helpers";
-import { Interaction } from "../../Interfaces/Interaction";
+import { Interaction, Command } from "../../Interfaces/Core";
 import errorHandler from "../../Errors/handler";
-import { Command } from "../../Interfaces";
 import ExtendedClient from "../../Client";
+import { get, format } from "./helpers";
 
 export const command: Command = {
   name: "check",

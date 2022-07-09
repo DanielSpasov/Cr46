@@ -23,7 +23,7 @@ const setupCommands = (client: ExtendedClient) => {
       }
     });
   } catch (error) {
-    errorHandler(client, error);
+    errorHandler({ client, error });
   }
 };
 export default setupCommands;

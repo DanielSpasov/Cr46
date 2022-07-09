@@ -1,4 +1,4 @@
-import { Command } from "../../Interfaces";
+import { Command } from "../../Interfaces/Core";
 import { menus as HelpMenus } from "./Menus";
 
 import Guild from "../../Database/Models/Guild";

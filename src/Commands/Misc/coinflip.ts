@@ -1,6 +1,6 @@
 import { MessageEmbed } from "discord.js";
 
-import { Command } from "../../Interfaces";
+import { Command } from "../../Interfaces/Core";
 import Guild from "../../Database/Models/Guild";
 
 import { menus } from "../Help/Menus/index";

@@ -1,7 +1,7 @@
 import { Client, Collection } from "discord.js";
 import dotenv from "dotenv";
 
-import { Command, Event, Config } from "../Interfaces";
+import { Command, Event, Config } from "../Interfaces/Core";
 import ConfigJson from "../config.json";
 
 import setupCommandIntegrations from "./commandIntegration";

@@ -1,16 +1,16 @@
-import { CategoryChannel, Client, TextChannel, VoiceChannel } from "discord.js";
-
-import { IChannel } from "../../../Interfaces/IChannel";
+import { CategoryChannel, TextChannel, VoiceChannel } from "discord.js";
+import { Channel } from "../../../Interfaces/Core";
 import Guild from "../../../Database/Models/Guild";
 import errorHandler from "../../../Errors/handler";
+import ExtendedClient from "../../../Client";
 import { mapType } from "./helpers";
 
 export const updateChannel = async (
-  client: Client,
+  client: ExtendedClient,
   channel: TextChannel | VoiceChannel | CategoryChannel
 ) => {
   try {
-    const updatedChannel: IChannel = {
+    const updatedChannel: Channel = {
       id: channel.id,
       name: channel.name,
       type: channel.type,
@@ -40,6 +40,6 @@ export const updateChannel = async (
     //   };
     // }
   } catch (error) {
-    errorHandler(client, error);
+    errorHandler({ client, error });
   }
 };

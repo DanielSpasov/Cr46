@@ -1,11 +1,11 @@
-import { CategoryChannel, Client, TextChannel, VoiceChannel } from "discord.js";
-
+import { CategoryChannel, TextChannel, VoiceChannel } from "discord.js";
 import Guild from "../../../Database/Models/Guild";
 import errorHandler from "../../../Errors/handler";
+import ExtendedClient from "../../../Client";
 import { mapType } from "./helpers";
 
 export const deleteChannel = async (
-  client: Client,
+  client: ExtendedClient,
   channel: TextChannel | VoiceChannel | CategoryChannel
 ) => {
   try {
@@ -23,6 +23,6 @@ export const deleteChannel = async (
       };
     }
   } catch (error) {
-    errorHandler(client, error);
+    errorHandler({ client, error });
   }
 };

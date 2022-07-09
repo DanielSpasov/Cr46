@@ -1,14 +1,14 @@
-import { IChannel } from "./IChannel";
+import { Channel } from "./Channel";
 
-export interface IGuild {
+export interface Guild {
   id: string;
   name: string;
   icon: string;
   prefix: string;
   channels: {
-    text: IChannel[];
-    voice: IChannel[];
-    category: IChannel[];
+    text: Channel[];
+    voice: Channel[];
+    category: Channel[];
   };
   validChannels: string[];
   league: {

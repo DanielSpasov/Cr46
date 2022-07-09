@@ -1,8 +1,7 @@
-import { Message, TextChannel } from "discord.js";
-
-import { Event, Command } from "../../Interfaces";
-import errorHandler from "../../Errors/handler";
 import { destructureMessage, validateMessage } from "./helpers";
+import { Event, Command } from "../../Interfaces/Core";
+import { Message, TextChannel } from "discord.js";
+import errorHandler from "../../Errors/handler";
 import Guild from "../../Database/Models/Guild";
 
 export const event: Event = {
@@ -23,7 +22,7 @@ export const event: Event = {
       const command = client.commands.get(cmd) || client.aliases.get(cmd);
       if (command) (command as Command).run(client, message, args);
     } catch (error) {
-      errorHandler(client, error);
+      errorHandler({ client, error });
     }
   },
 };

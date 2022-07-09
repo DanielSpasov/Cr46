@@ -1,18 +1,20 @@
-import { Client } from "discord.js";
+import errorHandler from "../Errors/handler";
+import ExtendedClient from "../Client";
 import mongoose from "mongoose";
 
-import errorHandler from "../Errors/handler";
-
-const connect = async (client: Client) => {
+const connect = async (client: ExtendedClient) => {
   try {
     await mongoose.connect(process.env.DB_URI);
     console.log("Database Connected!");
     return true;
   } catch (err) {
-    await errorHandler(client, {
-      type: err.name,
-      message: err.message,
-      error_code: 501,
+    await errorHandler({
+      client,
+      error: {
+        type: err.name,
+        message: err.message,
+        error_code: 501,
+      },
     });
     console.error("Database Connection Error!\nShutting down...");
     client.destroy();

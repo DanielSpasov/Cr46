@@ -12,7 +12,7 @@ const setupEvents = (client: ExtendedClient) => {
       client.on(event.name, event.run.bind(null, client));
     });
   } catch (error) {
-    errorHandler(client, error);
+    errorHandler({ client, error });
   }
 };
 

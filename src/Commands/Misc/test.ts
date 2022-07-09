@@ -1,4 +1,4 @@
-import { Command } from "../../Interfaces";
+import { Command } from "../../Interfaces/Core";
 import errorHandler from "../../Errors/handler";
 
 export const command: Command = {
@@ -9,7 +9,7 @@ export const command: Command = {
     try {
       console.log("test");
     } catch (error) {
-      errorHandler(client, error);
+      errorHandler({ client, error });
     }
   },
 };

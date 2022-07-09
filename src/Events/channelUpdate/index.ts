@@ -1,6 +1,6 @@
-import errorHandler from "../../Errors/handler";
-import { Event } from "../../Interfaces";
 import { guildService } from "../../Services/Guild";
+import errorHandler from "../../Errors/handler";
+import { Event } from "../../Interfaces/Core";
 
 export const event: Event = {
   name: "channelUpdate",
@@ -9,7 +9,7 @@ export const event: Event = {
       await guildService.channels.update(client, newChannel);
       console.log(`${newChannel.type} with ID: ${newChannel.id} was UPDATED.`);
     } catch (error) {
-      errorHandler(client, error);
+      errorHandler({ client, error });
     }
   },
 };

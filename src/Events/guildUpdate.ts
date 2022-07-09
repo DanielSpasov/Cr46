@@ -1,5 +1,5 @@
-import { Event } from "../Interfaces";
 import Guild from "../Database/Models/Guild";
+import { Event } from "../Interfaces/Core";
 
 export const event: Event = {
   name: "guildUpdate",

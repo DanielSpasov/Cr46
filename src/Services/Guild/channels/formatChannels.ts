@@ -1,6 +1,5 @@
 import {
   CategoryChannel,
-  Client,
   Collection,
   NewsChannel,
   StageChannel,
@@ -8,12 +7,12 @@ import {
   TextChannel,
   VoiceChannel,
 } from "discord.js";
-
+import ExtendedClient from "../../../Client";
 import errorHandler from "../../../Errors/handler";
 import { mapType, defaultValues } from "./helpers";
 
 export const formatChannels = (
-  client: Client,
+  client: ExtendedClient,
   channels: Collection<
     string,
     | TextChannel
@@ -37,6 +36,6 @@ export const formatChannels = (
     );
     return result;
   } catch (error) {
-    errorHandler(client, error);
+    errorHandler({ client, error });
   }
 };

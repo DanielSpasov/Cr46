@@ -1,9 +1,8 @@
-import { Client } from "discord.js";
-
 import Guild from "../../../Database/Models/Guild";
 import errorHandler from "../../../Errors/handler";
+import ExtendedClient from "../../../Client";
 
-export const deleteGuild = async (client: Client, guildId: string) => {
+export const deleteGuild = async (client: ExtendedClient, guildId: string) => {
   try {
     const deletedGuild = await Guild.findOneAndDelete({ id: guildId });
     if (!deletedGuild) {
@@ -14,6 +13,6 @@ export const deleteGuild = async (client: Client, guildId: string) => {
       };
     }
   } catch (error) {
-    errorHandler(client, error);
+    errorHandler({ client, error });
   }
 };

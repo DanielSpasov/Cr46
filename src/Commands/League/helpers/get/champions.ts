@@ -1,9 +1,9 @@
+import ExtendedClient from "../../../../Client";
 import {
   Champion,
   ExtendedChampion,
   RawChampion,
 } from "../../../../Interfaces/League";
-import ExtendedClient from "../../../../Client";
 import axios from "axios";
 import { get } from ".";
 

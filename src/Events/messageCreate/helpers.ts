@@ -1,27 +1,26 @@
-import { Client, Message } from "discord.js";
-import ExtendedClient from "../../Client";
-
 import { command as HelpMenu } from "../../Commands/Help/help";
 import errorHandler from "../../Errors/handler";
-import { IGuild } from "../../Interfaces/IGuild";
+import { Guild } from "../../Interfaces/Core";
+import ExtendedClient from "../../Client";
+import { Message } from "discord.js";
 
 export const destructureMessage = (
-  client: Client,
-  guild: IGuild,
+  client: ExtendedClient,
+  guild: Guild,
   content: string
 ) => {
   try {
     const args = content.slice(guild.prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
     return { cmd, args };
-  } catch (err) {
-    errorHandler(client, err);
+  } catch (error) {
+    errorHandler({ client, error });
   }
 };
 
 export const validateMessage = async (
   client: ExtendedClient,
-  guild: IGuild,
+  guild: Guild,
   channelID: string,
   message: Message
 ) => {
@@ -38,6 +37,6 @@ export const validateMessage = async (
     if (!message.content.startsWith(guild.prefix)) return false;
     return true;
   } catch (error) {
-    errorHandler(client, error);
+    errorHandler({ client, error });
   }
 };
