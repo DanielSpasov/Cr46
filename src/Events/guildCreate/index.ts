@@ -14,7 +14,6 @@ export const event: Event = {
       await newGuild.save();
       console.log(`Cr46 was added to Guild with ID: ${guild.id}.`);
     } catch (error) {
-      console.log(error);
       errorHandler({ client, error });
     }
   },

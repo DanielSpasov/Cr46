@@ -17,5 +17,5 @@ export const event: Event = {
     } catch (error) {
       errorHandler({ client, error });
     }
-  }, // 931830363360215071
+  },
 };
