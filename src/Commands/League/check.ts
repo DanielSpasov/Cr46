@@ -29,8 +29,8 @@ export const command: Command = {
     try {
       // Command arguments
       const summonerName = get.summonerName(interaction);
-      const championCount = get.championsCount(client, interaction);
       const serverName = get.serverName(client, interaction);
+      const championCount = get.championsCount(client, interaction);
 
       // API Requests
       const version = await get.latestVersion(client, interaction);

@@ -35,7 +35,11 @@ export const accChampions = async (
 ): Promise<Champion[]> => {
   const { data: accountChamps } = await axios.get(
     get.url({ key: "accountChamps", summonerID, serverName }),
-    client.config.requestOptions
+    {
+      headers: {
+        "X-Riot-Token": process.env.RIOT_API_KEY,
+      },
+    }
   );
   return accountChamps.slice(0, champCount);
 };
@@ -46,7 +50,11 @@ export const allChampions = async (
 ): Promise<RawChampion[]> => {
   const { data: allChamps } = await axios.get(
     get.url({ key: "allChampions", version }),
-    client.config.requestOptions
+    {
+      headers: {
+        "X-Riot-Token": process.env.RIOT_API_KEY,
+      },
+    }
   );
   return allChamps.data;
 };

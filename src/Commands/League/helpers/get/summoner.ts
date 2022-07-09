@@ -13,10 +13,15 @@ export const summoner = async (
   try {
     const { data: summoner } = await axios.get<Summoner>(
       get.url({ key: "summoner", summonerName, serverName }),
-      client.config.requestOptions
+      {
+        headers: {
+          "X-Riot-Token": process.env.RIOT_API_KEY,
+        },
+      }
     );
     return summoner;
   } catch (error) {
+    // console.log(error);
     throw {
       channelID: interaction.channelId,
       ...error,

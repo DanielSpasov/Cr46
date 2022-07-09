@@ -10,7 +10,11 @@ export const latestVersion = async (
   try {
     const versionList = await axios.get<string[]>(
       get.url({ key: "versions" }),
-      client.config.requestOptions
+      {
+        headers: {
+          "X-Riot-Token": process.env.RIOT_API_KEY,
+        },
+      }
     );
     return versionList.data[0];
   } catch (error) {

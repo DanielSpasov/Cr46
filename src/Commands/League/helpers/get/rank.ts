@@ -13,7 +13,11 @@ export const rank = async (
   try {
     const response = await axios.get<Rank[]>(
       get.url({ key: "ranked", summonerID, serverName }),
-      client.config.requestOptions
+      {
+        headers: {
+          "X-Riot-Token": process.env.RIOT_API_KEY,
+        },
+      }
     );
     return response.data;
   } catch (error) {

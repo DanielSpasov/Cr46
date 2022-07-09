@@ -1,4 +1,4 @@
-import { ColorResolvable, MessageEmbed } from "discord.js";
+import { ColorResolvable, MessageEmbedOptions } from "discord.js";
 import ExtendedClient from "../../Client";
 import errorHandler from "../../Errors/handler";
 
@@ -9,7 +9,10 @@ export const command: Command = {
   description: "Shows Cr46's Latency in miliseconds.",
   arguments: [],
   aliases: [],
-  run: async (client: ExtendedClient, interaction: Interaction) => {
+  run: async (
+    client: ExtendedClient,
+    interaction: Interaction
+  ): Promise<MessageEmbedOptions> => {
     try {
       let color: ColorResolvable;
       if (client.ws.ping <= 75) {
@@ -30,7 +33,7 @@ export const command: Command = {
       errorHandler({
         client,
         error: { channelID: interaction.channelId, ...error },
-        module: "Common",
+        module: "Ping",
       });
     }
   },

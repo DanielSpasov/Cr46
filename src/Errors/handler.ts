@@ -19,8 +19,8 @@ export default async function errorHandler({
   const messageContent =
     error?.message ||
     error?.response?.data?.status?.message ||
-    error?.error.message ||
-    error?.err.message ||
+    error?.error?.message ||
+    error?.err?.message ||
     "No Message was provided";
   const channelID = error?.channelID || process.env.CONSOLE_CHANNEL_ID;
   message.send({
