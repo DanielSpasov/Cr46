@@ -6,7 +6,10 @@ export const event: Event = {
   name: "guildUpdate",
   run: async (client, oldGuild, newGuild) => {
     try {
-      console.log("In Guild Update");
+      await Guild.findOneAndUpdate(
+        { id: oldGuild.id },
+        { id: newGuild.id, name: newGuild.name }
+      );
     } catch (error) {
       errorHandler({ client, error });
     }
