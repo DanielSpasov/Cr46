@@ -1,4 +1,3 @@
-import ExtendedClient from "../../../../Client";
 import {
   Champion,
   ExtendedChampion,
@@ -8,14 +7,13 @@ import axios from "axios";
 import { get } from ".";
 
 export const champions = async (
-  client: ExtendedClient,
   accID: string,
   version: string,
   count: number,
   serverName: string
 ): Promise<ExtendedChampion[]> => {
-  const accountChamps = await accChampions(client, accID, serverName, count);
-  const allChamps = Object.values(await allChampions(client, version));
+  const accountChamps = await accChampions(accID, serverName, count);
+  const allChamps = Object.values(await allChampions(version));
 
   return accountChamps.map((champ: any) => {
     const { id: name } = <RawChampion>(
@@ -28,7 +26,6 @@ export const champions = async (
 };
 
 export const accChampions = async (
-  client: ExtendedClient,
   summonerID: string,
   serverName: string,
   champCount: number
@@ -44,10 +41,7 @@ export const accChampions = async (
   return accountChamps.slice(0, champCount);
 };
 
-export const allChampions = async (
-  client: ExtendedClient,
-  version: string
-): Promise<RawChampion[]> => {
+export const allChampions = async (version: string): Promise<RawChampion[]> => {
   const { data: allChamps } = await axios.get(
     get.url({ key: "allChampions", version }),
     {

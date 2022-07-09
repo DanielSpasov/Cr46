@@ -3,11 +3,10 @@ import errorHandler from "../../Errors/handler";
 import { Event } from "../../Interfaces/Core";
 
 export const event: Event = {
-  name: "guildDelete",
-  run: async (client, guild) => {
+  name: "guildUpdate",
+  run: async (client, oldGuild, newGuild) => {
     try {
-      await Guild.findOneAndDelete({ id: guild.id });
-      console.log(`Cr46 was removed from Guild with ID: ${guild.id}.`);
+      console.log("In Guild Update");
     } catch (error) {
       errorHandler({ client, error });
     }

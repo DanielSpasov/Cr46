@@ -1,8 +1,8 @@
 import { Command, Interaction } from "../../Interfaces/Core";
+import { MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../Errors/handler";
 import ExtendedClient from "../../Client";
 import { message } from "../../Messages";
-import { MessageEmbedOptions } from "discord.js";
 
 export const command: Command = {
   name: "enviroment",

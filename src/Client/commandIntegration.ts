@@ -31,11 +31,8 @@ const setupCommandIntegrations = async (client: ExtendedClient) => {
       return command;
     });
 
-    const guilds = await client.guilds.fetch();
-    guilds.forEach((guild) => {
-      rest.put(Routes.applicationGuildCommands(client.user.id, guild.id), {
-        body: commands,
-      });
+    await rest.put(Routes.applicationCommands(client.user.id), {
+      body: commands,
     });
   } catch (error) {
     errorHandler({ client, error });

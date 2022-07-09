@@ -1,11 +1,9 @@
 import { Interaction } from "../../../../Interfaces/Core";
 import { Summoner } from "../../../../Interfaces/League";
-import ExtendedClient from "../../../../Client";
 import axios from "axios";
 import { get } from ".";
 
 export const summoner = async (
-  client: ExtendedClient,
   interaction: Interaction,
   summonerName: string,
   serverName: string
@@ -21,7 +19,6 @@ export const summoner = async (
     );
     return summoner;
   } catch (error) {
-    // console.log(error);
     throw {
       channelID: interaction.channelId,
       ...error,

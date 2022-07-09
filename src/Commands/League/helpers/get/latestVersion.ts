@@ -1,10 +1,8 @@
 import { Interaction } from "../../../../Interfaces/Core";
-import ExtendedClient from "../../../../Client";
 import axios from "axios";
 import { get } from ".";
 
 export const latestVersion = async (
-  client: ExtendedClient,
   interaction: Interaction
 ): Promise<string> => {
   try {

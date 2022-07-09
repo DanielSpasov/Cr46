@@ -1,8 +1,7 @@
 import { ColorResolvable, MessageEmbedOptions } from "discord.js";
-import ExtendedClient from "../../Client";
-import errorHandler from "../../Errors/handler";
-
 import { Command, Interaction } from "../../Interfaces/Core";
+import errorHandler from "../../Errors/handler";
+import ExtendedClient from "../../Client";
 
 export const command: Command = {
   name: "ping",

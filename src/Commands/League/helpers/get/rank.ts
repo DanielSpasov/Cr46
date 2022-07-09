@@ -1,11 +1,9 @@
 import { Interaction } from "../../../../Interfaces/Core";
 import { Rank } from "../../../../Interfaces/League";
-import ExtendedClient from "../../../../Client";
 import axios from "axios";
 import { get } from ".";
 
 export const rank = async (
-  client: ExtendedClient,
   interaction: Interaction,
   summonerID: string,
   serverName: string

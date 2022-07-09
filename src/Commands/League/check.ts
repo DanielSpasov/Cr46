@@ -33,21 +33,14 @@ export const command: Command = {
       const championCount = get.championsCount(client, interaction);
 
       // API Requests
-      const version = await get.latestVersion(client, interaction);
+      const version = await get.latestVersion(interaction);
       const summoner = await get.summoner(
-        client,
         interaction,
         summonerName,
         serverName
       );
-      const rankData = await get.rank(
-        client,
-        interaction,
-        summoner.id,
-        serverName
-      );
+      const rankData = await get.rank(interaction, summoner.id, serverName);
       const champData = await get.champions(
-        client,
         summoner.id,
         version,
         championCount,
