@@ -1,9 +1,10 @@
 import { Command, Interaction } from "../../Interfaces/Core";
 import { Coin } from "../../Interfaces/Crypto/Coin";
+import Wallet from "../../Database/Models/Wallet";
 import { MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../Errors/handler";
+import { format, get, wallet } from "./helpers";
 import ExtendedClient from "../../Client";
-import { format, get } from "./helpers";
 
 export const command: Command = {
   name: "cryptoflip",
@@ -15,6 +16,11 @@ export const command: Command = {
       description: "Cryptocurrency.",
       required: true,
     },
+    {
+      key: "bet-amount",
+      description: "The amount you want to bet.",
+      required: false,
+    },
   ],
   aliases: [],
   run: async (
@@ -23,6 +29,7 @@ export const command: Command = {
   ): Promise<MessageEmbedOptions> => {
     try {
       const userChoice = get.coin(interaction);
+      const amount = await get.amount(interaction);
       const topCryptos = await get.topHundred();
 
       const validSymbols = topCryptos.map((x: Coin) => x.symbol.toLowerCase());
@@ -44,7 +51,24 @@ export const command: Command = {
           : coin.name.toLowerCase() === userChoice
       );
 
-      return format.cryptoflipMessage(client, userCrypto, randomCrypto);
+      if (amount) {
+        const userID = interaction.user.id;
+        const userWallet = await Wallet.findOne({ userID });
+        if (amount > userWallet.balance) {
+          throw {
+            message: `Insufficient funds.`,
+            error_code: 401,
+          };
+        }
+
+        await wallet.take(userWallet, amount);
+        const isWinner = userCrypto === randomCrypto;
+        if (isWinner) {
+          await wallet.load(userWallet, amount * 100);
+        }
+      }
+
+      return format.cryptoflipMessage(client, userCrypto, randomCrypto, amount);
     } catch (error) {
       errorHandler({
         client,

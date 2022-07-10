@@ -6,13 +6,20 @@ import { get } from "../get";
 export const cryptoflipMessage = (
   client: ExtendedClient,
   userCrypto: Coin,
-  randomCrypto: Coin
+  randomCrypto: Coin,
+  amount: number | null
 ): MessageEmbedOptions => {
   const isWinner = userCrypto === randomCrypto;
 
-  const name = isWinner
-    ? "You guessed the cryptocurrency! Congratulations!"
-    : "You just lost your life savings! Congratulations!";
+  const noAmountWinnerName = "You guessed the cryptocurrency! Congratulations!";
+  const noAmountLoserName = "You just lost your life savings! Congratulations!";
+  const amountWinnerName = (am) => `Congratulations you just won $${am * 100}!`;
+  const amountLoserName = (am) => `You just lost $${am}! Congratulations!`;
+
+  const winnerName = amount ? amountWinnerName(amount) : noAmountWinnerName;
+  const loserName = amount ? amountLoserName(amount) : noAmountLoserName;
+
+  const name = isWinner ? winnerName : loserName;
   const color = isWinner ? "GREEN" : "RED";
   const description = isWinner
     ? `It was \`${randomCrypto.name} (${randomCrypto.symbol})\`.\nNow touch grass.`

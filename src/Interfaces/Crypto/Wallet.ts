@@ -9,4 +9,5 @@ export interface Wallet {
   daily: Date;
   balance: number;
   crypto: Cryptocurrency[];
+  save: Function;
 }
