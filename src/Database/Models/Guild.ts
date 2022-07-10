@@ -17,21 +17,6 @@ const guildSchema = new Schema({
       type: String,
     },
   ],
-  users: [
-    {
-      id: String,
-      wallet: {
-        balance: Number,
-        crypto: [
-          {
-            symbol: String,
-            name: String,
-            balance: Number,
-          },
-        ],
-      },
-    },
-  ],
 });
 
 export default model("Guild", guildSchema);

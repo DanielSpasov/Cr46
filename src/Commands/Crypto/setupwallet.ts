@@ -1,8 +1,9 @@
-import { Command, GuildUser, Interaction, Wallet } from "../../Interfaces/Core";
+import { Command, Interaction, Wallet as IWallet } from "../../Interfaces/Core";
+import Wallet from "../../Database/Models/Wallet";
 import { MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../Errors/handler";
-import ExtendedClient from "../../Client";
 import Guild from "../../Database/Models/Guild";
+import ExtendedClient from "../../Client";
 
 export const command: Command = {
   name: "setupwallet",
@@ -15,11 +16,7 @@ export const command: Command = {
     interaction: Interaction
   ): Promise<MessageEmbedOptions> => {
     try {
-      const guild = await Guild.findOne({ id: interaction.guildId });
-
-      const hasWallet = guild.users.find(
-        (user: GuildUser) => user.id === interaction.user.id
-      );
+      const hasWallet = await Wallet.findOne({ userID: interaction.user.id });
       if (hasWallet) {
         throw {
           message: "You already have a wallet, use `/wallet` to open it.",
@@ -27,15 +24,13 @@ export const command: Command = {
         };
       }
 
-      const newUser: GuildUser = {
-        id: interaction.user.id,
-        wallet: {
-          balance: client.config.startup_wallet_balance,
-          crypto: [],
-        },
-      };
-      guild.users.push(newUser);
-      await guild.save();
+      const wallet = new Wallet({
+        userID: interaction.user.id,
+        daily: null,
+        balance: client.config.startup_wallet_balance,
+        crypto: [],
+      });
+      await wallet.save();
 
       return {
         title: "Wallet Setup Successful!",
