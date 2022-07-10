@@ -1,10 +1,10 @@
 import { Command, Interaction } from "../../Interfaces/Core";
 import { Cryptocurrency } from "../../Interfaces/Core";
+import { wallet as walletService } from "./helpers";
 import Wallet from "../../Database/Models/Wallet";
 import { MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../Errors/handler";
 import ExtendedClient from "../../Client";
-import { get } from "./helpers";
 
 export const command: Command = {
   name: "wallet",
@@ -16,15 +16,18 @@ export const command: Command = {
     interaction: Interaction
   ): Promise<MessageEmbedOptions> => {
     try {
-      const wallet = await Wallet.findOne({ userID: interaction.user.id });
-      if (!wallet) {
-        throw {
-          message:
-            "You don't have a wallet yet, use `/setupwallet` to create it.",
-          error_code: 400,
-        };
+      const hasWallet = await Wallet.findOne({ userID: interaction.user.id });
+      if (!hasWallet) {
+        const newWallet = await walletService.setup(client, interaction);
+        if (!newWallet) {
+          throw {
+            message: "Failed to create a wallet.",
+            error_code: 500,
+          };
+        }
       }
 
+      const wallet = await walletService.getInfo(interaction.user.id);
       const USDBalance = {
         name: `**USD** Balance:`,
         value: `\`$${wallet.balance}\``,
