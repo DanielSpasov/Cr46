@@ -6,8 +6,7 @@ import ExtendedClient from "../../Client";
 
 export const command: Command = {
   name: "setupwallet",
-  description:
-    "Setup your wallet to start trading your discord $ for cryptocurrencies.",
+  description: "Setup your wallet and start trading your digital $ for crypto.",
   arguments: [],
   aliases: [],
   run: async (
@@ -27,7 +26,23 @@ export const command: Command = {
         userID: interaction.user.id,
         daily: null,
         balance: client.config.startup_wallet_balance,
-        crypto: [],
+        crypto: [
+          {
+            name: "Bitcoin",
+            symbol: "BTC",
+            balance: 0,
+          },
+          {
+            name: "Ethereum",
+            symbol: "ETH",
+            balance: 0,
+          },
+          {
+            name: "Binance",
+            symbol: "BNB",
+            balance: 0,
+          },
+        ],
       });
       await wallet.save();
 
