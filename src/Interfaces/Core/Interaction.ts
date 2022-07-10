@@ -1,6 +1,7 @@
-import { Message } from "discord.js";
+import { Message, User } from "discord.js";
 
 export interface Interaction extends Message {
+  user: User;
   options: {
     _group: null;
     _subcommand: null;

@@ -27,9 +27,16 @@ export const command: Command = {
       );
 
       if (!channel) {
+        let validChannels: string = "Every channel is valid.";
+        if (guild.validChannels.length) {
+          validChannels = guild.validChannels
+            .map((ch: string) => (ch = `<#${ch}>`))
+            .join(", ");
+        }
+
         return {
           title: "Valid Channels",
-          description: `<#${guild.validChannels.join(">, <#")}>`,
+          description: validChannels,
           color: "GREEN",
         };
       } else {

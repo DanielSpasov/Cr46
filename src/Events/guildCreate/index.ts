@@ -10,6 +10,7 @@ export const event: Event = {
         id: guild.id,
         name: guild.name,
         validChannels: [],
+        users: [],
       });
       await newGuild.save();
       console.log(`Cr46 was added to Guild with ID: ${guild.id}.`);

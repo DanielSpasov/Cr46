@@ -19,6 +19,7 @@ class ExtendedClient extends Client {
       default_league_server: "euw1",
       default_number_of_champs: 3,
       bot_icon_url: "https://i.imgur.com/xn5SseQ.png",
+      startup_wallet_balance: 500,
     };
 
     await this.login(process.env.BOT_TOKEN);

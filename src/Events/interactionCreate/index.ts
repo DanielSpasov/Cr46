@@ -28,7 +28,7 @@ export const event: Event = {
           .get(interaction.commandName)
           .run(client, interaction, []);
         if (!message) return await interaction.deleteReply();
-        interaction.editReply({ embeds: [message] });
+        await interaction.editReply({ embeds: [message] });
       }
     } catch (error) {
       errorHandler({ client, error });
