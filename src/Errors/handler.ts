@@ -1,5 +1,5 @@
-import { MessageEmbedOptions } from "discord.js";
 import { Interaction } from "../Interfaces/Core";
+import { MessageEmbedOptions } from "discord.js";
 import ExtendedClient from "../Client";
 import { message } from "../Messages";
 
