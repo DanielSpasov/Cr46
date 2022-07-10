@@ -54,6 +54,12 @@ export const command: Command = {
       if (amount) {
         const userID = interaction.user.id;
         const userWallet = await Wallet.findOne({ userID });
+        if (!userWallet) {
+          throw {
+            message: "Failed to find a wallet. Type `/wallet` to create one.",
+            error_code: 404,
+          };
+        }
         if (amount > userWallet.balance) {
           throw {
             message: `Insufficient funds.`,
@@ -70,6 +76,7 @@ export const command: Command = {
 
       return format.cryptoflipMessage(client, userCrypto, randomCrypto, amount);
     } catch (error) {
+      console.log(error);
       errorHandler({
         client,
         interaction,

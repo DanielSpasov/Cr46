@@ -5,10 +5,11 @@ import Wallet from "../../Database/Models/Wallet";
 import { MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../Errors/handler";
 import ExtendedClient from "../../Client";
+import { compareDailyHours } from "./helpers/wallet/compareDailyHours";
 
 export const command: Command = {
-  name: "wallet",
-  description: "Opens your cryptocurrency wallet.",
+  name: "daily",
+  description: "Collect your daily $75.",
   arguments: [],
   aliases: [],
   run: async (
@@ -18,32 +19,32 @@ export const command: Command = {
     try {
       const hasWallet = await Wallet.findOne({ userID: interaction.user.id });
       if (!hasWallet) {
-        const newWallet = await walletService.setup(client, interaction);
-        if (!newWallet) {
-          throw {
-            message: "Failed to create a wallet.",
-            error_code: 500,
-          };
-        }
+        throw {
+          message: "Failed to find a wallet. Type `/wallet` to create one.",
+          error_code: 404,
+        };
       }
 
-      const wallet = await walletService.getInfo(interaction.user.id);
-      const USDBalance = {
-        name: `**USD** Balance:`,
-        value: `\`$${wallet.balance}\``,
-      };
-      const cryptoBalance = wallet.crypto.map((coin: Cryptocurrency) => ({
-        name: `**${coin.name}** Balance:`,
-        value: `\`${coin.balance} ${coin.symbol}\``,
-        inline: true,
-      }));
+      const wallet = await Wallet.findOne({ userID: interaction.user.id });
+
+      const hasCollected = compareDailyHours(wallet.daily, new Date());
+      if (!hasCollected) {
+        wallet.balance += 75;
+        wallet.daily = new Date();
+        await wallet.save();
+      } else {
+        throw {
+          message: `You have alerady collected your daily.`,
+          error_code: 401,
+        };
+      }
 
       return {
         author: {
           name: `${interaction.user.username}'s Wallet`,
           icon_url: interaction.user.avatarURL(),
         },
-        fields: [USDBalance, ...cryptoBalance],
+        description: "Collected Daily `$75`.\nCome tomorrow for another `$75`.",
         color: "GREEN",
         timestamp: Date.now(),
         footer: {
@@ -56,7 +57,7 @@ export const command: Command = {
         client,
         interaction,
         error,
-        module: "Cryptocurrency",
+        module: "Daily Money",
       });
     }
   },
