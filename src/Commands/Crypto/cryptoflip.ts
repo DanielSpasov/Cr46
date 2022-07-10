@@ -1,9 +1,9 @@
-import { MessageEmbedOptions } from "discord.js";
 import { Command, Interaction } from "../../Interfaces/Core";
+import { Coin } from "../../Interfaces/Crypto/Coin";
+import { MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../Errors/handler";
 import ExtendedClient from "../../Client";
 import { format, get } from "./helpers";
-import { Coin } from "../../Interfaces/Crypto/Coin";
 
 export const command: Command = {
   name: "cryptoflip",
@@ -32,7 +32,6 @@ export const command: Command = {
 
       if (!isSymbol && !isName) {
         throw {
-          channelID: interaction.channelId,
           message: `\`${userChoice}\` was not found in the top 100 Cryptocurrencies.`,
           error_code: 404,
         };
@@ -49,7 +48,8 @@ export const command: Command = {
     } catch (error) {
       errorHandler({
         client,
-        error: { channelID: interaction.channelId, ...error },
+        interaction,
+        error,
         module: "Cryptocurrency",
       });
     }

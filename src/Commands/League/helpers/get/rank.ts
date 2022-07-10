@@ -1,10 +1,8 @@
-import { Interaction } from "../../../../Interfaces/Core";
 import { Rank } from "../../../../Interfaces/League";
 import axios from "axios";
 import { get } from ".";
 
 export const rank = async (
-  interaction: Interaction,
   summonerID: string,
   serverName: string
 ): Promise<Rank[]> => {
@@ -19,9 +17,6 @@ export const rank = async (
     );
     return response.data;
   } catch (error) {
-    throw {
-      channelID: interaction.channelId,
-      ...error,
-    };
+    throw error;
   }
 };

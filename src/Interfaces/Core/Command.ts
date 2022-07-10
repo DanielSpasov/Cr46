@@ -4,8 +4,7 @@ import Client from "../../Client";
 interface Run {
   (
     client: Client,
-    message: Message | Interaction,
-    args: string[]
+    message: Message | Interaction
   ): Promise<MessageEmbedOptions>;
 }
 

@@ -1,5 +1,5 @@
-import { ColorResolvable } from "discord.js";
 import { Rank } from "../../../../Interfaces/League";
+import { ColorResolvable } from "discord.js";
 
 const ranks = [
   "UNRANKED",

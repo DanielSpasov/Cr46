@@ -19,9 +19,6 @@ export const summoner = async (
     );
     return summoner;
   } catch (error) {
-    throw {
-      channelID: interaction.channelId,
-      ...error,
-    };
+    throw error;
   }
 };

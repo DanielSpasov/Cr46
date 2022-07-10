@@ -12,10 +12,12 @@ export const event: Event = {
       if (interaction.isCommand()) {
         const guild = await Guild.findOne({ id: interaction.guildId });
 
-        if (
-          !guild.validChannels.includes(interaction.channelId) &&
-          !!guild.validChannels.length
-        ) {
+        const isEphemeral = client.config.ephemeral_commands.includes(
+          interaction.commandName
+        );
+        const hasLength = Boolean(guild.validChannels.length);
+        const isValid = guild.validChannels.includes(interaction.channelId);
+        if (hasLength && !isValid) {
           await interaction.reply({
             embeds: [messages.common.invalidChannel(client)],
             ephemeral: true,
@@ -23,11 +25,11 @@ export const event: Event = {
           return;
         }
 
-        await interaction.deferReply();
+        await interaction.deferReply({ ephemeral: isEphemeral });
         const message = await client.commands
           .get(interaction.commandName)
-          .run(client, interaction, []);
-        if (!message) return await interaction.deleteReply();
+          .run(client, interaction);
+        if (!message) return;
         await interaction.editReply({ embeds: [message] });
       }
     } catch (error) {

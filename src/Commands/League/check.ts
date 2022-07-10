@@ -43,7 +43,7 @@ export const command: Command = {
         summonerName,
         serverName
       );
-      const rankData = await get.rank(interaction, summoner.id, serverName);
+      const rankData = await get.rank(summoner.id, serverName);
       const champData = await get.champions(
         summoner.id,
         version,
@@ -90,7 +90,8 @@ export const command: Command = {
     } catch (error) {
       errorHandler({
         client,
-        error: { channelID: interaction.channelId, ...error },
+        interaction,
+        error,
         module: "League of Legends",
       });
     }

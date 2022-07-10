@@ -8,7 +8,7 @@ export const command: Command = {
   name: "enviroment",
   description: "Tests Cr46's enviroment.",
   arguments: [],
-  aliases: [],
+  aliases: ["env"],
   run: async (
     client: ExtendedClient,
     interaction: Interaction
@@ -18,7 +18,8 @@ export const command: Command = {
     } catch (error) {
       errorHandler({
         client,
-        error: { channelID: interaction.channelId, ...error },
+        interaction,
+        error,
         module: "Enviroment",
       });
     }

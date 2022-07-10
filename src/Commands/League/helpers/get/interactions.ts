@@ -24,7 +24,6 @@ export const championsCount = (
   );
   if (championsData && Number(championsData.value) > 15) {
     throw {
-      channelID: interaction.channelId,
       message: `The maximum number of champions Cr46 can display at once is \`15\``,
       error_code: 400,
     };
@@ -43,7 +42,6 @@ export const serverName = (
   );
   if (serverProps && !validServers.includes(serverProps.value)) {
     throw {
-      channelID: interaction.channelId,
       message: `Server not Found: \`${
         serverProps.value
       }\`\nValid Servers: \`${validServers.join("`, `")}\``,

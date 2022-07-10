@@ -20,6 +20,7 @@ class ExtendedClient extends Client {
       default_number_of_champs: 3,
       bot_icon_url: "https://i.imgur.com/xn5SseQ.png",
       startup_wallet_balance: 500,
+      ephemeral_commands: ["wallet", "setupwallet"],
     };
 
     await this.login(process.env.BOT_TOKEN);

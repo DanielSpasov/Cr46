@@ -1,9 +1,8 @@
 import { Command, Interaction } from "../../Interfaces/Core";
 import { MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../Errors/handler";
-import ExtendedClient from "../../Client";
 import Guild from "../../Database/Models/Guild";
-import { ObjectFlags } from "typescript";
+import ExtendedClient from "../../Client";
 
 export const command: Command = {
   name: "validchannels",
@@ -51,7 +50,6 @@ export const command: Command = {
           targetChannel.type === "GUILD_TEXT";
         if (!isValidChannel) {
           throw {
-            channelID: interaction.channelId,
             message: `${channel.value} is not a valid text channel. Please mention the channel e.g. <#${interaction.channelId}>`,
             error_code: 400,
           };
@@ -77,8 +75,9 @@ export const command: Command = {
     } catch (error) {
       errorHandler({
         client,
-        error: { channelID: interaction.channelId, ...error },
-        module: "Ping",
+        interaction,
+        error,
+        module: "Channel Validating",
       });
     }
   },

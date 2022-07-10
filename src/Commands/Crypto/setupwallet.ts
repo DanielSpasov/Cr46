@@ -1,8 +1,7 @@
-import { Command, Interaction, Wallet as IWallet } from "../../Interfaces/Core";
+import { Command, Interaction } from "../../Interfaces/Core";
 import Wallet from "../../Database/Models/Wallet";
 import { MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../Errors/handler";
-import Guild from "../../Database/Models/Guild";
 import ExtendedClient from "../../Client";
 
 export const command: Command = {
@@ -45,7 +44,8 @@ export const command: Command = {
     } catch (error) {
       errorHandler({
         client,
-        error: { channelID: interaction.channelId, ...error },
+        interaction,
+        error,
         module: "Cryptocurrency",
       });
     }

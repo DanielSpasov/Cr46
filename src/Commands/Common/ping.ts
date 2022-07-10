@@ -31,7 +31,8 @@ export const command: Command = {
     } catch (error) {
       errorHandler({
         client,
-        error: { channelID: interaction.channelId, ...error },
+        interaction,
+        error,
         module: "Ping",
       });
     }

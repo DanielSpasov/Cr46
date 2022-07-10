@@ -16,9 +16,6 @@ export const latestVersion = async (
     );
     return versionList.data[0];
   } catch (error) {
-    throw {
-      channelID: interaction.channelId,
-      ...error,
-    };
+    throw error;
   }
 };
