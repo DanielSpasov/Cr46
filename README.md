@@ -28,7 +28,7 @@ Cr46 is a discord.js bot who interacts with League of Legends and the Cryptocurr
 
 ```
 /validchannels channel[optional]
-/envirroment
+/environment
 /ping
 ```
 
