@@ -5,7 +5,7 @@ import ExtendedClient from "../../Client";
 import { message } from "../../Messages";
 
 export const command: Command = {
-  name: "enviroment",
+  name: "environment",
   description: "Tests Cr46's enviroment.",
   arguments: [],
   aliases: ["env"],
