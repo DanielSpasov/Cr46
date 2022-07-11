@@ -31,7 +31,7 @@ export default async function errorHandler({
   const errorEmbed: MessageEmbedOptions = {
     author: {
       name: `${type} Error`,
-      iconURL: client?.config?.bot_icon_url,
+      iconURL: client?.user?.avatarURL(),
     },
     footer: {
       text: `Error Code: ${code}`,
