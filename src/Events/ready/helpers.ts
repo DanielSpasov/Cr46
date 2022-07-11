@@ -1,7 +1,7 @@
 import { Client } from "discord.js";
 
 const mapActivity = {
-  production: "@Cr46",
+  production: "/",
   development: "Under Maintenance",
 };
 
