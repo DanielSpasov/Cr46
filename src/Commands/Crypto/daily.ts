@@ -49,7 +49,7 @@ export const command: Command = {
         timestamp: Date.now(),
         footer: {
           text: "Cr46",
-          icon_url: client.config.bot_icon_url,
+          icon_url: client.user.avatarURL(),
         },
       };
     } catch (error) {
