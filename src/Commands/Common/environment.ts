@@ -6,7 +6,7 @@ import { message } from "../../Messages";
 
 export const command: Command = {
   name: "environment",
-  description: "Tests Cr46's enviroment.",
+  description: "Tests Cr46's environment.",
   arguments: [],
   aliases: ["env"],
   run: async (
@@ -20,7 +20,7 @@ export const command: Command = {
         client,
         interaction,
         error,
-        module: "Enviroment",
+        module: "Environment",
       });
     }
   },
