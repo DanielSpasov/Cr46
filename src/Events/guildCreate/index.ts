@@ -1,10 +1,12 @@
+import Guild from "../../Database/Models/Guild";
 import errorHandler from "../../Errors/handler";
 import { Event } from "../../Interfaces/Core";
-import Guild from "../../Database/Models/Guild";
+import { Guild as IGuild } from "discord.js";
+import ExtendedClient from "../../Client";
 
 export const event: Event = {
   name: "guildCreate",
-  run: async (client, guild) => {
+  run: async (client: ExtendedClient, guild: IGuild) => {
     try {
       const newGuild = await new Guild({
         id: guild.id,
