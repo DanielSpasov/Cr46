@@ -1,5 +1,3 @@
-global.AbortController = require("abort-controller");
-
 import Client from "./Client";
 import { Intents } from "discord.js";
 
