@@ -45,7 +45,6 @@ export const command: Command = {
         },
         fields: [USDBalance, ...cryptoBalance],
         color: "GREEN",
-        timestamp: Date.now(),
         footer: {
           text: "Cr46",
           icon_url: client.user.avatarURL(),

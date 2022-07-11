@@ -46,7 +46,6 @@ export const command: Command = {
         },
         description: "Collected Daily `$75`.\nCome tomorrow for another `$75`.",
         color: "GREEN",
-        timestamp: Date.now(),
         footer: {
           text: "Cr46",
           icon_url: client.user.avatarURL(),

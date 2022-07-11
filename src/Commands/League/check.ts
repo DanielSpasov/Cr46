@@ -81,7 +81,6 @@ export const command: Command = {
         thumbnail: {
           url: thumbnailURL,
         },
-        timestamp: Date.now(),
         footer: {
           text: client.user.username,
           iconURL: client.user.avatarURL(),

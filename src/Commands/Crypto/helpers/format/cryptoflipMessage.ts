@@ -35,7 +35,6 @@ export const cryptoflipMessage = (
     thumbnail: {
       url: get.url({ key: "cryptoImg", cryptoID: randomCrypto.id }),
     },
-    timestamp: Date.now(),
     footer: {
       text: client.user.username,
       iconURL: client.user.avatarURL(),
