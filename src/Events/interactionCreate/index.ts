@@ -19,7 +19,7 @@ export const event: Event = {
         const isValid = guild.validChannels.includes(interaction.channelId);
         if (hasLength && !isValid) {
           await interaction.reply({
-            embeds: [messages.common.invalidChannel(client)],
+            embeds: [messages.common.invalidChannel],
             ephemeral: true,
           });
           return;
