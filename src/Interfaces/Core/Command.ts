@@ -8,13 +8,22 @@ interface Run {
   ): Promise<MessageEmbedOptions>;
 }
 
+export interface Option {
+  name: string;
+  description: string;
+  required: boolean;
+}
+
+export interface SubCommand {
+  name: string;
+  description: string;
+  options: Option[];
+}
+
 export interface Command {
   name: string;
-  description?: string;
-  args: {
-    key: string;
-    description?: string;
-    required: boolean;
-  }[];
+  description: string;
+  subCommands: SubCommand[];
+  options: Option[];
   run: Run;
 }

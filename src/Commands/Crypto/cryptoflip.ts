@@ -10,14 +10,15 @@ export const command: Command = {
   name: "cryptoflip",
   description:
     "Cr46's chooses one of the top 100 cryptocurrencies on the market.",
-  args: [
+  subCommands: [],
+  options: [
     {
-      key: "coin",
+      name: "coin",
       description: "Cryptocurrency.",
       required: true,
     },
     {
-      key: "bet-amount",
+      name: "bet-amount",
       description: "The amount you want to bet.",
       required: false,
     },

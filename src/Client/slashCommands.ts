@@ -15,11 +15,11 @@ const setupSlashCommands = async (client: ExtendedClient) => {
         cmd.description || "This command has no description"
       );
 
-      if (cmd.args.length) {
-        cmd.args.forEach((arg) =>
+      if (cmd.options.length) {
+        cmd.options.forEach((arg) =>
           command.addStringOption((option) =>
             option
-              .setName(arg.key)
+              .setName(arg.name)
               .setDescription(
                 arg.description || "This argument has no description"
               )

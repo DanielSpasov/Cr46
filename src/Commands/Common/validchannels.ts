@@ -7,9 +7,10 @@ import ExtendedClient from "../../Client";
 export const command: Command = {
   name: "validchannels",
   description: "Authorizes command usage in that channel.",
-  args: [
+  subCommands: [],
+  options: [
     {
-      key: "channel",
+      name: "channel",
       description: "Mention the channel you want to validate",
       required: false,
     },

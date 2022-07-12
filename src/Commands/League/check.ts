@@ -7,19 +7,20 @@ import { get, format } from "./helpers";
 export const command: Command = {
   name: "check",
   description: "Displays information about a League of Legends account.",
-  args: [
+  subCommands: [],
+  options: [
     {
-      key: "summoner",
+      name: "summoner",
       description: "The League of Legends account name.",
       required: true,
     },
     {
-      key: "server",
+      name: "server",
       description: "The League of Legends server (EUW1, NA1, etc.)",
       required: false,
     },
     {
-      key: "champions",
+      name: "champions",
       description:
         "The Number of champions you want to display information for",
       required: false,

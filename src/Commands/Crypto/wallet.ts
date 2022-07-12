@@ -9,7 +9,8 @@ import ExtendedClient from "../../Client";
 export const command: Command = {
   name: "wallet",
   description: "Opens your cryptocurrency wallet.",
-  args: [],
+  subCommands: [],
+  options: [],
   run: async (
     client: ExtendedClient,
     interaction: Interaction

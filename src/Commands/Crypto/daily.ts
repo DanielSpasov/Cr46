@@ -8,7 +8,8 @@ import ExtendedClient from "../../Client";
 export const command: Command = {
   name: "daily",
   description: "Collect your daily $75.",
-  args: [],
+  subCommands: [],
+  options: [],
   run: async (
     client: ExtendedClient,
     interaction: Interaction
