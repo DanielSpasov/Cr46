@@ -1,1 +1,0 @@
-export { getChannel } from "./getChannel";

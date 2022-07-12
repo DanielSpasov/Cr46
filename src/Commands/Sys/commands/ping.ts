@@ -1,12 +1,11 @@
 import { ColorResolvable, MessageEmbedOptions } from "discord.js";
-import { Command, Interaction } from "../../Interfaces/Core";
-import errorHandler from "../../Errors/handler";
-import ExtendedClient from "../../Client";
+import { SubCommand, Interaction } from "../../../Interfaces/Core";
+import errorHandler from "../../../Handlers/error";
+import ExtendedClient from "../../../Client";
 
-export const command: Command = {
+export const command: SubCommand = {
   name: "ping",
   description: "Shows Cr46's Latency in miliseconds.",
-  subCommands: [],
   options: [],
   run: async (
     client: ExtendedClient,

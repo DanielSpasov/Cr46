@@ -1,15 +1,12 @@
 import { Message, MessagePayload, ReplyMessageOptions, User } from "discord.js";
 
 export interface Interaction extends Message {
+  commandName: string;
   user: User;
   options: {
     _group: null;
     _subcommand: null;
-    _hoistedOptions: {
-      name: string;
-      type: string;
-      value: string;
-    }[];
+    _hoistedOptions: any;
   };
   reply: (
     options: string | MessagePayload | ReplyMessageOptions

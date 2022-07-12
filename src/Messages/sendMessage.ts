@@ -1,6 +1,5 @@
 import { MessageEmbedOptions, TextChannel } from "discord.js";
 import ExtendedClient from "../Client";
-import { getChannel } from "../Services/Core/getChannel";
 
 export const sendMessage = async ({
   client,
@@ -11,6 +10,9 @@ export const sendMessage = async ({
   channelID?: string;
   embed: MessageEmbedOptions;
 }) => {
-  const channel: TextChannel = await getChannel(client, channelID);
+  const _channelID = !channelID ? process.env.CONSOLE_CHANNEL_ID : channelID;
+  const channel: TextChannel = await (<Promise<TextChannel>>(
+    client.channels.fetch(_channelID)
+  ));
   return await channel.send({ embeds: [embed] });
 };

@@ -16,8 +16,8 @@ export const getAmount = async (
   );
   if (!enteredAmount) return null;
 
-  const amount = Number(enteredAmount.value);
-  if (isNaN(amount) || amount < 1) {
+  const amount = enteredAmount.value;
+  if (amount < 1) {
     throw {
       message: `\`${enteredAmount.value}\` is not a valid amount, please enter a number.`,
       error_code: 400,

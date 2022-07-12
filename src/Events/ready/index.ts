@@ -1,4 +1,4 @@
-import errorHandler from "../../Errors/handler";
+import errorHandler from "../../Handlers/error";
 import { database } from "../../Database/setup";
 import { Event } from "../../Interfaces/Core";
 import ExtendedClient from "../../Client";

@@ -22,15 +22,17 @@ export const championsCount = (
   const championsData = interaction.options._hoistedOptions.find(
     (x) => x.name === "champions"
   );
-  if (championsData && Number(championsData.value) > 15) {
+  if (!championsData) return client.config.default_number_of_champs;
+
+  const champCount = championsData.value;
+  if (champCount < 1 || champCount > 15) {
     throw {
-      message: `The maximum number of champions Cr46 can display at once is \`15\``,
+      message: `\`${champCount}\` is not a valid amount, please enter a number between \`1\` and \`15\`.`,
       error_code: 400,
     };
   }
-  return championsData
-    ? Number(championsData.value.toLowerCase())
-    : Number(client.config.default_number_of_champs);
+
+  return champCount;
 };
 
 export const serverName = (

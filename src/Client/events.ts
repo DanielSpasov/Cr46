@@ -1,4 +1,4 @@
-import errorHandler from "../Errors/handler";
+import errorHandler from "../Handlers/error";
 import { readdirSync } from "fs";
 import ExtendedClient from ".";
 import path from "path";

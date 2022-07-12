@@ -1,6 +1,8 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
+import { setupSubCommands } from "./subCommands";
 import { Routes } from "discord-api-types/v9";
-import errorHandler from "../Errors/handler";
+import errorHandler from "../Handlers/error";
+import { setupOptions } from "./options";
 import { REST } from "@discordjs/rest";
 import ExtendedClient from ".";
 
@@ -9,24 +11,12 @@ const setupSlashCommands = async (client: ExtendedClient) => {
     const rest = new REST({ version: "9" }).setToken(process.env.BOT_TOKEN);
 
     const commands = client.commands.map((cmd) => {
-      const command = new SlashCommandBuilder();
-      command.setName(cmd.name);
-      command.setDescription(
-        cmd.description || "This command has no description"
-      );
+      const command = new SlashCommandBuilder()
+        .setName(cmd.name)
+        .setDescription(cmd.description || "This command has no description.");
 
-      if (cmd.options.length) {
-        cmd.options.forEach((arg) =>
-          command.addStringOption((option) =>
-            option
-              .setName(arg.name)
-              .setDescription(
-                arg.description || "This argument has no description"
-              )
-              .setRequired(arg.required)
-          )
-        );
-      }
+      setupSubCommands(command, cmd.subCommands);
+      if (cmd.options.length) setupOptions(command, cmd.options);
 
       return command;
     });
@@ -38,4 +28,5 @@ const setupSlashCommands = async (client: ExtendedClient) => {
     errorHandler({ client, error });
   }
 };
+
 export default setupSlashCommands;

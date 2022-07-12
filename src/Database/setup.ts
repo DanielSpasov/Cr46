@@ -1,4 +1,4 @@
-import errorHandler from "../Errors/handler";
+import errorHandler from "../Handlers/error";
 import ExtendedClient from "../Client";
 import mongoose from "mongoose";
 

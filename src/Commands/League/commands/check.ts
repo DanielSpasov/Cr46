@@ -1,28 +1,30 @@
-import { Interaction, Command } from "../../Interfaces/Core";
+import { Interaction, SubCommand } from "../../../Interfaces/Core";
+import errorHandler from "../../../Handlers/error";
 import { MessageEmbedOptions } from "discord.js";
-import errorHandler from "../../Errors/handler";
-import ExtendedClient from "../../Client";
-import { get, format } from "./helpers";
+import ExtendedClient from "../../../Client";
+import { get, format } from "../helpers";
 
-export const command: Command = {
+export const command: SubCommand = {
   name: "check",
   description: "Displays information about a League of Legends account.",
-  subCommands: [],
   options: [
     {
       name: "summoner",
       description: "The League of Legends account name.",
+      type: "String",
       required: true,
     },
     {
       name: "server",
       description: "The League of Legends server (EUW1, NA1, etc.)",
+      type: "String",
       required: false,
     },
     {
       name: "champions",
       description:
         "The Number of champions you want to display information for",
+      type: "Integer",
       required: false,
     },
   ],
@@ -82,8 +84,8 @@ export const command: Command = {
           url: thumbnailURL,
         },
         footer: {
-          text: client.user.username,
-          iconURL: client.user.avatarURL(),
+          text: "All information gathered from • Riot Games API",
+          iconURL: get.url({ key: "apiIcon" }),
         },
       };
     } catch (error) {

@@ -1,17 +1,18 @@
 import { Command, Interaction } from "../../Interfaces/Core";
-import { MessageEmbedOptions } from "discord.js";
-import errorHandler from "../../Errors/handler";
+import { Collection, MessageEmbedOptions } from "discord.js";
+import errorHandler from "../../Handlers/error";
 import Guild from "../../Database/Models/Guild";
 import ExtendedClient from "../../Client";
 
 export const command: Command = {
   name: "validchannels",
   description: "Authorizes command usage in that channel.",
-  subCommands: [],
+  subCommands: new Collection(),
   options: [
     {
       name: "channel",
       description: "Mention the channel you want to validate",
+      type: "Channel",
       required: false,
     },
   ],
@@ -39,35 +40,19 @@ export const command: Command = {
           color: "GREEN",
         };
       } else {
-        const channelID = channel.value.slice(2, channel.value.length - 1);
-        const guilds = await client.guilds.fetch();
-        const currentGuild = await guilds.get(interaction.guildId).fetch();
-        const channels = await currentGuild.channels.fetch();
-        const targetChannel = channels.get(channelID);
-
-        const isValidChannel =
-          /<#[0-9]{18}>/.test(channel.value) &&
-          targetChannel.type === "GUILD_TEXT";
-        if (!isValidChannel) {
-          throw {
-            message: `${channel.value} is not a valid text channel. Please mention the channel e.g. <#${interaction.channelId}>`,
-            error_code: 400,
-          };
-        }
-
-        if (guild.validChannels.includes(channelID)) {
-          const channelIndex = guild.validChannels.indexOf(channelID);
+        if (guild.validChannels.includes(channel.value)) {
+          const channelIndex = guild.validChannels.indexOf(channel.value);
           guild.validChannels.splice(channelIndex, 1);
           await guild.save();
           return {
-            description: `<#${channelID}> is no more a valid channel.`,
+            description: `<#${channel.value}> is no more a valid channel.`,
             color: "GREEN",
           };
         } else {
-          guild.validChannels.push(channelID);
+          guild.validChannels.push(channel.value);
           await guild.save();
           return {
-            description: `<#${channelID}> is now a valid channel.`,
+            description: `<#${channel.value}> is now a valid channel.`,
             color: "GREEN",
           };
         }

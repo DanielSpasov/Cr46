@@ -30,5 +30,7 @@ export const url = ({
       return `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`;
     case "championImg":
       return `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`;
+    case "apiIcon":
+      return "https://static.wikia.nocookie.net/leagueoflegends/images/5/53/Riot_Games_logo_icon.png/revision/latest?cb=20220302144707";
   }
 };

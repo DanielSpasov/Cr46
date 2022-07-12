@@ -1,15 +1,14 @@
-import { Command, Interaction } from "../../Interfaces/Core";
-import { Cryptocurrency } from "../../Interfaces/Core";
-import { get, wallet as walletService } from "./helpers";
-import Wallet from "../../Database/Models/Wallet";
+import { Interaction, SubCommand } from "../../../Interfaces/Core";
+import { Cryptocurrency } from "../../../Interfaces/Core";
+import { wallet as walletService } from "../helpers";
+import Wallet from "../../../Database/Models/Wallet";
+import errorHandler from "../../../Handlers/error";
 import { MessageEmbedOptions } from "discord.js";
-import errorHandler from "../../Errors/handler";
-import ExtendedClient from "../../Client";
+import ExtendedClient from "../../../Client";
 
-export const command: Command = {
+export const command: SubCommand = {
   name: "wallet",
   description: "Opens your cryptocurrency wallet.",
-  subCommands: [],
   options: [],
   run: async (
     client: ExtendedClient,

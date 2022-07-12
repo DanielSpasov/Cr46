@@ -1,13 +1,12 @@
-import { Command, Interaction } from "../../Interfaces/Core";
+import { SubCommand, Interaction } from "../../../Interfaces/Core";
 import { MessageEmbedOptions } from "discord.js";
-import errorHandler from "../../Errors/handler";
-import ExtendedClient from "../../Client";
-import { message } from "../../Messages";
+import errorHandler from "../../../Handlers/error";
+import ExtendedClient from "../../../Client";
+import { message } from "../../../Messages";
 
-export const command: Command = {
-  name: "environment",
+export const command: SubCommand = {
+  name: "env",
   description: "Tests Cr46's environment.",
-  subCommands: [],
   options: [],
   run: async (
     client: ExtendedClient,

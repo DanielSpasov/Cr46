@@ -1,14 +1,13 @@
-import { Command, Interaction } from "../../Interfaces/Core";
-import { wallet as walletSc } from "./helpers/wallet";
-import Wallet from "../../Database/Models/Wallet";
+import { Interaction, SubCommand } from "../../../Interfaces/Core";
+import { wallet as walletSc } from "../helpers/wallet";
+import Wallet from "../../../Database/Models/Wallet";
 import { MessageEmbedOptions } from "discord.js";
-import errorHandler from "../../Errors/handler";
-import ExtendedClient from "../../Client";
+import errorHandler from "../../../Handlers/error";
+import ExtendedClient from "../../../Client";
 
-export const command: Command = {
+export const command: SubCommand = {
   name: "daily",
   description: "Collect your daily $75.",
-  subCommands: [],
   options: [],
   run: async (
     client: ExtendedClient,

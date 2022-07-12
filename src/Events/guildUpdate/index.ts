@@ -1,5 +1,5 @@
 import Guild from "../../Database/Models/Guild";
-import errorHandler from "../../Errors/handler";
+import errorHandler from "../../Handlers/error";
 import { Event } from "../../Interfaces/Core";
 import { Guild as IGuild } from "discord.js";
 import ExtendedClient from "../../Client";

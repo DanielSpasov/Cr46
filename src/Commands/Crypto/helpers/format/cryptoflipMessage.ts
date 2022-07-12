@@ -36,7 +36,7 @@ export const cryptoflipMessage = (
       url: get.url({ key: "cryptoImg", cryptoID: randomCrypto.id }),
     },
     footer: {
-      text: "Powered by CoinMarketCap",
+      text: "All information gathered from • CoinMarketCap API",
       iconURL: get.url({ key: "apiIcon" }),
     },
   };

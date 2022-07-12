@@ -13,7 +13,7 @@ class ExtendedClient extends Client {
     default_league_server: "euw1",
     default_number_of_champs: 3,
     startup_wallet_balance: 500,
-    ephemeral_commands: ["wallet", "setupwallet", "daily"],
+    ephemeral_commands: ["wallet", "daily"],
   };
 
   public async init() {
