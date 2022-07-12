@@ -7,8 +7,7 @@ import { get, format } from "./helpers";
 export const command: Command = {
   name: "check",
   description: "Displays information about a League of Legends account.",
-  aliases: [],
-  arguments: [
+  args: [
     {
       key: "summoner",
       description: "The League of Legends account name.",

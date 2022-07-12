@@ -10,7 +10,7 @@ export const command: Command = {
   name: "cryptoflip",
   description:
     "Cr46's chooses one of the top 100 cryptocurrencies on the market.",
-  arguments: [
+  args: [
     {
       key: "coin",
       description: "Cryptocurrency.",
@@ -22,7 +22,6 @@ export const command: Command = {
       required: false,
     },
   ],
-  aliases: [],
   run: async (
     client: ExtendedClient,
     interaction: Interaction

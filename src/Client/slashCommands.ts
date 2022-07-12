@@ -4,7 +4,7 @@ import errorHandler from "../Errors/handler";
 import { REST } from "@discordjs/rest";
 import ExtendedClient from ".";
 
-const setupCommandIntegrations = async (client: ExtendedClient) => {
+const setupSlashCommands = async (client: ExtendedClient) => {
   try {
     const rest = new REST({ version: "9" }).setToken(process.env.BOT_TOKEN);
 
@@ -15,8 +15,8 @@ const setupCommandIntegrations = async (client: ExtendedClient) => {
         cmd.description || "This command has no description"
       );
 
-      if (cmd.arguments.length) {
-        cmd.arguments.forEach((arg) =>
+      if (cmd.args.length) {
+        cmd.args.forEach((arg) =>
           command.addStringOption((option) =>
             option
               .setName(arg.key)
@@ -38,4 +38,4 @@ const setupCommandIntegrations = async (client: ExtendedClient) => {
     errorHandler({ client, error });
   }
 };
-export default setupCommandIntegrations;
+export default setupSlashCommands;

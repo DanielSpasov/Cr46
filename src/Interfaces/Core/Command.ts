@@ -11,8 +11,7 @@ interface Run {
 export interface Command {
   name: string;
   description?: string;
-  aliases?: string[];
-  arguments: {
+  args: {
     key: string;
     description?: string;
     required: boolean;

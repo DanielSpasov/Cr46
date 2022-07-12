@@ -6,8 +6,7 @@ import ExtendedClient from "../../Client";
 export const command: Command = {
   name: "ping",
   description: "Shows Cr46's Latency in miliseconds.",
-  arguments: [],
-  aliases: [],
+  args: [],
   run: async (
     client: ExtendedClient,
     interaction: Interaction

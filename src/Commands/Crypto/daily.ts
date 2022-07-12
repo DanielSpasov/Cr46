@@ -1,17 +1,14 @@
 import { Command, Interaction } from "../../Interfaces/Core";
-import { Cryptocurrency } from "../../Interfaces/Core";
-import { wallet as walletService } from "./helpers";
+import { wallet as walletSc } from "./helpers/wallet";
 import Wallet from "../../Database/Models/Wallet";
 import { MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../Errors/handler";
 import ExtendedClient from "../../Client";
-import { compareDailyHours } from "./helpers/wallet/compareDailyHours";
 
 export const command: Command = {
   name: "daily",
   description: "Collect your daily $75.",
-  arguments: [],
-  aliases: [],
+  args: [],
   run: async (
     client: ExtendedClient,
     interaction: Interaction
@@ -27,7 +24,7 @@ export const command: Command = {
 
       const wallet = await Wallet.findOne({ userID: interaction.user.id });
 
-      const hasCollected = compareDailyHours(wallet.daily, new Date());
+      const hasCollected = walletSc.compareDailyHours(wallet.daily, new Date());
       if (!hasCollected) {
         wallet.balance += 75;
         wallet.daily = new Date();
