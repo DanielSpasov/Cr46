@@ -1,6 +1,6 @@
 import { Command, Interaction } from "../../Interfaces/Core";
 import { Cryptocurrency } from "../../Interfaces/Core";
-import { wallet as walletService } from "./helpers";
+import { get, wallet as walletService } from "./helpers";
 import Wallet from "../../Database/Models/Wallet";
 import { MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../Errors/handler";
@@ -44,10 +44,6 @@ export const command: Command = {
         },
         fields: [USDBalance, ...cryptoBalance],
         color: "GREEN",
-        footer: {
-          text: "Cr46",
-          icon_url: client.user.avatarURL(),
-        },
       };
     } catch (error) {
       errorHandler({
