@@ -15,6 +15,7 @@ export const command: SubCommand = {
     interaction: Interaction
   ): Promise<MessageEmbedOptions> => {
     try {
+      // Handle Wallet Creation
       const hasWallet = await Wallet.findOne({ userID: interaction.user.id });
       if (!hasWallet) {
         const newWallet = await walletService.setup(client, interaction);
@@ -26,6 +27,7 @@ export const command: SubCommand = {
         }
       }
 
+      // Get Wallet Information
       const wallet = await walletService.getInfo(interaction.user.id);
       const USDBalance = {
         name: `**USD** Balance:`,
@@ -37,6 +39,7 @@ export const command: SubCommand = {
         inline: true,
       }));
 
+      // Message
       return {
         author: {
           name: `${interaction.user.username}'s Wallet`,
