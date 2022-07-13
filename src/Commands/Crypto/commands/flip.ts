@@ -1,10 +1,10 @@
 import { Interaction, SubCommand } from "../../../Interfaces/Core";
 import { Coin } from "../../../Interfaces/Crypto/Coin";
 import Wallet from "../../../Database/Models/Wallet";
-import { MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../../Handlers/error";
-import { format, get, wallet } from "../helpers";
+import { MessageEmbedOptions } from "discord.js";
 import ExtendedClient from "../../../Client";
+import { get, wallet } from "../helpers";
 
 export const command: SubCommand = {
   name: "flip",
@@ -29,6 +29,7 @@ export const command: SubCommand = {
     interaction: Interaction
   ): Promise<MessageEmbedOptions> => {
     try {
+      // Intreaction Formatting & Validation
       const userChoice = get.coin(interaction);
       const amount = await get.amount(interaction);
       const userWallet = await Wallet.findOne({ userID: interaction.user.id });
@@ -47,6 +48,7 @@ export const command: SubCommand = {
         }
       }
 
+      // API Request & Validation
       const topCryptos = await get.topHundred();
       const validSymbols = topCryptos.map((x: Coin) => x.symbol.toLowerCase());
       const validNames = topCryptos.map((x: Coin) => x.name.toLowerCase());
@@ -60,6 +62,7 @@ export const command: SubCommand = {
         };
       }
 
+      // Matching Crypto
       const randomCrypto = topCryptos[Math.floor(Math.random() * 100)];
       const userCrypto = topCryptos.find((coin) =>
         isSymbol
@@ -67,13 +70,43 @@ export const command: SubCommand = {
           : coin.name.toLowerCase() === userChoice
       );
 
+      // Wallet Transactions
       await wallet.take(userWallet, amount);
       const isWinner = userCrypto === randomCrypto;
       if (isWinner) {
         await wallet.load(userWallet, amount * 100);
       }
 
-      return format.cryptoflipMessage(client, userCrypto, randomCrypto, amount);
+      // Message Formatting
+      const noAmWinnerName = "You guessed the cryptocurrency! Congratulations!";
+      const noAmLoserName = "You just lost your life savings! Congratulations!";
+      const amWinnerName = (am) => `Congratulations you just won $${am * 100}!`;
+      const amLoserName = (am) => `You just lost $${am}! Congratulations!`;
+
+      const winnerName = amount ? amWinnerName(amount) : noAmWinnerName;
+      const loserName = amount ? amLoserName(amount) : noAmLoserName;
+
+      const name = isWinner ? winnerName : loserName;
+      const color = isWinner ? "GREEN" : "RED";
+      const description = isWinner
+        ? `It was \`${randomCrypto.name} (${randomCrypto.symbol})\`.\nNow touch grass.`
+        : `You chose \`${userCrypto.name} (${userCrypto.symbol})\`,\nbut the crypto was \`${randomCrypto.name} (${randomCrypto.symbol})\`.`;
+
+      return {
+        author: {
+          name,
+          iconURL: get.url({ key: "cryptoImg", cryptoID: userCrypto.id }),
+        },
+        color,
+        description,
+        thumbnail: {
+          url: get.url({ key: "cryptoImg", cryptoID: randomCrypto.id }),
+        },
+        footer: {
+          text: "All information gathered from • CoinMarketCap API",
+          iconURL: get.url({ key: "apiIcon" }),
+        },
+      };
     } catch (error) {
       errorHandler({
         client,
