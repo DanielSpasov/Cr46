@@ -1,4 +1,4 @@
-export const compareDailyHours = (dateOne: Date, dateTwo: Date): boolean => {
+export const hasCollectedDaily = (dateOne: Date, dateTwo: Date): boolean => {
   if (!dateOne) return false;
 
   const msBetweenDates = Math.abs(dateOne.getTime() - dateTwo.getTime());

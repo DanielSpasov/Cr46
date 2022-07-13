@@ -4,6 +4,7 @@ import Wallet from "../../../Database/Models/Wallet";
 import { MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../../Handlers/error";
 import ExtendedClient from "../../../Client";
+import { format } from "../helpers";
 
 export const command: SubCommand = {
   name: "daily",
@@ -24,15 +25,16 @@ export const command: SubCommand = {
 
       const wallet = await Wallet.findOne({ userID: interaction.user.id });
 
-      const hasCollected = walletSc.compareDailyHours(wallet.daily, new Date());
+      const hasCollected = walletSc.hasCollectedDaily(wallet.daily, new Date());
       if (!hasCollected) {
         wallet.balance += 75;
         wallet.daily = new Date();
         await wallet.save();
       } else {
+        const nextDaily = format.dailyDate(wallet.daily);
         throw {
-          message: `You have alerady collected your daily.`,
-          error_code: 401,
+          message: `You have already collected your daily \`$75\`.\nCome back around ${nextDaily}.`,
+          error_code: 400,
         };
       }
 
