@@ -1,5 +1,5 @@
+import { ChannelData, Collection, MessageEmbedOptions } from "discord.js";
 import { Command, Interaction } from "../../Interfaces/Core";
-import { Collection, MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../Handlers/error";
 import Guild from "../../Database/Models/Guild";
 import ExtendedClient from "../../Client";
@@ -21,11 +21,13 @@ export const command: Command = {
     interaction: Interaction
   ): Promise<MessageEmbedOptions> => {
     try {
+      // Interaction Formatting
       const guild = await Guild.findOne({ id: interaction.guildId });
       const channel = interaction.options._hoistedOptions.find(
-        (x) => x.name === "channel"
+        (x: ChannelData) => x.name === "channel"
       );
 
+      // Check Valid Channels (No Options Selected)
       if (!channel) {
         let validChannels: string = "Every channel is valid.";
         if (guild.validChannels.length) {
@@ -40,6 +42,7 @@ export const command: Command = {
           color: "GREEN",
         };
       } else {
+        // Remove Valid Channel (Valid Channel Selected)
         if (guild.validChannels.includes(channel.value)) {
           const channelIndex = guild.validChannels.indexOf(channel.value);
           guild.validChannels.splice(channelIndex, 1);
@@ -49,6 +52,7 @@ export const command: Command = {
             color: "GREEN",
           };
         } else {
+          // Add Valid Channel (Invalid Channel Selected)
           guild.validChannels.push(channel.value);
           await guild.save();
           return {
