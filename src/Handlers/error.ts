@@ -35,6 +35,8 @@ export default async function errorHandler({
     },
     footer: {
       text: `Error Code: ${code}`,
+      icon_url:
+        "https://www.tracker-software.com/fckfiles/image/buttons/icon_notice-destructive.svg.png",
     },
     color: "RED",
     description: messageContent,
