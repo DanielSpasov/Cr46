@@ -28,11 +28,9 @@ const handleCommand = async (
   );
   await interaction.deferReply({ ephemeral: isEphemeral });
 
-  const output = await client.commands
+  return await client.commands
     .get(interaction.commandName)
     .run(client, interaction);
-  if (!output) return;
-  return output;
 };
 
 export default handleCommand;

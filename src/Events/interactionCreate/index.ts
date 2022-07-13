@@ -10,6 +10,7 @@ export const event: Event = {
     try {
       if (interaction.isCommand()) {
         const message = await handleCommand(client, interaction);
+        if (!message) return;
         await interaction.editReply({ embeds: [message] });
       }
     } catch (error) {
