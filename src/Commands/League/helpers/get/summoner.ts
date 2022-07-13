@@ -1,10 +1,8 @@
-import { Interaction } from "../../../../Interfaces/Core";
 import { Summoner } from "../../../../Interfaces/League";
 import axios from "axios";
 import { get } from ".";
 
 export const summoner = async (
-  interaction: Interaction,
   summonerName: string,
   serverName: string
 ): Promise<Summoner> => {
@@ -19,6 +17,15 @@ export const summoner = async (
     );
     return summoner;
   } catch (error) {
-    throw error;
+    if (error.response.status === 404) {
+      const urlArr = error.response.config.url.split("/");
+      const username = urlArr[urlArr.length - 1];
+      throw {
+        customMessage: `Summoner \`${username}\` was not found.`,
+        ...error,
+      };
+    } else {
+      throw error;
+    }
   }
 };

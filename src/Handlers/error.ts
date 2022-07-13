@@ -16,11 +16,13 @@ export default async function errorHandler({
 }) {
   const type = module || error.type || "Unknown";
   const code =
+    error?.response?.status ||
     error?.response?.data?.status?.status_code ||
     error?.error_code ||
     error?.status_code ||
     500;
   const messageContent =
+    error?.customMessage ||
     error?.response?.data?.status?.message ||
     error?.message ||
     error?.error?.message ||

@@ -40,11 +40,7 @@ export const command: SubCommand = {
 
       // API Requests
       const version = await get.latestVersion(interaction);
-      const summoner = await get.summoner(
-        interaction,
-        summonerName,
-        serverName
-      );
+      const summoner = await get.summoner(summonerName, serverName);
       const rankData = await get.rank(summoner.id, serverName);
       const champData = await get.champions(
         summoner.id,
