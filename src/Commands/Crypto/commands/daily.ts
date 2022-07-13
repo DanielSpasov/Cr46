@@ -1,8 +1,8 @@
 import { Interaction, SubCommand } from "../../../Interfaces/Core";
 import { wallet as walletSc } from "../helpers/wallet";
 import Wallet from "../../../Database/Models/Wallet";
-import { MessageEmbedOptions } from "discord.js";
 import errorHandler from "../../../Handlers/error";
+import { MessageEmbedOptions } from "discord.js";
 import ExtendedClient from "../../../Client";
 import { format } from "../helpers";
 
@@ -15,6 +15,7 @@ export const command: SubCommand = {
     interaction: Interaction
   ): Promise<MessageEmbedOptions> => {
     try {
+      // Interaction Formatting
       const hasWallet = await Wallet.findOne({ userID: interaction.user.id });
       if (!hasWallet) {
         throw {
@@ -23,8 +24,8 @@ export const command: SubCommand = {
         };
       }
 
+      // 24h Validation Check
       const wallet = await Wallet.findOne({ userID: interaction.user.id });
-
       const hasCollected = walletSc.hasCollectedDaily(wallet.daily, new Date());
       if (!hasCollected) {
         wallet.balance += 75;
@@ -38,6 +39,7 @@ export const command: SubCommand = {
         };
       }
 
+      // Message
       return {
         author: {
           name: `${interaction.user.username}'s Wallet`,
