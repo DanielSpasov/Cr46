@@ -1,10 +1,7 @@
-import { Interaction } from "../../../../Interfaces/Core";
 import axios from "axios";
 import { get } from ".";
 
-export const latestVersion = async (
-  interaction: Interaction
-): Promise<string> => {
+export const latestVersion = async (): Promise<string> => {
   try {
     const versionList = await axios.get<string[]>(
       get.url({ key: "versions" }),

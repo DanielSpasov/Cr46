@@ -1,4 +1,3 @@
-import Wallet from "../../../../Database/Models/Wallet";
 import { Interaction } from "../../../../Interfaces/Core";
 
 export const getCoin = (interaction: Interaction): string => {
